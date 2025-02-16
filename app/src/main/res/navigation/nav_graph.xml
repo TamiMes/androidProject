@@ -39,7 +39,7 @@
         android:label="CustomerSupport" />
     <fragment
         android:id="@+id/loginPage"
-        android:name="Fragments.loginPage"
+        android:name="com.example.androidproject_tamara_hen.Fragments.loginPage"
         android:label="loginPage" />
     <fragment
         android:id="@+id/userPage"
@@ -49,3 +49,4 @@
             android:id="@+id/action_userPage_to_purchase"
             app:destination="@id/purchase" />
     </fragment>
+</navigation>

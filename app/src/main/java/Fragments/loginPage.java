@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.androidproject_tamara_hen.ActivitiesAndFragments.Activities.MainActivity;
+import com.example.androidproject_tamara_hen.androidproject_tamara_hen.MainActivity;
 import com.example.androidproject_tamara_hen.R;
 
 /**

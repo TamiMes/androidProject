@@ -6,6 +6,7 @@
     tools:context=".Fragments.UserPage"
     android:orientation="vertical">
 
+    <!-- Top Layout for Buttons & Title -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,8 +19,8 @@
             android:src="@drawable/homelogo"
             android:background="@null"
             android:contentDescription="Home"
-            android:layout_gravity="start|top"
             android:padding="8dp"/>
+
         <ImageButton
             android:id="@+id/customerSupportButton"
             android:layout_width="48dp"
@@ -27,31 +28,33 @@
             android:src="@drawable/customersupport"
             android:background="@null"
             android:contentDescription="Customer Support"
-            android:layout_gravity="start"
             android:padding="8dp"/>
-    <TextView
-        android:id="@+id/tvUserName"
-        android:fontFamily="Fantasy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/shopping_cart_name"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-<ImageButton
-    android:id="@+id/ibAddItem"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:src="@drawable/baseline_add_to_shopping_cart_24"
-    android:contentDescription="Shopping Cart"/>
+
+        <!-- Centered TextView -->
+        <TextView
+            android:id="@+id/tvUserName"
+            android:fontFamily="Fantasy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/shopping_cart_name"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <!-- Shopping Cart Button -->
+        <ImageButton
+            android:id="@+id/ibAddItem"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/baseline_add_to_shopping_cart_24"
+            android:contentDescription="Shopping Cart"/>
     </LinearLayout>
 
+    <!-- RecyclerView for Shopping Items -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/resView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
 
 </LinearLayout>
