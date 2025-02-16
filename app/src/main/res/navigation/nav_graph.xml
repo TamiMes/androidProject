@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationPage"
-        android:name="Fragments.RegistrationPage"
+        android:name="FragmentsRegistrationPage"
         android:label="RegistrationPage" >
         <action
             android:id="@+id/action_registrationPage_to_homePage"
@@ -44,7 +44,11 @@
     <fragment
         android:id="@+id/loginPage"
         android:name="com.example.androidproject_tamara_hen.Fragments.loginPage"
-        android:label="loginPage" />
+        android:label="loginPage" >
+        <action
+            android:id="@+id/action_loginPage_to_userPage"
+            app:destination="@id/userPage" />
+    </fragment>
     <fragment
         android:id="@+id/userPage"
         android:name="Fragments.UserPage"

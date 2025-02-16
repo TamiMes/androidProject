@@ -6,7 +6,9 @@
     android:background="@drawable/breaking"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".Fragments.HomePage">
+    tools:context="Fragments.HomePage">
+
+    <!-- Home Page Title -->
 
     <!-- Customer Support Button (Top-Left) -->
     <FrameLayout
