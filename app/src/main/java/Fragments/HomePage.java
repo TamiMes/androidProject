@@ -67,14 +67,14 @@ public class HomePage extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
-        buttonRegister = view.findViewById(R.id.btnRegisterLogin);
-        buttonLogin = view.findViewById(R.id.btnLoginLogin);
-        email = view.findViewById(R.id.etEmailLogin);
-        password = view.findViewById(R.id.etPasswordLogin);
+        buttonRegister = view.findViewById(R.id.RegisterButton);
+        buttonLogin = view.findViewById(R.id.LoginButton);
+        email = view.findViewById(R.id.EmailLogin);
+        password = view.findViewById(R.id.PasswordLogin);
         bundle = new Bundle();
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {

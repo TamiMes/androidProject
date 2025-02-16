@@ -7,28 +7,45 @@
 
     <fragment
         android:id="@+id/homePage"
-        android:name="com.example.shoppingmanagement.Fragments.HomePage"
-        android:label="fragment_home_page"
-        tools:layout="@layout/fragment_home_page" >
+        android:name="Fragments.HomePage"
+        android:label="HomePage" >
+        <action
+            android:id="@+id/action_homePage_to_loginPage"
+            app:destination="@id/loginPage" />
         <action
             android:id="@+id/action_homePage_to_registrationPage"
             app:destination="@id/registrationPage" />
-        <action
-            android:id="@+id/action_homePage_to_userPage"
-            app:destination="@id/userPage" />
     </fragment>
     <fragment
         android:id="@+id/registrationPage"
-        android:name="com.example.shoppingmanagement.Fragments.RegistrationPage"
-        android:label="fragment_registration_page"
-        tools:layout="@layout/fragment_registration_page" >
-        <action
-            android:id="@+id/action_registrationPage_to_homePage"
-            app:destination="@id/homePage" />
-    </fragment>
+        android:name="Fragments.RegistrationPage"
+        android:label="RegistrationPage" />
+    <fragment
+        android:id="@+id/wishlist"
+        android:name="Fragments.Wishlist"
+        android:label="fragment_wishlist"
+        tools:layout="@layout/fragment_wishlist" />
+    <fragment
+        android:id="@+id/userPersonalInfo"
+        android:name="Fragments.UserPersonalInfo"
+        android:label="UserPersonalInfo" />
+    <fragment
+        android:id="@+id/purchase"
+        android:name="Fragments.Purchase"
+        android:label="Purchase" />
+    <fragment
+        android:id="@+id/customerSupport"
+        android:name="Fragments.CustomerSupport"
+        android:label="CustomerSupport" />
+    <fragment
+        android:id="@+id/loginPage"
+        android:name="Fragments.loginPage"
+        android:label="loginPage" />
     <fragment
         android:id="@+id/userPage"
-        android:name="com.example.shoppingmanagement.Fragments.UserPage"
-        android:label="fragment_user_page"
-        tools:layout="@layout/fragment_user_page" />
-</navigation>
+        android:name="Fragments.UserPage"
+        android:label="UserPage" >
+        <action
+            android:id="@+id/action_userPage_to_purchase"
+            app:destination="@id/purchase" />
+    </fragment>

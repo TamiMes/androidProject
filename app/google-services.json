@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1043851394981",
+    "project_id": "finalproject-d79c1",
+    "storage_bucket": "finalproject-d79c1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043851394981:android:13e8ed05c8f665d506b24c",
+        "android_client_info": {
+          "package_name": "com.example.androidproject_tamara_hen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWUZ0Hhcq-6c0Av3bpMMdjAOwtPVlN0xM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,72 +3,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.HomePage"
+    android:background="@drawable/breaking"
     android:orientation="vertical"
-    android:padding="16dp">
-    <ImageButton
-        android:id="@+id/customerSupportButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/customersupport"
-        android:background="@null"
-        android:contentDescription="Customer Support"
-        android:layout_gravity="start"
-        android:padding="8dp"/>
+    android:padding="16dp"
+    tools:context=".Fragments.HomePage">
+
+    <!-- Customer Support Button (Top-Left) -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/customerSupportButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@null"
+            android:contentDescription="Customer Support"
+            android:padding="8dp"
+            android:src="@drawable/customersupport"
+            android:layout_gravity="start|top"/>
+    </FrameLayout>
+
+    <!-- Home Page Title -->
     <TextView
         android:layout_width="match_parent"
-        android:fontFamily="Fantasy"
         android:layout_height="wrap_content"
+        android:fontFamily="Fantasy"
+        android:gravity="center"
         android:text="Home Page"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:gravity="center"/>
+        android:textStyle="bold" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etEmailLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email:" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPasswordLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password:"
-            android:inputType="textPassword"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/btnLoginLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:layout_margin="16dp"/>
-
+    <!-- Description Text -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Don't have a user?"
+        android:layout_margin="16dp"
+        android:background="#00FFFAFA"
         android:gravity="center"
-        android:layout_margin="16dp"/>
+        android:text="Hey there! 🎉 Welcome to our app, dive into a world of nostalgia, where you’ll find legendary items from your favorite shows—like the pink teddy bear from Breaking Bad, the original cane from House, and so much more. Get ready to relive the magic, one iconic piece at a time!"
+        android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/btnRegisterLogin"
+    <!-- Centered Login Page Button -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"/>
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/LoginPage"
+            android:layout_width="151dp"
+            android:layout_height="41dp"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="Login Page"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have a user?"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/RegisterPage"
+            android:layout_width="156dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="Registration Page"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
 
 </LinearLayout>

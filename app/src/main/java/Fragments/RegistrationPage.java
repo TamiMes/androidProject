@@ -74,20 +74,20 @@ public class RegistrationPage extends Fragment {
             }
         });*/
 
-        EditText emailRegistrationText = view.findViewById(R.id.etEmailRegistration);
+        EditText emailRegistrationText = view.findViewById(R.id.EmailRegistration);
         String registerEmailStr = emailRegistrationText.getText().toString();
 
-        EditText passwordRegistrationText = view.findViewById(R.id.etPasswordRegistration);
+        EditText passwordRegistrationText = view.findViewById(R.id.PasswordRegistration);
         String registerPasswordStr = passwordRegistrationText.getText().toString();
 
-        EditText reEnterPasswordRegistrationText = view.findViewById(R.id.reEnterPasswordTextBox);
+        EditText reEnterPasswordRegistrationText = view.findViewById(R.id.reEnterPasswordRegistration);
         String registerReEnterPasswordStr = reEnterPasswordRegistrationText.getText().toString();
 
-        EditText phoneNumberRegistrationText = view.findViewById(R.id.etPhoneNumber);
+        EditText phoneNumberRegistrationText = view.findViewById(R.id.PhoneNumberRegistration);
         String registerPhoneNumberStr = phoneNumberRegistrationText.getText().toString();
 
-        EditText NameRegistrationText = view.findViewById(R.id.etNameRegistration);
-        String nameText = NameRegistrationText.getText().toString();
+        EditText NameRegistrationText = view.findViewById(R.id.NameRegistration);
+        String registernameStr = NameRegistrationText.getText().toString();
 
         Button button = view.findViewById(R.id.RegisterButton);
         button.setOnClickListener(new View.OnClickListener() {

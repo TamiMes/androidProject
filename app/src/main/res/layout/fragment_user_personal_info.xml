@@ -7,17 +7,31 @@
     android:padding="16dp"
     android:background="@android:color/white">
 
+    <!-- Container for the two buttons to align them horizontally -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp">
 
-    <ImageButton
-        android:id="@+id/customerSupportButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/customersupport"
-        android:background="@null"
-        android:contentDescription="Customer Support"
-        android:layout_gravity="start"
-        android:padding="8dp"/>
+        <ImageButton
+            android:id="@+id/homeButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/homelogo"
+            android:background="@null"
+            android:contentDescription="Home"
+            android:padding="8dp"/>
 
+        <ImageButton
+            android:id="@+id/customerSupportButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@null"
+            android:contentDescription="Customer Support"
+            android:padding="8dp"
+            android:src="@drawable/customersupport"/>
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,7 +44,6 @@
         android:paddingTop="20dp"
         android:paddingBottom="20dp"/>
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +52,6 @@
         android:textColor="@android:color/black"
         android:paddingBottom="10dp"/>
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,7 +59,6 @@
         android:textSize="18sp"
         android:textColor="@android:color/black"
         android:paddingBottom="10dp"/>
-
 
     <TextView
         android:layout_width="match_parent"

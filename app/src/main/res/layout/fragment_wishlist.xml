@@ -4,19 +4,38 @@
     android:layout_height="match_parent"
     tools:context="Fragments.Wishlist">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ImageButton
-        android:id="@+id/customerSupportButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/customersupport"
-        android:background="@null"
-        android:contentDescription="Customer Support"
-        android:layout_gravity="start"
-        android:padding="8dp"/>
+    <!-- Top-left button container -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:layout_gravity="start|top">
+
+        <ImageButton
+            android:id="@+id/homeButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/homelogo"
+            android:background="@null"
+            android:contentDescription="Home"
+            android:padding="8dp"/>
+
+        <ImageButton
+            android:id="@+id/customerSupportButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/customersupport"
+            android:background="@null"
+            android:contentDescription="Customer Support"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+    <!-- Main content -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="64dp"
         android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>
