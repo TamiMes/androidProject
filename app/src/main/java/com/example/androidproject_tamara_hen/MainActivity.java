@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             Toast.makeText(MainActivity.this , "login succeeded" , Toast.LENGTH_LONG).show();
-                            Navigation.findNavController(v).navigate(R.id.action_mainScreenFragment_to_calenderFragment);
+                            Navigation.findNavController(v).navigate(R.id.action_homePage_to_loginPage);
                         } else
                         {
                             Toast.makeText(MainActivity.this , "login failed" , Toast.LENGTH_LONG).show();
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                         {
                             addDataToFirebase();
                             Toast.makeText(MainActivity.this , "register succeeded" , Toast.LENGTH_LONG).show();
-                            Navigation.findNavController(v).navigate(R.id.action_registrationFragment_to_mainScreenFragment);
+                            Navigation.findNavController(v).navigate(R.id.action_registrationPage_to_homePage);
 
                         } else
                         {

@@ -19,7 +19,11 @@
     <fragment
         android:id="@+id/registrationPage"
         android:name="Fragments.RegistrationPage"
-        android:label="RegistrationPage" />
+        android:label="RegistrationPage" >
+        <action
+            android:id="@+id/action_registrationPage_to_homePage"
+            app:destination="@id/homePage" />
+    </fragment>
     <fragment
         android:id="@+id/wishlist"
         android:name="Fragments.Wishlist"
