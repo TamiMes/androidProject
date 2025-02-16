@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.androidproject_tamara_hen.Activities.MainActivity;
+import com.example.androidproject_tamara_hen.MainActivity;
 import com.example.androidproject_tamara_hen.R;
 
 /**

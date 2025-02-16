@@ -38,9 +38,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/shopping_cart_name"
             android:textSize="30sp"
             android:textStyle="bold" />
+        <!--android:text="@string/shopping_cart_name"-->
 
         <!-- Shopping Cart Button -->
         <ImageButton

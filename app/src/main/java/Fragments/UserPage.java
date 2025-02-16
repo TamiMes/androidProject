@@ -1,5 +1,6 @@
 package Fragments;
 
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,11 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidproject_tamara_hen.R;
-import com.example.androidproject_tamara_hen.Ui.Cart;
-import com.example.androidproject_tamara_hen.Ui.Item;
-import com.example.androidproject_tamara_hen.Ui.ItemAdapter;
-import com.example.androidproject_tamara_hen.Ui.User;
-import com.example.androidproject_tamara_hen.data.myData;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +25,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import Ui.Cart;
+import Ui.Item;
+import Ui.ItemAdapter;
+import Ui.User;
 
 
 public class UserPage extends Fragment {
@@ -96,7 +98,7 @@ public class UserPage extends Fragment {
                         Log.e("firebase", "Error getting data", task.getException());
                     } else {
                         taskResult = task.getResult().getValue(String.class);
-                        tvName.setText(getResources().getString(R.string.shopping_cart_name, taskResult));
+                        //tvName.setText(getResources().getString(R.string.shopping_cart_name, taskResult));
                     }
                 }
             });
