@@ -6,10 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +44,7 @@ public class UserPage extends Fragment {
     private LinearLayoutManager layoutManager;
     private ItemAdapter adapter;
     private Cart cart;
+    private ImageButton btnPurchase;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -82,7 +86,15 @@ public class UserPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_page, container, false);
+        btnPurchase = view.findViewById(R.id.ibAddItem);
 
+        btnPurchase.setOnClickListener(new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View v) {
+                                               Navigation.findNavController(v).navigate(R.id.action_userPage_to_purchase);
+                                           }
+                                       }
+                );
 
         ArrayList<Item> dataSet = new ArrayList<>();
         recyclerView = view.findViewById(R.id.resView);
