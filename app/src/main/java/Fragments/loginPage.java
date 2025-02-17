@@ -22,7 +22,7 @@ public class loginPage extends Fragment {
     private String mParam2;
 
     public loginPage() {
-        // Required empty public constructor
+
     }
 
     /**
