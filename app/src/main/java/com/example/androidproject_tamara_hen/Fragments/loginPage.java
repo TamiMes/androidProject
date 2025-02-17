@@ -1,4 +1,4 @@
-package Fragments;
+package com.example.androidproject_tamara_hen.Fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -80,7 +80,7 @@ public class loginPage extends Fragment {
             public void onClick(View v) {
                 MainActivity mainAct = (MainActivity) getActivity();
                 mainAct.login(v);
-                Navigation.findNavController(v).navigate(R.id.action_loginPage_to_userPage);
+//                Navigation.findNavController(v).navigate(R.id.action_loginPage_to_userPage);
             }
         });
 

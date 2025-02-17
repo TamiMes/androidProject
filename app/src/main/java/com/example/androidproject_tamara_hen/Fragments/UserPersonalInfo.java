@@ -1,4 +1,4 @@
-package Fragments;
+package com.example.androidproject_tamara_hen.Fragments;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.example.androidproject_tamara_hen.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CustomerSupport#newInstance} factory method to
+ * Use the {@link UserPersonalInfo#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CustomerSupport extends Fragment {
+public class UserPersonalInfo extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class CustomerSupport extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public CustomerSupport() {
+    public UserPersonalInfo() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class CustomerSupport extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CustomerSupport.
+     * @return A new instance of fragment UserPersonalInfo.
      */
     // TODO: Rename and change types and number of parameters
-    public static CustomerSupport newInstance(String param1, String param2) {
-        CustomerSupport fragment = new CustomerSupport();
+    public static UserPersonalInfo newInstance(String param1, String param2) {
+        UserPersonalInfo fragment = new UserPersonalInfo();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class CustomerSupport extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer_support, container, false);
+        return inflater.inflate(R.layout.fragment_user_personal_info, container, false);
     }
 }

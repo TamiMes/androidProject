@@ -1,4 +1,4 @@
-package Fragments;
+package com.example.androidproject_tamara_hen.Fragments;
 
 import com.example.androidproject_tamara_hen.R;
 

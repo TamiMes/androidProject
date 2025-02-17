@@ -1,4 +1,4 @@
-package Fragments;
+package com.example.androidproject_tamara_hen.Fragments;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.example.androidproject_tamara_hen.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Wishlist#newInstance} factory method to
+ * Use the {@link CustomerSupport#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Wishlist extends Fragment {
+public class CustomerSupport extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class Wishlist extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Wishlist() {
+    public CustomerSupport() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class Wishlist extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Wishlist.
+     * @return A new instance of fragment CustomerSupport.
      */
     // TODO: Rename and change types and number of parameters
-    public static Wishlist newInstance(String param1, String param2) {
-        Wishlist fragment = new Wishlist();
+    public static CustomerSupport newInstance(String param1, String param2) {
+        CustomerSupport fragment = new CustomerSupport();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class Wishlist extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_wishlist, container, false);
+        return inflater.inflate(R.layout.fragment_customer_support, container, false);
     }
 }

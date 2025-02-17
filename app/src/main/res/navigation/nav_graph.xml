@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homePage"
-        android:name="Fragments.HomePage"
+        android:name="com.example.androidproject_tamara_hen.Fragments.HomePage"
         android:label="HomePage" >
         <action
             android:id="@+id/action_homePage_to_loginPage"
@@ -18,28 +18,28 @@
     </fragment>
     <fragment
         android:id="@+id/registrationPage"
-        android:name="FragmentsRegistrationPage"
+        android:name="com.example.androidproject_tamara_hen.Fragments.RegistrationPage"
         android:label="RegistrationPage" >
         <action
-            android:id="@+id/action_registrationPage_to_homePage"
-            app:destination="@id/homePage" />
+            android:id="@+id/action_registrationPage_to_userPage"
+            app:destination="@id/userPage" />
     </fragment>
     <fragment
         android:id="@+id/wishlist"
-        android:name="Fragments.Wishlist"
+        android:name="com.example.androidproject_tamara_hen.Fragments.Wishlist"
         android:label="fragment_wishlist"
         tools:layout="@layout/fragment_wishlist" />
     <fragment
         android:id="@+id/userPersonalInfo"
-        android:name="Fragments.UserPersonalInfo"
+        android:name="com.example.androidproject_tamara_hen.Fragments.UserPersonalInfo"
         android:label="UserPersonalInfo" />
     <fragment
         android:id="@+id/purchase"
-        android:name="Fragments.Purchase"
+        android:name="com.example.androidproject_tamara_hen.Fragments.Purchase"
         android:label="Purchase" />
     <fragment
         android:id="@+id/customerSupport"
-        android:name="Fragments.CustomerSupport"
+        android:name="com.example.androidproject_tamara_hen.Fragments.CustomerSupport"
         android:label="CustomerSupport" />
     <fragment
         android:id="@+id/loginPage"
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/userPage"
-        android:name="Fragments.UserPage"
+        android:name="com.example.androidproject_tamara_hen.Fragments.UserPage"
         android:label="UserPage" >
         <action
             android:id="@+id/action_userPage_to_purchase"

@@ -6,7 +6,7 @@
     android:background="@drawable/breaking"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context="Fragments.HomePage">
+    tools:context=".Fragments.HomePage">
 
     <!-- Home Page Title -->
 
@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="Fantasy"
+
         android:gravity="center"
         android:text="Home Page"
         android:textSize="30sp"
@@ -41,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+
         android:background="#00FFFAFA"
         android:gravity="center"
         android:text="Hey there! 🎉 Welcome to our app, dive into a world of nostalgia, where you’ll find legendary items from your favorite shows—like the pink teddy bear from Breaking Bad, the original cane from House, and so much more. Get ready to relive the magic, one iconic piece at a time!"
@@ -55,8 +56,8 @@
 
         <Button
             android:id="@+id/LoginPage"
-            android:layout_width="151dp"
-            android:layout_height="41dp"
+            android:layout_width="190dp"
+            android:layout_height="48dp"
             android:backgroundTint="@android:color/holo_red_dark"
             android:text="Login Page"
             android:textColor="@android:color/white"
@@ -70,9 +71,9 @@
             android:layout_marginBottom="16dp"/>
 
         <Button
-            android:id="@+id/RegisterPage"
-            android:layout_width="156dp"
-            android:layout_height="40dp"
+            android:id="@+id/btnRegisterHomePage"
+            android:layout_width="190dp"
+            android:layout_height="48dp"
             android:backgroundTint="@android:color/holo_red_dark"
             android:text="Registration Page"
             android:textColor="@android:color/white"/>

@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
+import androidx.navigation.Navigation;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,18 +33,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.fragment_home_page);
+        setContentView(R.layout.activity_main);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+//            return insets;
+//        });
 
         mAuth = FirebaseAuth.getInstance();
 
         // Initialize NavController properly
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager() .findFragmentById(R.id.homePage);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.homePage);
 
         if (navHostFragment != null) {
             navController = navHostFragment.getNavController();
@@ -61,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Login succeeded", Toast.LENGTH_LONG).show();
-                            navController.navigate(R.id.action_homePage_to_loginPage);
+                            //navController.navigate(R.id.action_homePage_to_loginPage);
+                            Navigation.findNavController(v).navigate(R.id.action_loginPage_to_userPage);
                         } else {
                             Toast.makeText(MainActivity.this, "Login failed", Toast.LENGTH_LONG).show();
                         }
@@ -80,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             addDataToFirebase();
                             Toast.makeText(MainActivity.this, "Register succeeded", Toast.LENGTH_LONG).show();
-                            navController.navigate(R.id.action_registrationPage_to_homePage);
+                            //navController.navigate(R.id.action_registrationPage_to_homePage);
+                            Navigation.findNavController(v).navigate(R.id.action_registrationPage_to_userPage);
                         } else {
                             Toast.makeText(MainActivity.this, "Register failed", Toast.LENGTH_LONG).show();
                         }
