@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
@@ -26,20 +27,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import Ui.User;
 
 public class MainActivity extends AppCompatActivity {
+
     private FirebaseAuth mAuth;
     private NavController navController;
+    private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-//            return insets;
-//        });
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -63,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Login succeeded", Toast.LENGTH_LONG).show();
                             //navController.navigate(R.id.action_homePage_to_loginPage);
+                            userViewModel.setEmail(email);
                             Navigation.findNavController(v).navigate(R.id.action_loginPage_to_userPage);
                         } else {
                             Toast.makeText(MainActivity.this, "Login failed", Toast.LENGTH_LONG).show();
@@ -80,26 +79,30 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            addDataToFirebase();
+                            addData();
+                            userViewModel.setEmail(email);
                             Toast.makeText(MainActivity.this, "Register succeeded", Toast.LENGTH_LONG).show();
                             //navController.navigate(R.id.action_registrationPage_to_homePage);
                             Navigation.findNavController(v).navigate(R.id.action_registrationPage_to_userPage);
                         } else {
-                            Toast.makeText(MainActivity.this, "Register failed", Toast.LENGTH_LONG).show();
+                            String errorMessage = task.getException() != null ? task.getException().getMessage() : "Unknown error";
+                            Toast.makeText(MainActivity.this, errorMessage, Toast.LENGTH_LONG).show();
                         }
                     }
                 });
     }
 
-    public void addDataToFirebase() {
-        String email = ((EditText) findViewById(R.id.EmailRegistration)).getText().toString();
-        String phone = ((EditText) findViewById(R.id.PasswordRegistration)).getText().toString();
-
+    public void addData(){
+        EditText phone = ((EditText) findViewById(R.id.PhoneNumberRegistration));
+        EditText email = ((EditText) findViewById(R.id.EmailRegistration));
+        EditText name = ((EditText) findViewById(R.id.NameRegistration));
+        EditText password = ((EditText) findViewById(R.id.PasswordRegistration));
+        //get data from the layout or register (for now)
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users").child(phone);
+        DatabaseReference myRef = database.getReference("users").child(email.getText().toString().replace('.','_'));
 
-        User u = new User(email, phone);
-        myRef.setValue(u);
+        User user = new User(name.getText().toString(),email.getText().toString(),password.getText().toString() ,phone.getText().toString());
+        myRef.setValue(user);
     }
 
     @Override

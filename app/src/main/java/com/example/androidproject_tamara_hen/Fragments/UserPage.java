@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidproject_tamara_hen.R;
 
+import com.example.androidproject_tamara_hen.UserViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import Ui.Cart;
 import Ui.Item;
@@ -37,6 +41,7 @@ import Ui.User;
 
 public class UserPage extends Fragment {
 
+    UserViewModel viewModel;
     private DatabaseReference mDatabase;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private String taskResult;
@@ -72,6 +77,7 @@ public class UserPage extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 //        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
@@ -102,19 +108,48 @@ public class UserPage extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         TextView tvName = view.findViewById(R.id.tvUserName);
-        if (null != getArguments())
-            mDatabase.child("users").child(getArguments().getString("email").replace('.', '_')).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (!task.isSuccessful()) {
-                        Log.e("firebase", "Error getting data", task.getException());
-                    } else {
-                        taskResult = task.getResult().getValue(String.class);
-                        //tvName.setText(getResources().getString(R.string.shopping_cart_name, taskResult));
-                    }
-                }
-            });
+//        viewModel.getUserEmailLiveData().observe(getViewLifecycleOwner(), email -> {
+//            if (email != null) {
+//                tvName.setText(email);
+//            } else {
+//                tvName.setText("No email found"); // Optional fallback text
+//            }
+//        });
+
+//            mDatabase.child("users").child(Objects.requireNonNull(viewModel.getUserEmailLiveData().getValue()).replace('.', '_')).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                    if (!task.isSuccessful()) {
+//                        Log.e("firebase", "Error getting data", task.getException());
+//                    } else {
+//                        taskResult = task.getResult().getValue(String.class);
+//                        tvName.setText(taskResult);
+//                    }
+//                }
+//            });
 //        tvName.setText(getResources().getString(R.string.shopping_cart_name, taskResult));
+        viewModel.getUserEmailLiveData().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String email) {
+                if (email != null) {
+                    // Fetch user name from Firebase when email is available
+                    mDatabase.child("users").child(email.replace('.', '_')).child("name").get()
+                            .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                    if (!task.isSuccessful()) {
+                                        Log.e("firebase", "Error getting data", task.getException());
+                                    } else {
+                                        String userName = task.getResult().getValue(String.class);
+                                        tvName.setText(userName != null ? userName : "No name found");
+                                    }
+                                }
+                            });
+                } else {
+                    tvName.setText("No email found");
+                }
+            }
+        });
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.

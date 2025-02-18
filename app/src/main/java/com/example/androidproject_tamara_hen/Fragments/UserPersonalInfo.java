@@ -3,10 +3,13 @@ package com.example.androidproject_tamara_hen.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavAction;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.example.androidproject_tamara_hen.R;
 
@@ -16,6 +19,8 @@ import com.example.androidproject_tamara_hen.R;
  * create an instance of this fragment.
  */
 public class UserPersonalInfo extends Fragment {
+
+    ImageButton btnHome;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +66,15 @@ public class UserPersonalInfo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_personal_info, container, false);
+         View view = inflater.inflate(R.layout.fragment_user_personal_info, container, false);
+         btnHome = view.findViewById(R.id.ibnHome);
+         btnHome.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 Navigation.findNavController(view).navigate(R.id.action_userPersonalInfo_to_homePage);
+             }
+         });
+
+        return view;
     }
 }

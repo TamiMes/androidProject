@@ -15,10 +15,10 @@
         android:paddingBottom="16dp">
 
         <ImageButton
-            android:id="@+id/homeButton"
+            android:id="@+id/ibnHome"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/homelogo"
+            android:src="@drawable/baseline_home_24"
             android:background="@null"
             android:contentDescription="Home"
             android:padding="8dp"/>

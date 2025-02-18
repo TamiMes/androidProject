@@ -34,6 +34,9 @@ android {
 
 dependencies {
 
+    implementation ("androidx.lifecycle:lifecycle-viewmodel:2.5.1")
+    implementation ("androidx.lifecycle:lifecycle-livedata:2.5.1")
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
