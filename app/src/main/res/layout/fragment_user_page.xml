@@ -16,7 +16,7 @@
             android:id="@+id/homeButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/homelogo"
+            android:src="@drawable/baseline_home_24"
             android:background="@null"
             android:contentDescription="Home"
             android:padding="8dp"/>
@@ -25,12 +25,13 @@
             android:id="@+id/customerSupportButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/customersupport"
+            android:src="@drawable/baseline_contact_support_24"
             android:background="@null"
             android:contentDescription="Customer Support"
             android:padding="8dp"/>
 
         <!-- Centered TextView -->
+
         <TextView
             android:id="@+id/tvUserName"
             android:layout_width="0dp"
@@ -42,6 +43,15 @@
         <!--android:text="@string/shopping_cart_name"-->
 
         <!-- Shopping Cart Button -->
+        <ImageButton
+            android:id="@+id/ibToPersonalInfo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@null"
+            android:contentDescription="Customer Support"
+            android:padding="8dp"
+            android:src="@drawable/baseline_person_outline_24" />
+
         <ImageButton
             android:id="@+id/ibAddItem"
             android:layout_width="48dp"

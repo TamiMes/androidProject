@@ -78,11 +78,6 @@ public class UserPage extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
@@ -100,7 +95,7 @@ public class UserPage extends Fragment {
                                                Navigation.findNavController(v).navigate(R.id.action_userPage_to_purchase);
                                            }
                                        }
-                );
+        );
 
         ArrayList<Item> dataSet = new ArrayList<>();
         recyclerView = view.findViewById(R.id.resView);
@@ -108,40 +103,21 @@ public class UserPage extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         TextView tvName = view.findViewById(R.id.tvUserName);
-//        viewModel.getUserEmailLiveData().observe(getViewLifecycleOwner(), email -> {
-//            if (email != null) {
-//                tvName.setText(email);
-//            } else {
-//                tvName.setText("No email found"); // Optional fallback text
-//            }
-//        });
 
-//            mDatabase.child("users").child(Objects.requireNonNull(viewModel.getUserEmailLiveData().getValue()).replace('.', '_')).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//                @Override
-//                public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                    if (!task.isSuccessful()) {
-//                        Log.e("firebase", "Error getting data", task.getException());
-//                    } else {
-//                        taskResult = task.getResult().getValue(String.class);
-//                        tvName.setText(taskResult);
-//                    }
-//                }
-//            });
-//        tvName.setText(getResources().getString(R.string.shopping_cart_name, taskResult));
         viewModel.getUserEmailLiveData().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String email) {
                 if (email != null) {
                     // Fetch user name from Firebase when email is available
-                    mDatabase.child("users").child(email.replace('.', '_')).child("name").get()
+                    mDatabase.child("users").child(email.replace('.', '_')).get()
                             .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                                     if (!task.isSuccessful()) {
                                         Log.e("firebase", "Error getting data", task.getException());
                                     } else {
-                                        String userName = task.getResult().getValue(String.class);
-                                        tvName.setText(userName != null ? userName : "No name found");
+                                        viewModel.setUser(task.getResult().getValue(User.class));
+                                        tvName.setText(viewModel.getUser().getValue().getName() != null ? viewModel.getUser().getValue().getName() : "No name found");
                                     }
                                 }
                             });
@@ -150,15 +126,6 @@ public class UserPage extends Fragment {
                 }
             }
         });
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CalenderFragment.
-         */
-        // TODO: Rename and change types and number of parameters
 
         if (null != getArguments())
             mDatabase.child("carts").child(getArguments().getString("email").replace('.', '_')).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -181,16 +148,6 @@ public class UserPage extends Fragment {
                     recyclerView.setAdapter(adapter);
                 }
             });
-
-////        // Populate the dataSet
-//        for (int i = 0; i < cart.getItems().size(); i++) {
-//            dataSet.add(new Item(
-//                    myData.nameArray[i],
-//                    cart.getQuantity((myData.nameArray[i])),
-//                    myData.drawableArray[i],
-//                    myData.id_[i]
-//            ));
-//        }
 
         // Set up the adapter
         adapter = new ItemAdapter(dataSet, new ItemAdapter.RecyclerViewListener() {
@@ -232,7 +189,7 @@ public class UserPage extends Fragment {
         return view;
     }
 
-    private void dbListener(){
+    private void dbListener() {
         ValueEventListener userListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -244,10 +201,10 @@ public class UserPage extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
-                Log.d( "loadPost:onCancelled", databaseError.toException().toString());
+                Log.d("loadPost:onCancelled", databaseError.toException().toString());
             }
         };
-        DatabaseReference myRef = database.getReference("users").child(getArguments().getString("email").replace('.','_'));
+        DatabaseReference myRef = database.getReference("users").child(getArguments().getString("email").replace('.', '_'));
         myRef.addValueEventListener(userListener);
     }
 }

@@ -60,5 +60,8 @@
         <action
             android:id="@+id/action_userPage_to_purchase"
             app:destination="@id/purchase" />
+        <action
+            android:id="@+id/action_userPage_to_userPersonalInfo"
+            app:destination="@id/userPersonalInfo" />
     </fragment>
 </navigation>
