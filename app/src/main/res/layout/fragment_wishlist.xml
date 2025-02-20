@@ -1,41 +1,55 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.Wishlist">
+    android:orientation="vertical"
+    android:background="#F7F7F7">
 
-    <!-- Top-left button container -->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hello_blank_fragment"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"/>
+    </FrameLayout>
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="8dp"
-        android:layout_gravity="start|top">
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="46dp"
+            android:layout_height="44dp"
+            android:src="@drawable/merchverselogo"/>
 
         <ImageButton
-            android:id="@+id/homeButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/homelogo"
+            android:id="@+id/ibnHome"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/baseline_home_24"
             android:background="@null"
             android:contentDescription="Home"
             android:padding="8dp"/>
 
         <ImageButton
             android:id="@+id/customerSupportButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/customersupport"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/baseline_contact_support_24"
             android:background="@null"
             android:contentDescription="Customer Support"
             android:padding="8dp"/>
     </LinearLayout>
 
-    <!-- Main content -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="64dp"
-        android:text="@string/hello_blank_fragment" />
-
-</FrameLayout>
+</LinearLayout>

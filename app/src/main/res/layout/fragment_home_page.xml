@@ -1,56 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/back"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/breaking"
+    android:background="@drawable/merchverse4"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".Fragments.HomePage">
 
-    <!-- Home Page Title -->
-
-    <!-- Customer Support Button (Top-Left) -->
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageButton
-            android:id="@+id/customerSupportButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@null"
-            android:contentDescription="Customer Support"
-            android:padding="8dp"
-            android:src="@drawable/customersupport"
-            android:layout_gravity="start|top"/>
+        android:layout_width="394dp"
+        android:layout_height="237dp">
     </FrameLayout>
 
-    <!-- Home Page Title -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:gravity="center"
-        android:text="Home Page"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
-    <!-- Description Text -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-
-        android:background="#00FFFAFA"
+        android:background="#F7F7F7"
         android:gravity="center"
-        android:text="Hey there! 🎉 Welcome to our app, dive into a world of nostalgia, where you’ll find legendary items from your favorite shows—like the pink teddy bear from Breaking Bad, the original cane from House, and so much more. Get ready to relive the magic, one iconic piece at a time!"
+        android:text="Hello 🎉 Welcome to our app, dive into a world of nostalgia, where you’ll find legendary items from your favorite shows—like the pink teddy bear from Breaking Bad, the original cane from House, and so much more. Get ready to relive the magic, one iconic piece at a time!"
+        android:textColor="#A19B98"
         android:textSize="16sp" />
 
-    <!-- Centered Login Page Button -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -58,25 +35,38 @@
             android:id="@+id/LoginPage"
             android:layout_width="190dp"
             android:layout_height="48dp"
-            android:backgroundTint="@android:color/holo_red_dark"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/nudecolor"
             android:text="Login Page"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="16dp"/>
+            android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Don't have a user?"
+            android:layout_marginBottom="16dp"
             android:gravity="center"
-            android:layout_marginBottom="16dp"/>
+            android:text="Don't have a user?" />
 
         <Button
             android:id="@+id/btnRegisterHomePage"
             android:layout_width="190dp"
             android:layout_height="48dp"
-            android:backgroundTint="@android:color/holo_red_dark"
+            android:backgroundTint="@color/nudecolor"
             android:text="Registration Page"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
     </LinearLayout>
+
+
+    <ImageButton
+        android:id="@+id/customerSupportButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@null"
+        android:contentDescription="Customer Support"
+        android:padding="8dp"
+        android:src="@drawable/baseline_contact_support_24"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
 
 </LinearLayout>

@@ -49,7 +49,7 @@ public class UserPage extends Fragment {
     private LinearLayoutManager layoutManager;
     private ItemAdapter adapter;
     private Cart cart;
-    private ImageButton btnPurchase;
+    private ImageButton btnPurchase,btnCustumerSupport;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -88,13 +88,20 @@ public class UserPage extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_page, container, false);
         btnPurchase = view.findViewById(R.id.ibAddItem);
-
         btnPurchase.setOnClickListener(new View.OnClickListener() {
-                                           @Override
-                                           public void onClick(View v) {
-                                               Navigation.findNavController(v).navigate(R.id.action_userPage_to_purchase);
-                                           }
-                                       }
+           @Override
+           public void onClick(View v) {
+         Navigation.findNavController(v).navigate(R.id.action_userPage_to_purchase);
+           }
+          }
+        );
+        btnCustumerSupport=view.findViewById(R.id.customerSupportButton);
+        btnCustumerSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_userPage_to_customerSupport);
+            }
+        }
         );
 
         ArrayList<Item> dataSet = new ArrayList<>();

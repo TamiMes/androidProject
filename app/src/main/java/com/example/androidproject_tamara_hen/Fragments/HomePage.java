@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -18,6 +19,7 @@ import com.example.androidproject_tamara_hen.R;
 public class HomePage extends Fragment {
 
     private Button buttonRegister, buttonLogin;
+    private ImageButton supportBtn;
     //private EditText email, password;
     //private Bundle bundle;
 
@@ -55,6 +57,13 @@ public class HomePage extends Fragment {
             });
             Toast.makeText(requireContext(),"Login NOW!!!!",Toast.LENGTH_SHORT).show();
         }
+        supportBtn = view.findViewById(R.id.customerSupportButton);
+        supportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {Navigation.findNavController(v).navigate(R.id.action_homePage_to_customerSupport);
+                                          }
+                                      }
+        );
 
         return view;
     }

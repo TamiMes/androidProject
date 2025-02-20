@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_homePage_to_registrationPage"
             app:destination="@id/registrationPage" />
+        <action
+            android:id="@+id/action_homePage_to_customerSupport"
+            app:destination="@id/customerSupport" />
     </fragment>
     <fragment
         android:id="@+id/registrationPage"
@@ -23,6 +26,12 @@
         <action
             android:id="@+id/action_registrationPage_to_userPage"
             app:destination="@id/userPage" />
+        <action
+            android:id="@+id/action_registrationPage_to_homePage"
+            app:destination="@id/homePage" />
+        <action
+            android:id="@+id/action_registrationPage_to_customerSupport"
+            app:destination="@id/customerSupport" />
     </fragment>
     <fragment
         android:id="@+id/wishlist"
@@ -44,7 +53,11 @@
     <fragment
         android:id="@+id/customerSupport"
         android:name="com.example.androidproject_tamara_hen.Fragments.CustomerSupport"
-        android:label="CustomerSupport" />
+        android:label="CustomerSupport" >
+        <action
+            android:id="@+id/action_customerSupport_to_homePage"
+            app:destination="@id/homePage" />
+    </fragment>
     <fragment
         android:id="@+id/loginPage"
         android:name="com.example.androidproject_tamara_hen.Fragments.loginPage"
@@ -52,6 +65,12 @@
         <action
             android:id="@+id/action_loginPage_to_userPage"
             app:destination="@id/userPage" />
+        <action
+            android:id="@+id/action_loginPage_to_homePage"
+            app:destination="@id/homePage" />
+        <action
+            android:id="@+id/action_loginPage_to_customerSupport"
+            app:destination="@id/customerSupport" />
     </fragment>
     <fragment
         android:id="@+id/userPage"
@@ -63,5 +82,8 @@
         <action
             android:id="@+id/action_userPage_to_userPersonalInfo"
             app:destination="@id/userPersonalInfo" />
+        <action
+            android:id="@+id/action_userPage_to_customerSupport"
+            app:destination="@id/customerSupport" />
     </fragment>
 </navigation>

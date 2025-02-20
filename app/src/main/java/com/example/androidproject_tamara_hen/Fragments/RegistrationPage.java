@@ -6,9 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.androidproject_tamara_hen.MainActivity;
 import com.example.androidproject_tamara_hen.R;
@@ -28,7 +30,7 @@ public class RegistrationPage extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private ImageButton homeBtn,supportBtn;
     public RegistrationPage() {
         // Required empty public constructor
     }
@@ -73,7 +75,21 @@ public class RegistrationPage extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_registrationFragment_to_mainScreenFragment);
             }
         });*/
-
+        homeBtn = view.findViewById(R.id.homeButton);
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_registrationPage_to_homePage);
+            }
+        }
+        );
+        supportBtn = view.findViewById(R.id.customerSupportButton);
+        supportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {Navigation.findNavController(v).navigate(R.id.action_registrationPage_to_customerSupport);
+            }
+        }
+        );
         EditText emailRegistrationText = view.findViewById(R.id.EmailRegistration);
         String registerEmailStr = emailRegistrationText.getText().toString();
 

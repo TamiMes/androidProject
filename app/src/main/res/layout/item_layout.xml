@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/material_dynamic_primary80"
+                    android:backgroundTint="@color/material_dynamic_primary70"
                     android:text="REMOVE-" />
             </LinearLayout>
         </LinearLayout>
