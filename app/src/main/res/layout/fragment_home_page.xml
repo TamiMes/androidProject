@@ -4,15 +4,14 @@
     android:id="@+id/back"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/merchverse4"
+    android:background="@drawable/merchverse6"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".Fragments.HomePage">
 
     <FrameLayout
         android:layout_width="394dp"
-        android:layout_height="237dp">
-    </FrameLayout>
+        android:layout_height="157dp"></FrameLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -20,9 +19,21 @@
         android:layout_margin="16dp"
         android:background="#F7F7F7"
         android:gravity="center"
-        android:text="Hello 🎉 Welcome to our app, dive into a world of nostalgia, where you’ll find legendary items from your favorite shows—like the pink teddy bear from Breaking Bad, the original cane from House, and so much more. Get ready to relive the magic, one iconic piece at a time!"
-        android:textColor="#A19B98"
-        android:textSize="16sp" />
+        android:text="🎉Welcome🎉"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="339dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16sp"
+        android:background="#F7F7F7"
+        android:gravity="center"
+        android:text="Dive into a world of nostalgia, where  you’ll find legendary items from your favorite shows!"
+        android:textColor="#eb3434"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,11 +44,11 @@
 
         <Button
             android:id="@+id/LoginPage"
-            android:layout_width="190dp"
+            android:layout_width="120dp"
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/nudecolor"
-            android:text="Login Page"
+            android:backgroundTint="@color/myRed2"
+            android:text="Sign In"
             android:textColor="@android:color/white" />
 
         <TextView
@@ -49,10 +60,10 @@
 
         <Button
             android:id="@+id/btnRegisterHomePage"
-            android:layout_width="190dp"
+            android:layout_width="124dp"
             android:layout_height="48dp"
-            android:backgroundTint="@color/nudecolor"
-            android:text="Registration Page"
+            android:backgroundTint="@color/myRed2"
+            android:text="Sign Up"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
@@ -61,12 +72,12 @@
         android:id="@+id/customerSupportButton"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@null"
         android:contentDescription="Customer Support"
         android:padding="8dp"
-        android:src="@drawable/baseline_contact_support_24"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:src="@drawable/baseline_contact_support_24" />
 
 </LinearLayout>
