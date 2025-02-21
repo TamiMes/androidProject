@@ -42,7 +42,8 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-livedata:2.5.1")
     implementation ("com.sun.mail:javax.mail:1.6.2")
     implementation ("androidx.appcompat:appcompat:1.6.1")
-   // implementation ("com.sun.activation:javax.activation:1.1.1")
+    implementation ("com.google.firebase:firebase-functions:20.2.0")
+    // implementation ("com.sun.activation:javax.activation:1.1.1")
     //implementation ("org.eclipse.angus:jakarta.mail:2.0.2")
 
         //implementation ("com.google.api-client:google-api-client-android:1.33.0")
@@ -62,6 +63,7 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.constraintlayout.core)
     implementation(libs.play.services.maps)
+    implementation(libs.firebase.functions)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
