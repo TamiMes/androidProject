@@ -131,30 +131,53 @@ public class UserPage extends Fragment {
                 } else {
                     tvName.setText("No email found");
                 }
+
+                mDatabase.child("carts").child(email.replace('.', '_')).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (!task.isSuccessful()) {
+                            Log.e("firebase", "Error getting data", task.getException());
+                        } else {
+                            cart = task.getResult().getValue(Cart.class);
+                            //        // Populate the dataSet
+                            for (int i = 0; i < cart.getItems().size(); i++) {
+                                dataSet.add(new Item(
+                                        myData.nameArray[i],
+                                        cart.getQuantity((myData.nameArray[i])),
+                                        myData.drawableArray[i],
+                                        myData.id_[i]
+                                ));
+                            }
+                        }
+                        recyclerView.setAdapter(adapter);
+                    }
+                });
+
+
             }
         });
 
-        if (null != getArguments())
-            mDatabase.child("carts").child(getArguments().getString("email").replace('.', '_')).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (!task.isSuccessful()) {
-                        Log.e("firebase", "Error getting data", task.getException());
-                    } else {
-                        cart = task.getResult().getValue(Cart.class);
-                        //        // Populate the dataSet
-                        for (int i = 0; i < cart.getItems().size(); i++) {
-                            dataSet.add(new Item(
-                                    myData.nameArray[i],
-                                    cart.getQuantity((myData.nameArray[i])),
-                                    myData.drawableArray[i],
-                                    myData.id_[i]
-                            ));
-                        }
-                    }
-                    recyclerView.setAdapter(adapter);
-                }
-            });
+//        if (null != getArguments())
+//            mDatabase.child("carts").child(viewModel.getUser().getValue().getName().replace('.', '_')).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                    if (!task.isSuccessful()) {
+//                        Log.e("firebase", "Error getting data", task.getException());
+//                    } else {
+//                        cart = task.getResult().getValue(Cart.class);
+//                        //        // Populate the dataSet
+//                        for (int i = 0; i < cart.getItems().size(); i++) {
+//                            dataSet.add(new Item(
+//                                    myData.nameArray[i],
+//                                    cart.getQuantity((myData.nameArray[i])),
+//                                    myData.drawableArray[i],
+//                                    myData.id_[i]
+//                            ));
+//                        }
+//                    }
+//                    recyclerView.setAdapter(adapter);
+//                }
+//            });
 
         // Set up the adapter
         adapter = new ItemAdapter(dataSet, new ItemAdapter.RecyclerViewListener() {
@@ -174,7 +197,7 @@ public class UserPage extends Fragment {
                 TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
-                mDatabase.child("carts").child(getArguments().getString("email").replace('.', '_')).child("items").child(tvItemName.getText().toString()).setValue(counter + 1);
+                mDatabase.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("items").child(tvItemName.getText().toString()).setValue(counter + 1);
                 tvItemCounter.setText(String.valueOf(counter + 1));
             }
 
@@ -185,12 +208,35 @@ public class UserPage extends Fragment {
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
                 if (counter > 0) {
-                    mDatabase.child("carts").child(getArguments().getString("email").replace('.', '_')).child("items").child(tvItemName.getText().toString()).setValue(counter - 1);
+                    mDatabase.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("items").child(tvItemName.getText().toString()).setValue(counter - 1);
                     tvItemCounter.setText(String.valueOf(counter - 1));
                 }
             }
         });
-//        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
+
+        //Here we will handle the filtering EditText
+        editText.addTextChangedListener(new TextWatcher() {
+            //Not used in the project
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!(charSequence.toString().isEmpty())) {
+                    filter(charSequence.toString());
+                } else {
+                    adapter.filterList(dataSet);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            //Not used in the project
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
 
         // Return the modified view
         return view;
@@ -214,4 +260,30 @@ public class UserPage extends Fragment {
         DatabaseReference myRef = database.getReference("users").child(getArguments().getString("email").replace('.', '_'));
         myRef.addValueEventListener(userListener);
     }
+
+//Filtering by key words
+    private void filter(String text) {
+        // creating a new array list to filter data, so the original dataSet is kept intact
+        ArrayList<DataModel> filteredList = new ArrayList<>();
+
+        // itirating all elements of dataSet
+        for (DataModel item : dataSet) {
+            // checking if the entered string matches any item of our recycler view
+            if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+                // adding matched item to the filtered list
+                filteredList.add(item);
+            }
+        }
+
+        //Checking if the filteredList has some elements in it
+        if (filteredList.isEmpty()) {
+            // displaying a toast message if no data found
+            Toast.makeText(this, "No character with the entered letters found..", Toast.LENGTH_SHORT).show();
+            adapter.filterList(filteredList);
+        } else {
+            // passing the filtered list to the CustomeAdapter
+            adapter.filterList(filteredList);
+        }
+    }
+
 }

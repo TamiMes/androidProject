@@ -38,7 +38,7 @@ public class HomePage extends Fragment {
 
         // Set click listener for registration button
         if (buttonRegister != null) {
-            Toast.makeText(requireContext(),"Register NOW!!!!",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(requireContext(),"Register NOW!!!!",Toast.LENGTH_SHORT).show();
             buttonRegister.setOnClickListener(v ->
                     Navigation.findNavController(v).navigate(R.id.action_homePage_to_registrationPage)
             );
@@ -55,7 +55,7 @@ public class HomePage extends Fragment {
                 //}
                 Navigation.findNavController(v).navigate(R.id.action_homePage_to_loginPage);
             });
-            Toast.makeText(requireContext(),"Login NOW!!!!",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(requireContext(),"Login NOW!!!!",Toast.LENGTH_SHORT).show();
         }
         supportBtn = view.findViewById(R.id.customerSupportButton);
         supportBtn.setOnClickListener(new View.OnClickListener() {

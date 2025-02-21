@@ -1,6 +1,7 @@
 package com.example.androidproject_tamara_hen;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.navigation.Navigation;
 
+import com.example.androidproject_tamara_hen.data.MyData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -24,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import Ui.Cart;
 import Ui.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -103,6 +106,16 @@ public class MainActivity extends AppCompatActivity {
 
         User user = new User(name.getText().toString(),email.getText().toString(),password.getText().toString() ,phone.getText().toString());
         myRef.setValue(user);
+
+        myRef = database.getReference("carts").child(email.getText().toString().replace('.','_'));
+
+        Cart cart = new Cart(email.getText().toString());
+        for (int i = 0; i < MyData.nameArray.length; i++){
+            cart.addItem(MyData.nameArray[i],0);
+        }
+        myRef.setValue(cart);
+        Log.d("User and Cart created","User and Cart created");
+        Toast.makeText(this,"User and Cart created", Toast.LENGTH_SHORT).show();
     }
 
     @Override
