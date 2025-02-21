@@ -9,21 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
 import com.example.androidproject_tamara_hen.R;
-
-import java.util.concurrent.Executors;
-
-import javax.mail.MessagingException;
 import com.google.firebase.functions.FirebaseFunctions;
 import com.google.firebase.functions.HttpsCallableResult;
-import com.google.android.gms.tasks.Task;
 import java.util.HashMap;
 import java.util.Map;
-import Ui.MailApi;
+
 
 public class CustomerSupport extends Fragment {
 
