@@ -6,4 +6,6 @@
     <color name="myRed">#eb3449</color>
     <color name="myRed2">#eb3434</color>
     <color name="PINK1">#F763C3</color>
+    <color name="material_dynamic_primary60">#FF6200EE</color>
+    <color name="material_dynamic_primary70">#FF3700B3</color>
 </resources>
