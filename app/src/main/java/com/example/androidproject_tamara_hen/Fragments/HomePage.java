@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import com.airbnb.lottie.LottieAnimationView;
 
 import com.example.androidproject_tamara_hen.MainActivity;
 import com.example.androidproject_tamara_hen.R;

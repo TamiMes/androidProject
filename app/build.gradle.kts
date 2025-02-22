@@ -43,15 +43,7 @@ dependencies {
     implementation ("com.sun.mail:javax.mail:1.6.2")
     implementation ("androidx.appcompat:appcompat:1.6.1")
     implementation ("com.google.firebase:firebase-functions:20.2.0")
-    // implementation ("com.sun.activation:javax.activation:1.1.1")
-    //implementation ("org.eclipse.angus:jakarta.mail:2.0.2")
-
-        //implementation ("com.google.api-client:google-api-client-android:1.33.0")
-        //implementation ("com.google.api-client:google-oauth-client-jetty:1.33.0")
-       //L implementation ("com.google.apis:google-api-services-gmail:v1-rev110-1.25.0")
-
-
-
+    implementation("com.github.LottieFiles:dotlottie-android:0.5.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
