@@ -1,6 +1,7 @@
 package com.example.androidproject_tamara_hen.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,17 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
 import com.example.androidproject_tamara_hen.R;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.HttpsCallableResult;
+import java.util.HashMap;
+import java.util.Map;
 
-import java.util.concurrent.Executors;
-
-import javax.mail.MessagingException;
-
-import Ui.MailApi;
 
 public class CustomerSupport extends Fragment {
 
@@ -41,9 +39,16 @@ public class CustomerSupport extends Fragment {
         subjectInput = view.findViewById(R.id.subjectInput);
         contentInput = view.findViewById(R.id.contentInput);
         submitButton = view.findViewById(R.id.submitButton);
-
-        submitButton.setOnClickListener(v -> sendEmail());
         homeBtn = view.findViewById(R.id.homeButton);
+
+
+        submitButton.setOnClickListener(v -> {
+            String userEmail = emailInput.getText().toString().trim();
+            String subject = subjectInput.getText().toString().trim();
+            String message = contentInput.getText().toString().trim();
+            sendEmail(userEmail, subject, message);
+        });
+
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,10 +60,8 @@ public class CustomerSupport extends Fragment {
         return view;
     }
 
-    private void sendEmail() {
-        String userEmail = emailInput.getText().toString().trim();
-        String subject = subjectInput.getText().toString().trim();
-        String message = contentInput.getText().toString().trim();
+    private void sendEmail(String userEmail, String subject, String message) {
+        FirebaseFunctions functions = FirebaseFunctions.getInstance();
 
         if (userEmail.isEmpty() || subject.isEmpty() || message.isEmpty()) {
             Toast.makeText(getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
@@ -68,28 +71,61 @@ public class CustomerSupport extends Fragment {
         // Format message to include user email at the bottom
         String formattedMessage = message + "\n\n---\nUser Email: " + userEmail;
 
-        // Run email sending in a background thread
-        Executors.newSingleThreadExecutor().execute(() -> {
-            try {
-                MailApi sender = new MailApi(COMPANY_EMAIL, COMPANY_EMAIL_PASSWORD, COMPANY_EMAIL, subject, formattedMessage);
-                sender.sendEmail();
+        Map<String, Object> data = new HashMap<>();
+        data.put("from", userEmail);
+        data.put("subject", subject);
+        data.put("text", formattedMessage);
 
-                // Notify success on UI thread
-                if (getActivity() != null) {
-                    getActivity().runOnUiThread(() ->
-                            Toast.makeText(getContext(), "Email sent successfully!", Toast.LENGTH_SHORT).show()
-                    );
-                }
-            } catch (MessagingException e) {
-                e.printStackTrace();
+        Log.d("Email", "About to send email...");
 
-                // Notify failure on UI thread
-                if (getActivity() != null) {
-                    getActivity().runOnUiThread(() ->
-                            Toast.makeText(getContext(), "Failed to send email", Toast.LENGTH_SHORT).show()
-                    );
-                }
-            }
-        });
+        functions.getHttpsCallable("sendEmail")
+                .call(data)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        HttpsCallableResult result = task.getResult();
+                        if (result != null) {
+                            Map response = (Map) result.getData();
+                            if ((Boolean) response.get("success")) {
+                                Log.d("Email", "Email sent successfully");
+                            } else {
+                                Log.e("Email", "Error: " + response.get("message"));
+                            }
+                        }
+                    } else {
+                        Log.e("Email", "Function call failed", task.getException());
+                    }
+                });
+    }
+
+    private void sendEmailOLD() {
+
+
+
+
+//
+//
+//        // Run email sending in a background thread
+//        Executors.newSingleThreadExecutor().execute(() -> {
+//            try {
+//                MailApi sender = new MailApi(COMPANY_EMAIL, COMPANY_EMAIL_PASSWORD, COMPANY_EMAIL, subject, formattedMessage);
+//                sender.sendEmail();
+//
+//                // Notify success on UI thread
+//                if (getActivity() != null) {
+//                    getActivity().runOnUiThread(() ->
+//                            Toast.makeText(getContext(), "Email sent successfully!", Toast.LENGTH_SHORT).show()
+//                    );
+//                }
+//            } catch (MessagingException e) {
+//                e.printStackTrace();
+//
+//                // Notify failure on UI thread
+//                if (getActivity() != null) {
+//                    getActivity().runOnUiThread(() ->
+//                            Toast.makeText(getContext(), "Failed to send email", Toast.LENGTH_SHORT).show()
+//                    );
+//                }
+//            }
+//        });
     }
 }
