@@ -2,13 +2,16 @@ package com.example.androidproject_tamara_hen.Fragments;
 
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.androidproject_tamara_hen.R;
 
 import com.example.androidproject_tamara_hen.UserViewModel;
+import com.example.androidproject_tamara_hen.data.myData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -50,7 +54,8 @@ public class UserPage extends Fragment {
     private ItemAdapter adapter;
     private Cart cart;
     private ImageButton btnPurchase,btnCustumerSupport;
-
+    private ArrayList<Item> dataSet;
+    EditText editText;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -87,6 +92,7 @@ public class UserPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_page, container, false);
+        editText = view.findViewById(R.id.editText);
         btnPurchase = view.findViewById(R.id.ibAddItem);
         btnPurchase.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -104,7 +110,7 @@ public class UserPage extends Fragment {
         }
         );
 
-        ArrayList<Item> dataSet = new ArrayList<>();
+        dataSet = new ArrayList<>();
         recyclerView = view.findViewById(R.id.resView);
         layoutManager = new LinearLayoutManager(requireContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -139,8 +145,10 @@ public class UserPage extends Fragment {
                             Log.e("firebase", "Error getting data", task.getException());
                         } else {
                             cart = task.getResult().getValue(Cart.class);
+
                             //        // Populate the dataSet
-                            for (int i = 0; i < cart.getItems().size(); i++) {
+//                            for (int i = 0; i < Objects.requireNonNull(cart).getItems().size(); i++) {
+                            for (int i = 0; i < myData.nameArray.length; i++) {
                                 dataSet.add(new Item(
                                         myData.nameArray[i],
                                         cart.getQuantity((myData.nameArray[i])),
@@ -264,10 +272,10 @@ public class UserPage extends Fragment {
 //Filtering by key words
     private void filter(String text) {
         // creating a new array list to filter data, so the original dataSet is kept intact
-        ArrayList<DataModel> filteredList = new ArrayList<>();
+        ArrayList<Item> filteredList = new ArrayList<>();
 
         // itirating all elements of dataSet
-        for (DataModel item : dataSet) {
+        for (Item item : dataSet) {
             // checking if the entered string matches any item of our recycler view
             if (item.getName().toLowerCase().contains(text.toLowerCase())) {
                 // adding matched item to the filtered list
@@ -278,7 +286,7 @@ public class UserPage extends Fragment {
         //Checking if the filteredList has some elements in it
         if (filteredList.isEmpty()) {
             // displaying a toast message if no data found
-            Toast.makeText(this, "No character with the entered letters found..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "No character with the entered letters found..", Toast.LENGTH_SHORT).show();
             adapter.filterList(filteredList);
         } else {
             // passing the filtered list to the CustomeAdapter

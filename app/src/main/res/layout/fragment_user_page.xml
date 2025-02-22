@@ -63,10 +63,18 @@
             android:contentDescription="Shopping Cart"/>
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Enter part of a name to search for"/>
+
     <!-- RecyclerView for Shopping Items -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/resView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"/>
 
 </LinearLayout>
