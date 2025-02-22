@@ -5,21 +5,30 @@
     android:id="@+id/back"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/merchverse8"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".Fragments.HomePage">
 
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="163dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/merchverse9" />
+
     <FrameLayout
-        android:layout_width="394dp"
-        android:gravity="center"
-        android:layout_height="300dp"></FrameLayout>
+        android:layout_width="400dp"
+        android:layout_height="30dp"
+        android:gravity="center"></FrameLayout>
 
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimation"
-        android:layout_width="349dp"
-        android:layout_height="232dp"
+        android:layout_width="380dp"
+        android:layout_height="270dp"
         android:gravity="center"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
@@ -31,7 +40,7 @@
         android:layout_height="331dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:background="#F7F7F7"
+        android:background="#FEF7FF"
         android:orientation="vertical">
 
 
