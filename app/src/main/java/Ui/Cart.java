@@ -25,7 +25,9 @@ public class Cart {
     }
 
     public int getQuantity(String item) {
-        return items.getOrDefault(item, 0);
+        if(items == null) return 0;
+        else
+            return items.getOrDefault(item, 0);
     }
 
     public Map<String, Integer> getItems() {

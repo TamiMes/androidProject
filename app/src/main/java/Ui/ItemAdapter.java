@@ -82,6 +82,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         return dataSet.size();
     }
 
+    public void filterList(ArrayList<Item> filterList) {
+        //Below line is to add our filtered list in our course array list.
+        this.dataSet = filterList;
+    }
+
 
 }
 

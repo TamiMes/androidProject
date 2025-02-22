@@ -9,16 +9,14 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.navigation.Navigation;
 
-import com.example.androidproject_tamara_hen.data.MyData;
+//import com.example.androidproject_tamara_hen.data.MyData;
+import com.example.androidproject_tamara_hen.data.myData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -110,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
         myRef = database.getReference("carts").child(email.getText().toString().replace('.','_'));
 
         Cart cart = new Cart(email.getText().toString());
-        for (int i = 0; i < MyData.nameArray.length; i++){
-            cart.addItem(MyData.nameArray[i],0);
+        for (int i = 0; i < myData.nameArray.length; i++){
+            cart.addItem(myData.nameArray[i],0);
         }
         myRef.setValue(cart);
         Log.d("User and Cart created","User and Cart created");
