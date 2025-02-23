@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/back"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/pastel2"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".Fragments.HomePage">
@@ -17,30 +19,30 @@
         android:layout_marginTop="30dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/merchverse9" />
+        android:src="@drawable/merchverse12" />
 
-<!--    <FrameLayout-->
-<!--        android:layout_width="400dp"-->
-<!--        android:layout_height="250dp"-->
-<!--        android:gravity="center">-->
+    <!--    <FrameLayout-->
+    <!--        android:layout_width="400dp"-->
+    <!--        android:layout_height="250dp"-->
+    <!--        android:gravity="center">-->
 
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimation"
-        android:layout_width="380dp"
-        android:layout_height="270dp"
+        android:layout_width="400dp"
+        android:layout_height="266dp"
         android:layout_gravity="center"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/robotgif" />
-<!--</FrameLayout>-->
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="331dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:background="#FEF7FF"
+
         android:orientation="vertical">
 
 
@@ -58,7 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:gravity="center"
-            android:text="Don't have a user?" />
+            android:text="Don't have a user?"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnRegisterHomePage"

@@ -1,44 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/pastel2"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#F7F7F7">
-
-
-
+    android:padding="16dp">
 
 
     <TextView
         android:layout_width="wrap_content"
-        android:fontFamily="Fantasy"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="Fantasy"
+        android:paddingBottom="16dp"
         android:text="Purchase"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="16dp"/>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/paymentHolderInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background"
         android:hint="Name of Payment Holder"
         android:inputType="text"
-        android:padding="10dp"
-        android:background="@android:drawable/editbox_background"/>
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/idInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:drawable/editbox_background"
         android:hint="ID"
         android:inputType="number"
-        android:padding="10dp"
-        android:background="@android:drawable/editbox_background"
-        android:layout_marginTop="10dp"/>
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/cardNumberInput"
@@ -54,20 +50,21 @@
         android:id="@+id/cvvInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:drawable/editbox_background"
         android:hint="CVV"
         android:inputType="numberPassword"
-        android:padding="10dp"
-        android:background="@android:drawable/editbox_background"
-        android:layout_marginTop="10dp"/>
+        android:padding="10dp" />
 
     <Button
         android:id="@+id/purchaseButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/PINK1"
         android:text="Purchase"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="20dp"/>
+        android:textColor="@android:color/white" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

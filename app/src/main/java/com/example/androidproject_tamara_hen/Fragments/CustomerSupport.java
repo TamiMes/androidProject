@@ -11,11 +11,14 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.androidproject_tamara_hen.R;
 import com.google.firebase.functions.FirebaseFunctions;
 import com.google.firebase.functions.HttpsCallableResult;
 import java.util.HashMap;
 import java.util.Map;
+import com.airbnb.lottie.LottieAnimationView;
 
 
 public class CustomerSupport extends Fragment {
@@ -23,6 +26,7 @@ public class CustomerSupport extends Fragment {
     private EditText emailInput, subjectInput, contentInput;
     private Button submitButton;
     private ImageButton homeBtn;
+    private LottieAnimationView lottieAnimationView;
 
     private static final String COMPANY_EMAIL = "merchandisingverse@gmail.com";
     private static final String COMPANY_EMAIL_PASSWORD = "87654321@";
@@ -40,6 +44,10 @@ public class CustomerSupport extends Fragment {
         contentInput = view.findViewById(R.id.contentInput);
         submitButton = view.findViewById(R.id.submitButton);
         homeBtn = view.findViewById(R.id.homeButton);
+        lottieAnimationView = view.findViewById(R.id.lottieAnimation1);
+        lottieAnimationView.cancelAnimation();
+        lottieAnimationView.setVisibility(View.GONE);
+
 
 
         submitButton.setOnClickListener(v -> {
@@ -47,6 +55,9 @@ public class CustomerSupport extends Fragment {
             String subject = subjectInput.getText().toString().trim();
             String message = contentInput.getText().toString().trim();
             sendEmail(userEmail, subject, message);
+
+            lottieAnimationView.setVisibility(View.VISIBLE);
+            lottieAnimationView.playAnimation();
         });
 
         homeBtn.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +92,8 @@ public class CustomerSupport extends Fragment {
         functions.getHttpsCallable("sendEmail")
                 .call(data)
                 .addOnCompleteListener(task -> {
+                    lottieAnimationView.cancelAnimation();
+                    lottieAnimationView.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
                         HttpsCallableResult result = task.getResult();
                         if (result != null) {
@@ -97,7 +110,7 @@ public class CustomerSupport extends Fragment {
                 });
     }
 
-    private void sendEmailOLD() {
+    //private void sendEmailOLD() {
 
 
 
@@ -128,4 +141,4 @@ public class CustomerSupport extends Fragment {
 //            }
 //        });
     }
-}
+//}

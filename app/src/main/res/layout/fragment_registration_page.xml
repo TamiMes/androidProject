@@ -7,7 +7,6 @@
     android:background="#F7F7F7"
     tools:context=".Fragments.RegistrationPage">
 
-    <!-- Main Content -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

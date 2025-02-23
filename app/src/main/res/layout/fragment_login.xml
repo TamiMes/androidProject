@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F7F7F7"
+    android:background="@drawable/pastel2"
     tools:context=".Fragments.loginPage">
 
 
@@ -56,10 +56,10 @@
             android:id="@+id/LoginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/PINK1"
             android:text="Login"
-            android:backgroundTint="@android:color/holo_blue_dark"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="20dp"/>
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
 
