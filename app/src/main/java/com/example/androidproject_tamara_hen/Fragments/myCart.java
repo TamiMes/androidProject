@@ -97,9 +97,11 @@ public class myCart extends AppCompatActivity {
             if (quantity > 0) {  // Ensuring only items with quantity > 0 are added
                 dataSet.add(new Item(
                         myData.nameArray[i],
-                        quantity,
+                        cart.getQuantity((myData.nameArray[i])),
                         myData.drawableArray[i],
-                        myData.id_[i]
+                        myData.id_[i],
+                        myData.versionArray[i],
+                        myData.price[i]
                 ));
             }
         }

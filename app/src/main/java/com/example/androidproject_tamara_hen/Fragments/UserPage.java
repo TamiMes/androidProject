@@ -162,7 +162,9 @@ public class UserPage extends Fragment {
                                         myData.nameArray[i],
                                         cart.getQuantity((myData.nameArray[i])),
                                         myData.drawableArray[i],
-                                        myData.id_[i]
+                                        myData.id_[i],
+                                        myData.versionArray[i],
+                                        myData.price[i]
                                 ));
                             }
                         }

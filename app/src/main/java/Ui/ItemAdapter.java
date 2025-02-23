@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidproject_tamara_hen.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
@@ -40,6 +42,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         ImageView imageView;
         Button btnAdd;
         Button btnRemove;
+        TextView tvDesc;
+        TextView tvPrice;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -48,7 +52,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             imageView = itemView.findViewById(R.id.ibItem);
             btnAdd = itemView.findViewById(R.id.btnAdd);
             btnRemove = itemView.findViewById(R.id.btnRemove);
-
+            tvDesc = itemView.findViewById(R.id.tvItemDesc);
+            tvPrice = itemView.findViewById(R.id.tvItemPrice);
         }
     }
 
@@ -66,6 +71,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         holder.textViewName.setText(dataSet.get(position).getName());
         holder.imageView.setImageResource(dataSet.get(position).getImage());
         holder.textCounter.setText(String.valueOf(dataSet.get(position).getAmount()));
+        holder.tvDesc.setText(dataSet.get(position).getDesc());
+        holder.tvPrice.setText(String.valueOf(dataSet.get(position).getPrice()));
 //        holder.textCounter.setText(0);
         holder.itemView.setOnClickListener(v -> listener.onClick(v, position));
         holder.itemView.setOnLongClickListener(v -> {
@@ -74,6 +81,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         });
         holder.btnAdd.setOnClickListener(v -> listener.onAddButtonClick(holder.itemView, position));
         holder.btnRemove.setOnClickListener(v -> listener.onRemoveButtonClick(holder.itemView, position));
+
     }
 
 
