@@ -32,21 +32,52 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1.1">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="price of item:" />
+
+                <TextView
+                    android:id="@+id/tvItemPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1.1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="number of items:" />
 
                 <TextView
                     android:id="@+id/tvItemCounter"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="0" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvItemDesc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Item Description"
+                android:lines="4"
+                android:scrollbars = "vertical"
+                android:layout_weight="1"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,6 +89,8 @@
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:minHeight="50dp"
+                    android:minWidth="50dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/material_dynamic_primary70"
                     android:text="ADD+" />
@@ -66,6 +99,8 @@
                     android:id="@+id/btnRemove"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:minHeight="50dp"
+                    android:minWidth="50dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/material_dynamic_primary70"
                     android:text="REMOVE-" />
