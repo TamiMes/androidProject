@@ -107,6 +107,7 @@ public class CustomerSupport extends Fragment {
                     } else {
                         Log.e("Email", "Function call failed", task.getException());
                     }
+                    getFragmentManager().popBackStack();
                 });
     }
 
