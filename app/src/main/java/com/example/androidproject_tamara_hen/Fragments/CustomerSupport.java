@@ -1,5 +1,4 @@
 package com.example.androidproject_tamara_hen.Fragments;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,7 +48,6 @@ public class CustomerSupport extends Fragment {
         lottieAnimationView.setVisibility(View.GONE);
 
 
-
         submitButton.setOnClickListener(v -> {
             String userEmail = emailInput.getText().toString().trim();
             String subject = subjectInput.getText().toString().trim();
@@ -61,11 +59,11 @@ public class CustomerSupport extends Fragment {
         });
 
         homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_customerSupport_to_homePage);
-            }
-        }
+                                       @Override
+                                       public void onClick(View v) {
+                                           Navigation.findNavController(v).navigate(R.id.action_customerSupport_to_homePage);
+                                       }
+                                   }
         );
 
         return view;
@@ -110,36 +108,5 @@ public class CustomerSupport extends Fragment {
                     getFragmentManager().popBackStack();
                 });
     }
+}
 
-    //private void sendEmailOLD() {
-
-
-
-
-//
-//
-//        // Run email sending in a background thread
-//        Executors.newSingleThreadExecutor().execute(() -> {
-//            try {
-//                MailApi sender = new MailApi(COMPANY_EMAIL, COMPANY_EMAIL_PASSWORD, COMPANY_EMAIL, subject, formattedMessage);
-//                sender.sendEmail();
-//
-//                // Notify success on UI thread
-//                if (getActivity() != null) {
-//                    getActivity().runOnUiThread(() ->
-//                            Toast.makeText(getContext(), "Email sent successfully!", Toast.LENGTH_SHORT).show()
-//                    );
-//                }
-//            } catch (MessagingException e) {
-//                e.printStackTrace();
-//
-//                // Notify failure on UI thread
-//                if (getActivity() != null) {
-//                    getActivity().runOnUiThread(() ->
-//                            Toast.makeText(getContext(), "Failed to send email", Toast.LENGTH_SHORT).show()
-//                    );
-//                }
-//            }
-//        });
-    }
-//}

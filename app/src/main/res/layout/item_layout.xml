@@ -39,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="price of item:" />
+                    android:text="price:" />
 
                 <TextView
                     android:id="@+id/tvItemPrice"
@@ -74,7 +74,7 @@
                 android:id="@+id/tvItemDesc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Item Description"
+                android:text="Description"
                 android:lines="4"
                 android:scrollbars = "vertical"
                 android:layout_weight="1"/>

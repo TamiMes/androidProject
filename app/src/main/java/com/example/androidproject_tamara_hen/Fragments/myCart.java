@@ -1,6 +1,10 @@
 package com.example.androidproject_tamara_hen.Fragments;
 
-
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,12 +15,7 @@ import android.widget.TextView;
 
 import com.example.androidproject_tamara_hen.R;
 import com.example.androidproject_tamara_hen.data.myData;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,116 +33,121 @@ public class myCart extends Fragment {
     private RecyclerView recyclerView;
     private ItemAdapter adapter;
     private ArrayList<Item> dataSet;
-    private Button clearCartButton;
+    private Button btnClearCart,btnPurchase;
     private TextView totalAmount;
     private LinearLayoutManager layoutManager;
-
     private DatabaseReference databaseReference;
     private Cart cart;
+
+    private myData myData = new myData();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_user_page);
-
-
-       // clearCartButton = findViewById(R.id.clearCartButton);
-       // totalAmount = findViewById(R.id.totalAmount);
-//        layoutManager = new LinearLayoutManager(requireContext());
-//        recyclerView.setLayoutManager(layoutManager);
-//        dataSet = new ArrayList<>();
-//        adapter = new ItemAdapter(dataSet);
-//        recyclerView.setAdapter(adapter);
 
         cart = new Cart();
-        databaseReference = FirebaseDatabase.getInstance().getReference("cart");
-
-        // Fetch cart data from Firebase
-        fetchCartData();
-
-        clearCartButton.setOnClickListener(v -> clearCart());
+        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        if (userEmail != null) {
+            String safeEmailKey = userEmail.replace('.', '_');
+            databaseReference = FirebaseDatabase.getInstance()
+                    .getReference("carts")
+                    .child(safeEmailKey)
+                    .child("items");
+        }
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_cart, container, false);
 
         recyclerView = view.findViewById(R.id.resViewCart);
+        totalAmount = view.findViewById(R.id.totalAmount);
+        //clearCartButton = view.findViewById(R.id.clearCartButton);
 
         layoutManager = new LinearLayoutManager(requireContext());
         recyclerView.setLayoutManager(layoutManager);
         dataSet = new ArrayList<>();
         adapter = new ItemAdapter(dataSet);
         recyclerView.setAdapter(adapter);
+        btnPurchase = view.findViewById(R.id.checkout);
+        btnPurchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_myCart_to_purchase);
+            }
+        }
+        );
+
+        fetchCartData();
+
+        //clearCartButton.setOnClickListener(v -> clearCart());
 
         return view;
     }
 
     private void fetchCartData() {
+        if (databaseReference == null) return;
+
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //cart.clear();
-
+                dataSet.clear();
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     String itemName = itemSnapshot.getKey();
-                    int quantity = itemSnapshot.getValue(Integer.class);
+                    Integer quantity = itemSnapshot.getValue(Integer.class);
 
-                    if (quantity > 0) {  // Only add items with quantity > 0
-                        cart.addItem(itemName, quantity);
+                    if (quantity != null && quantity > 0) {
+                        int index = getItemIndexByName(itemName);
+                        if (index != -1) {
+                            dataSet.add(new Item(
+                                    myData.nameArray[index],
+                                    quantity,
+                                    myData.drawableArray[index],
+                                    myData.id_[index],
+                                    myData.versionArray[index],
+                                    myData.price[index]
+                            ));
+                        }
                     }
                 }
-
-                updateRecyclerView();
+                adapter.notifyDataSetChanged();
                 updateTotalAmount();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle potential errors
+                // Handle errors
             }
         });
     }
 
-    private void updateRecyclerView() {
-        dataSet.clear();
-
-        myData myData = new myData(); // Assuming MyData contains item details
-
+    private int getItemIndexByName(String itemName) {
         for (int i = 0; i < myData.nameArray.length; i++) {
-            int quantity = cart.getQuantity(myData.nameArray[i]);
-
-            if (quantity > 0) {  // Ensuring only items with quantity > 0 are added
-                dataSet.add(new Item(
-                        myData.nameArray[i],
-                        cart.getQuantity((myData.nameArray[i])),
-                        myData.drawableArray[i],
-                        myData.id_[i],
-                        myData.versionArray[i],
-                        myData.price[i]
-                ));
+            if (myData.nameArray[i].equals(itemName)) {
+                return i;
             }
         }
-
-        adapter.notifyDataSetChanged();
+        return -1;
     }
 
     private void updateTotalAmount() {
         int total = 0;
-       // for (Item item : dataSet) {
-          //  total += item.getAmount() * item.getPrice(); // Assuming each item has a getPrice() method
-       // }
+        for (Item item : dataSet) {
+            total += item.getAmount() * item.getPrice();
+        }
         totalAmount.setText("Total: $" + total);
     }
 
     private void clearCart() {
+        if (databaseReference == null) return;
+
         databaseReference.removeValue().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 dataSet.clear();
                 adapter.notifyDataSetChanged();
                 totalAmount.setText("Total: $0");
+
+
             }
         });
     }

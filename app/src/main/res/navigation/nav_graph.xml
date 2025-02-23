@@ -77,9 +77,6 @@
         android:name="com.example.androidproject_tamara_hen.Fragments.UserPage"
         android:label="UserPage" >
         <action
-            android:id="@+id/action_userPage_to_purchase"
-            app:destination="@id/purchase" />
-        <action
             android:id="@+id/action_userPage_to_userPersonalInfo"
             app:destination="@id/userPersonalInfo" />
         <action
@@ -94,5 +91,8 @@
         android:name="com.example.androidproject_tamara_hen.Fragments.myCart"
         android:label="my_cart"
         tools:layout="@layout/my_cart">
+        <action
+            android:id="@+id/action_myCart_to_purchase"
+            app:destination="@id/purchase" />
     </fragment>
 </navigation>
