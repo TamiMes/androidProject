@@ -53,7 +53,7 @@ public class UserPage extends Fragment {
     private LinearLayoutManager layoutManager;
     private ItemAdapter adapter;
     private Cart cart;
-    private ImageButton btnPurchase,btnCustumerSupport;
+    private ImageButton btnPurchase,btnCustumerSupport,btnPersonal;
     private ArrayList<Item> dataSet;
     EditText editText;
     // TODO: Rename parameter arguments, choose names that match
@@ -109,6 +109,15 @@ public class UserPage extends Fragment {
             }
         }
         );
+        btnPersonal=view.findViewById(R.id.ibToPersonalInfo);
+        btnPersonal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_userPage_to_userPersonalInfo);
+            }
+        }
+        );
+
 
         dataSet = new ArrayList<>();
         recyclerView = view.findViewById(R.id.resView);
