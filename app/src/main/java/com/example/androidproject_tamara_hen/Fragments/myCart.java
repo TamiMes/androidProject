@@ -3,14 +3,17 @@ package com.example.androidproject_tamara_hen.Fragments;
 
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.androidproject_tamara_hen.R;
 import com.example.androidproject_tamara_hen.data.myData;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,30 +29,31 @@ import Ui.Cart;
 import Ui.Item;
 import Ui.ItemAdapter;
 
-public class myCart extends AppCompatActivity {
+public class myCart extends Fragment {
 
     private RecyclerView recyclerView;
     private ItemAdapter adapter;
     private ArrayList<Item> dataSet;
     private Button clearCartButton;
     private TextView totalAmount;
+    private LinearLayoutManager layoutManager;
 
     private DatabaseReference databaseReference;
     private Cart cart;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_user_page);
 
-        recyclerView = findViewById(R.id.resViewCart);
+
        // clearCartButton = findViewById(R.id.clearCartButton);
        // totalAmount = findViewById(R.id.totalAmount);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        dataSet = new ArrayList<>();
-        adapter = new ItemAdapter(dataSet);
-        recyclerView.setAdapter(adapter);
+//        layoutManager = new LinearLayoutManager(requireContext());
+//        recyclerView.setLayoutManager(layoutManager);
+//        dataSet = new ArrayList<>();
+//        adapter = new ItemAdapter(dataSet);
+//        recyclerView.setAdapter(adapter);
 
         cart = new Cart();
         databaseReference = FirebaseDatabase.getInstance().getReference("cart");
@@ -58,6 +62,23 @@ public class myCart extends AppCompatActivity {
         fetchCartData();
 
         clearCartButton.setOnClickListener(v -> clearCart());
+    }
+
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.my_cart, container, false);
+
+        recyclerView = view.findViewById(R.id.resViewCart);
+
+        layoutManager = new LinearLayoutManager(requireContext());
+        recyclerView.setLayoutManager(layoutManager);
+        dataSet = new ArrayList<>();
+        adapter = new ItemAdapter(dataSet);
+        recyclerView.setAdapter(adapter);
+
+        return view;
     }
 
     private void fetchCartData() {

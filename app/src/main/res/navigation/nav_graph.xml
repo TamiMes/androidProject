@@ -89,9 +89,10 @@
             android:id="@+id/action_userPage_to_myCart"
             app:destination="@id/myCart" />
     </fragment>
-    <activity
+    <fragment
         android:id="@+id/myCart"
         android:name="com.example.androidproject_tamara_hen.Fragments.myCart"
         android:label="my_cart"
-        tools:layout="@layout/my_cart" />
+        tools:layout="@layout/my_cart">
+    </fragment>
 </navigation>
