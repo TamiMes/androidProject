@@ -13,7 +13,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:fontFamily="Fantasy"
         android:paddingBottom="16dp"
         android:text="Purchase"
         android:textSize="24sp"
@@ -35,7 +34,7 @@
         android:layout_marginTop="10dp"
         android:background="@android:drawable/editbox_background"
         android:hint="ID"
-        android:inputType="number"
+        android:inputType="text"
         android:padding="10dp" />
 
     <EditText
@@ -45,7 +44,7 @@
         android:layout_marginTop="48dp"
         android:background="@android:drawable/editbox_background"
         android:hint="Card Number"
-        android:inputType="number"
+        android:inputType="text"
         android:padding="10dp" />
 
     <EditText
@@ -82,7 +81,8 @@
         android:layout_gravity="center"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/loading" />
+        app:lottie_rawRes="@raw/loadingharry" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

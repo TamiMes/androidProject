@@ -19,7 +19,7 @@
         android:layout_marginTop="30dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/merchverse12" />
+        android:src="@drawable/merchverse14png" />
 
     <!--    <FrameLayout-->
     <!--        android:layout_width="400dp"-->

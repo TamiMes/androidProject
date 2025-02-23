@@ -13,11 +13,17 @@ import androidx.navigation.Navigation;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.androidproject_tamara_hen.R;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.HttpsCallableResult;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomePage extends Fragment {
 
     private Button buttonRegister, buttonLogin;
     private ImageButton supportBtn;
+    private FirebaseFunctions mFunctions;
     private LottieAnimationView lottieAnimationView; // Lottie animation reference
 
     public HomePage() {
@@ -29,6 +35,10 @@ public class HomePage extends Fragment {
         // Inflate the layout
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
         Log.d("DEBUG", "View Hierarchy: " + view);
+       // mFunctions = FirebaseFunctions.getInstance();
+
+       // Log.d("EMAIL", "ABOUT TO SEND RECIEPT");
+       // sendReceiptEmail("tami", "12465", "12311","789","tmesengiser444@gmail.com");
 
         // Initialize UI elements
         buttonRegister = view.findViewById(R.id.btnRegisterHomePage);
@@ -58,4 +68,7 @@ public class HomePage extends Fragment {
 
         return view;
     }
+
+
+
 }

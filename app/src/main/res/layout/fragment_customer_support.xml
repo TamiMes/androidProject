@@ -63,18 +63,17 @@
         android:text="Submit"
         android:textColor="@android:color/white" />
 
+
+    <!-- Horizontal layout for ImageView and ImageButtons -->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimation1"
-        android:layout_width="300dp"
-        android:layout_height="175dp"
+        android:layout_width="114dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/loading" />
+        app:lottie_rawRes="@raw/loadingharry" />
 
-
-
-    <!-- Horizontal layout for ImageView and ImageButtons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

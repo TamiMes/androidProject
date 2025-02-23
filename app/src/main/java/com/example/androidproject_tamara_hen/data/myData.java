@@ -4,21 +4,23 @@ import com.example.androidproject_tamara_hen.R;
 
 public class myData {
 
-    public static String[] nameArray = {"The Pink Teddy Bear", "Friends Mug", "Blessing card", "Gus Fring"
+    public static String[] nameArray = {"The wand from deathly hollows", "The wand of Lord Voldemort", "Blessing card", "Metal Captain America Shield"
             ,"Mike Ehrmantraut", "Saul Goodman", "Skyler White"
             ,"Walter White JR", "Nacho Varga", "Lalo Salamanca"};
     public static String[] versionArray = {
-            "“Say My Name” with the Iconic Pink Teddy Bear!\n" +
-                    "\n" +
-                    "Inspired by the legendary series Breaking Bad, this adorable yet rebellious pink teddy bear is more than just a cuddle buddy – it’s a symbol of the wild ride through Albuquerque’s underworld. Whether you’re a fan of Walter White’s transformation or just love the nostalgia of one of the greatest shows ever, this bear brings a touch of the unexpected. Soft, squishy, and totally unique, it's the perfect gift for Breaking Bad fans who appreciate a little whimsy with their danger."
-            , "“You don’t have to be a coffee lover to enjoy the Central Perk experience!”\n" +
-            "Sip your favorite brew from the iconic Central Perk mug, and feel like you’re catching up with Monica, Chandler, Ross, Rachel, Joey, and Phoebe in their favorite NYC coffee shop. "
+            "The Elder Wand, one of the Deathly Hallows, is the most powerful wand in the wizarding world. Made from elder wood with a Thestral tail hair core, it is said to be unbeatable in duels. According to legend, it was created by Death himself!"
+            ,
+            "Lord Voldemort's wand is 13½ inches long, made of yew wood, with a phoenix feather core. It was crafted by Garrick Ollivander and shares a unique connection with Harry Potter’s wand, as both have cores from the same phoenix—Fawkes, Dumbledore’s companion.  "
+
             , "Inspired by the heartwarming moment from The Simpsons ,the card Raphael gave to Lisa, this card of love and the beauty of life’s simple blessings. "
-            , "Head of his drug empire"
+
+            , "100% Handmade: This is a high-quality handmade round shield."
+
+
             , "5", "6", "7", "8", "9","10"};
 
-    public static Integer[] drawableArray = {R.drawable.pinkbear, R.drawable.friendsmug, R.drawable.trainblessing,
-            R.drawable.deadpool_funko_pop, R.drawable.deadpool_funko_pop, R.drawable.deadpool_funko_pop,
+    public static Integer[] drawableArray = {R.drawable.wanddeathlyhollows, R.drawable.voldermortwandpng, R.drawable.trainblessing,
+            R.drawable.sheild, R.drawable.deadpool_funko_pop, R.drawable.deadpool_funko_pop,
             R.drawable.deadpool_funko_pop, R.drawable.deadpool_funko_pop, R.drawable.deadpool_funko_pop,R.drawable.deadpool_funko_pop};
 
     public static Integer[] id_ = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};

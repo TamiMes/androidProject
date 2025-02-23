@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.androidproject_tamara_hen.R;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -17,11 +20,14 @@ import com.google.firebase.functions.HttpsCallableResult;
 import java.util.HashMap;
 import java.util.Map;
 
+import Ui.PolicyDialog;
+
 public class Purchase extends Fragment {
 
     // UI Components
     private EditText paymentHolderInput, idInput, cardNumberInput, cvvInput, emailInput;
     private Button purchaseButton;
+    private ImageButton homeBtn,supportBtn;
     private LottieAnimationView lottieAnimationView;
 
     // Firebase Instances
@@ -51,6 +57,21 @@ public class Purchase extends Fragment {
 
         // Hide animation initially
         lottieAnimationView.setVisibility(View.GONE);
+        homeBtn = view.findViewById(R.id.homeButton);
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           Navigation.findNavController(v).navigate(R.id.action_purchase_to_homePage);
+                                       }
+                                   }
+        );
+        supportBtn = view.findViewById(R.id.customerSupportButton);
+        supportBtn.setOnClickListener(new View.OnClickListener() {
+                                          @Override
+                                          public void onClick(View v) {Navigation.findNavController(v).navigate(R.id.action_purchase_to_customerSupport);
+                                          }
+                                      }
+        );
 
         // Handle purchase button click
         purchaseButton.setOnClickListener(v -> {
@@ -59,7 +80,8 @@ public class Purchase extends Fragment {
             String cardNumber = cardNumberInput.getText().toString().trim();
             String cvv = cvvInput.getText().toString().trim();
             String email = emailInput.getText().toString().trim();
-
+           // PolicyDialog policyDialog = new PolicyDialog();
+           // policyDialog.show(getParentFragmentManager(), "PolicyDialog");
             sendData(name, id, cardNumber, cvv, email);
         });
 
@@ -67,6 +89,7 @@ public class Purchase extends Fragment {
     }
 
     private void sendData(String name, String id, String cardNumber, String cvv, String email) {
+
         // Check for empty fields
         if (name.isEmpty() || id.isEmpty() || cardNumber.isEmpty() || cvv.isEmpty() || email.isEmpty()) {
             Toast.makeText(getContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
@@ -78,19 +101,18 @@ public class Purchase extends Fragment {
         lottieAnimationView.playAnimation();
 
         // Create a data map to save in Firestore
-        Map<String, Object> purchaseData = new HashMap<>();
+        Map<String, Object>purchaseData= new HashMap<>();
+        purchaseData.put("userEmail", email);
         purchaseData.put("paymentHolder", name);
         purchaseData.put("id", id);
         purchaseData.put("cardNumber", cardNumber);
         purchaseData.put("cvv", cvv);
-        purchaseData.put("email", email);
-
         // Store in Firestore
         db.collection("purchases")
                 .add(purchaseData)
                 .addOnSuccessListener(documentReference -> {
-                    Toast.makeText(getContext(), "Purchase successful!", Toast.LENGTH_SHORT).show();
-                    sendReceiptEmail(name, id, cardNumber, cvv, email);
+                   sendReceiptEmail(name, id, cardNumber, cvv, email);
+                   // sendReceiptEmail ("tami", "12465", "12311","789","tmesengiser444@gmail.com");
                     stopAnimation();
                 })
                 .addOnFailureListener(e -> {
@@ -118,6 +140,7 @@ public class Purchase extends Fragment {
                             Map response = (Map) result.getData();
                             if ((Boolean) response.get("success")) {
                                 Log.d("Email", "Receipt sent successfully");
+
                             } else {
                                 Log.e("Email", "Error: " + response.get("message"));
                             }
