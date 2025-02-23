@@ -53,7 +53,7 @@ public class UserPage extends Fragment {
     private LinearLayoutManager layoutManager;
     private ItemAdapter adapter;
     private Cart cart;
-    private ImageButton btnPurchase,btnCustumerSupport,btnPersonal;
+    private ImageButton btnMyCart,btnCustumerSupport,btnPersonal;
     private ArrayList<Item> dataSet;
     EditText editText;
     // TODO: Rename parameter arguments, choose names that match
@@ -93,11 +93,11 @@ public class UserPage extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_page, container, false);
         editText = view.findViewById(R.id.editText);
-        btnPurchase = view.findViewById(R.id.ibAddItem);
-        btnPurchase.setOnClickListener(new View.OnClickListener() {
+        btnMyCart = view.findViewById(R.id.ibMyCart);
+        btnMyCart.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-         Navigation.findNavController(v).navigate(R.id.action_userPage_to_purchase);
+         Navigation.findNavController(v).navigate(R.id.action_userPage_to_myCart);
            }
           }
         );
