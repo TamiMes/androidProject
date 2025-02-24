@@ -11,20 +11,31 @@
     android:padding="16dp"
     tools:context=".Fragments.HomePage">
 
-    <ImageView
-        android:id="@+id/backgroundImage"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="163dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="30dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/merchverse14png" />
+        android:layout_marginTop="30dp">
 
-    <!--    <FrameLayout-->
-    <!--        android:layout_width="400dp"-->
-    <!--        android:layout_height="250dp"-->
-    <!--        android:gravity="center">-->
+
+        <ImageView
+            android:id="@+id/backgroundImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/merchverse14png" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationgold"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/goldensnich" />
+
+    </FrameLayout>
 
 
     <com.airbnb.lottie.LottieAnimationView
