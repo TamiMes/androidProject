@@ -51,7 +51,7 @@ const createPdf = ({ paymentHolder, id, cardNumber, cvv, email, totalCost, items
     doc.text(`Card Number: ${cardNumber}`);
     doc.text(`CVV: ${cvv}`);
     doc.text(`Email: ${email}`).moveDown();
-    doc.fontSize(14).text("Purchased Items:").moveDown();
+    doc.fontSize(12).text("Purchased Items:").moveDown();
 
     // Add each item to the receipt
     Object.entries(items).forEach(([item, quantity]) => {
