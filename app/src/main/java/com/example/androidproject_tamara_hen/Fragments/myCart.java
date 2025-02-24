@@ -105,7 +105,7 @@ public class myCart extends Fragment {
                                     myData.drawableArray[index],
                                     myData.id_[index],
                                     myData.versionArray[index],
-                                    (int) myData.price[index]
+                                    myData.price[index]
                             ));
                         }
                     }

@@ -157,14 +157,16 @@ public class UserPage extends Fragment {
 
                             //        // Populate the dataSet
 //                            for (int i = 0; i < Objects.requireNonNull(cart).getItems().size(); i++) {
+                           // System.out.println(myData.nameArray.length);
                             for (int i = 0; i < myData.nameArray.length; i++) {
+                               // assert cart != null;
                                 dataSet.add(new Item(
                                         myData.nameArray[i],
                                         cart.getQuantity((myData.nameArray[i])),
                                         myData.drawableArray[i],
                                         myData.id_[i],
                                         myData.versionArray[i],
-                                        (int)myData.price[i]
+                                        myData.price[i]
                                 ));
                             }
                         }
