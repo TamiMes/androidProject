@@ -54,6 +54,7 @@ public class Purchase extends Fragment {
         emailInput = view.findViewById(R.id.emailInput1);
         purchaseButton = view.findViewById(R.id.purchaseButton);
         lottieAnimationView1 = view.findViewById(R.id.lottieAnimation1);
+        lottieAnimationView2 = view.findViewById(R.id.lottieAnimationemail);
 
         // Hide animation initially
         lottieAnimationView1.setVisibility(View.GONE);
