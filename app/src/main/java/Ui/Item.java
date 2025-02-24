@@ -6,9 +6,9 @@ public class Item {
     private int amount;
     private int image;
     private String desc;
-    private int price;
+    private double price;
 
-    public Item(String name, int amount, int image, int id_, String desc, int price) {
+    public Item(String name, int amount, int image, int id_, String desc, double price) {
         this.name = name;;
         this.image = image;
         this.amount = amount;
@@ -48,11 +48,11 @@ public class Item {
         this.desc = desc;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }

@@ -74,7 +74,7 @@ public class myData {
             R.drawable.dobby, R.drawable.cloack, R.drawable.philostone,
             R.drawable.goldensnich, R.drawable.turntime, R.drawable.riddlediary,R.drawable.marvolo,R.drawable.locket,R.drawable.helga,R.drawable.sortinghat,R.drawable.nimbus2000,R.drawable.halfblood,R.drawable.butterbeer,R.drawable.mirror,R.drawable.map,R.drawable.suitcase,R.drawable.letter};
 
-    public static Integer[] id_ = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19};
+    public static Integer[] id_ = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19,20};
 
     public static double[] price = {
             18.99,
