@@ -24,7 +24,7 @@ public class HomePage extends Fragment {
     private Button buttonRegister, buttonLogin;
     private ImageButton supportBtn;
     private FirebaseFunctions mFunctions;
-    private LottieAnimationView lottieAnimationView; // Lottie animation reference
+    private LottieAnimationView lottieAnimationView1,lottieAnimationView2; // Lottie animation reference
 
     public HomePage() {
         // Required empty public constructor
@@ -44,12 +44,13 @@ public class HomePage extends Fragment {
         buttonRegister = view.findViewById(R.id.btnRegisterHomePage);
         buttonLogin = view.findViewById(R.id.LoginPage);
         supportBtn = view.findViewById(R.id.customerSupportButton);
-        lottieAnimationView = view.findViewById(R.id.lottieAnimation);
+        lottieAnimationView1 = view.findViewById(R.id.lottieAnimation);
+        lottieAnimationView2 = view.findViewById(R.id.lottieAnimationgold);
 
         // Play animation on fragment load
-        lottieAnimationView.playAnimation();
+        lottieAnimationView1.playAnimation();
+        lottieAnimationView2.playAnimation();
 
-        // Button listeners
         if (buttonRegister != null) {
             buttonRegister.setOnClickListener(v ->
                     Navigation.findNavController(v).navigate(R.id.action_homePage_to_registrationPage)

@@ -164,7 +164,7 @@ public class UserPage extends Fragment {
                                         myData.drawableArray[i],
                                         myData.id_[i],
                                         myData.versionArray[i],
-                                        myData.price[i]
+                                        (int)myData.price[i]
                                 ));
                             }
                         }
