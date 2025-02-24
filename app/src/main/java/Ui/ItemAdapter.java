@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.androidproject_tamara_hen.R;
 
 import org.w3c.dom.Text;
@@ -69,7 +70,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.textViewName.setText(dataSet.get(position).getName());
-        holder.imageView.setImageResource(dataSet.get(position).getImage());
+        //holder.imageView.setImageResource(dataSet.get(position).getImage());
+        Glide.with(holder.itemView).load(dataSet.get(position).getImage()).into(holder.imageView);
         holder.textCounter.setText(String.valueOf(dataSet.get(position).getAmount()));
         holder.tvDesc.setText(dataSet.get(position).getDesc());
         holder.tvPrice.setText(String.valueOf(dataSet.get(position).getPrice()));

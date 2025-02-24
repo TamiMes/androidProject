@@ -2,6 +2,8 @@ package com.example.androidproject_tamara_hen.Fragments;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.androidproject_tamara_hen.R;
+import com.example.androidproject_tamara_hen.UserViewModel;
 import com.example.androidproject_tamara_hen.data.myData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -38,13 +41,14 @@ public class myCart extends Fragment {
     private LinearLayoutManager layoutManager;
     private DatabaseReference databaseReference;
     private Cart cart;
+    private UserViewModel viewModel;
 
     private myData myData = new myData();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         cart = new Cart();
         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         if (userEmail != null) {
@@ -67,7 +71,41 @@ public class myCart extends Fragment {
         layoutManager = new LinearLayoutManager(requireContext());
         recyclerView.setLayoutManager(layoutManager);
         dataSet = new ArrayList<>();
-        adapter = new ItemAdapter(dataSet);
+        adapter = new ItemAdapter(dataSet, new ItemAdapter.RecyclerViewListener() {
+            @Override
+            public void onClick(View view, int position) {
+
+            }
+
+            @Override
+            public boolean onLongClick(View view, int position) {
+                return false;
+            }
+
+            @Override
+            public void onAddButtonClick(View view, int position) {
+                //Toast.makeText(requireContext(), "Add to number of items", Toast.LENGTH_SHORT).show();
+                TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
+                TextView tvItemName = view.findViewById(R.id.tvName);
+                int counter = Integer.parseInt(tvItemCounter.getText().toString());
+                databaseReference.child(tvItemName.getText().toString()).setValue(counter + 1);
+                tvItemCounter.setText(String.valueOf(counter + 1));
+                updateTotalAmount();
+            }
+
+            @Override
+            public void onRemoveButtonClick(View view, int position) {
+                //Toast.makeText(requireContext(), "Decrease to number of items", Toast.LENGTH_SHORT).show();
+                TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
+                TextView tvItemName = view.findViewById(R.id.tvName);
+                int counter = Integer.parseInt(tvItemCounter.getText().toString());
+                if (counter > 0) {
+                    databaseReference.child(tvItemName.getText().toString()).setValue(counter - 1);
+                    tvItemCounter.setText(String.valueOf(counter - 1));
+                    updateTotalAmount();
+                }
+            }
+        });
         recyclerView.setAdapter(adapter);
         btnPurchase = view.findViewById(R.id.checkout);
         btnPurchase.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +169,7 @@ public class myCart extends Fragment {
     }
 
     private void updateTotalAmount() {
-        int total = 0;
+        double total = 0;
         for (Item item : dataSet) {
             total += item.getAmount() * item.getPrice();
         }

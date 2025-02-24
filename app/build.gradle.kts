@@ -37,7 +37,7 @@ android {
 }
 
 dependencies {
-
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("androidx.lifecycle:lifecycle-viewmodel:2.5.1")
     implementation ("androidx.lifecycle:lifecycle-livedata:2.5.1")
     implementation ("com.sun.mail:javax.mail:1.6.2")
