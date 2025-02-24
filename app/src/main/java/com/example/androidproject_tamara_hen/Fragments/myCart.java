@@ -26,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import Ui.Cart;
 import Ui.Item;
@@ -111,10 +113,25 @@ public class myCart extends Fragment {
         btnPurchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_myCart_to_purchase);
+                double totalCost = 0;
+                Map<String, Integer> purchasedItems = new HashMap<>();
+
+                for (Item item : dataSet) {
+                    int quantity = item.getAmount();
+                    if (quantity > 0) {
+                        purchasedItems.put(item.getName(), quantity);
+                        totalCost += item.getPrice() * quantity;
+                    }
+                }
+
+                Bundle bundle = new Bundle();
+                bundle.putDouble("totalCost", totalCost);
+                bundle.putSerializable("purchasedItems", (HashMap<String, Integer>) purchasedItems);
+
+                Navigation.findNavController(v).navigate(R.id.action_myCart_to_purchase, bundle);
             }
-        }
-        );
+        });
+
 
         fetchCartData();
 
