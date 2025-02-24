@@ -28,7 +28,7 @@ public class Purchase extends Fragment {
     private EditText paymentHolderInput, idInput, cardNumberInput, cvvInput, emailInput;
     private Button purchaseButton;
     private ImageButton homeBtn,supportBtn;
-    private LottieAnimationView lottieAnimationView;
+    private LottieAnimationView lottieAnimationView1,lottieAnimationView2;
 
     // Firebase Instances
     private FirebaseFirestore db;
@@ -53,10 +53,11 @@ public class Purchase extends Fragment {
         cvvInput = view.findViewById(R.id.cvvInput);
         emailInput = view.findViewById(R.id.emailInput1);
         purchaseButton = view.findViewById(R.id.purchaseButton);
-        lottieAnimationView = view.findViewById(R.id.lottieAnimation1);
+        lottieAnimationView1 = view.findViewById(R.id.lottieAnimation1);
 
         // Hide animation initially
-        lottieAnimationView.setVisibility(View.GONE);
+        lottieAnimationView1.setVisibility(View.GONE);
+        lottieAnimationView2.setVisibility(View.GONE);
         homeBtn = view.findViewById(R.id.homeButton);
         homeBtn.setOnClickListener(new View.OnClickListener() {
                                        @Override
@@ -80,8 +81,8 @@ public class Purchase extends Fragment {
             String cardNumber = cardNumberInput.getText().toString().trim();
             String cvv = cvvInput.getText().toString().trim();
             String email = emailInput.getText().toString().trim();
-           // PolicyDialog policyDialog = new PolicyDialog();
-           // policyDialog.show(getParentFragmentManager(), "PolicyDialog");
+            // PolicyDialog policyDialog = new PolicyDialog();
+            // policyDialog.show(getParentFragmentManager(), "PolicyDialog");
             sendData(name, id, cardNumber, cvv, email);
         });
 
@@ -97,8 +98,8 @@ public class Purchase extends Fragment {
         }
 
         // Show animation while processing
-        lottieAnimationView.setVisibility(View.VISIBLE);
-        lottieAnimationView.playAnimation();
+        lottieAnimationView1.setVisibility(View.VISIBLE);
+        lottieAnimationView1.playAnimation();
 
         // Create a data map to save in Firestore
         Map<String, Object>purchaseData= new HashMap<>();
@@ -111,13 +112,13 @@ public class Purchase extends Fragment {
         db.collection("purchases")
                 .add(purchaseData)
                 .addOnSuccessListener(documentReference -> {
-                   sendReceiptEmail(name, id, cardNumber, cvv, email);
-                   // sendReceiptEmail ("tami", "12465", "12311","789","tmesengiser444@gmail.com");
-                    stopAnimation();
+                    sendReceiptEmail(name, id, cardNumber, cvv, email);
+                    // sendReceiptEmail ("tami", "12465", "12311","789","tmesengiser444@gmail.com");
+                    stopAnimation1();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    stopAnimation();
+                    stopAnimation1();
                 });
     }
 
@@ -132,27 +133,29 @@ public class Purchase extends Fragment {
 
         // Call the Firebase function to send the receipt
         mFunctions.getHttpsCallable("sendReceipt").call(data).addOnCompleteListener(task -> {
-                    lottieAnimationView.cancelAnimation();
-                    lottieAnimationView.setVisibility(View.GONE);
-                    if (task.isSuccessful()) {
-                        HttpsCallableResult result = task.getResult();
-                        if (result != null) {
-                            Map response = (Map) result.getData();
-                            if ((Boolean) response.get("success")) {
-                                Log.d("Email", "Receipt sent successfully");
+            lottieAnimationView1.cancelAnimation();
+            lottieAnimationView1.setVisibility(View.GONE);
+            if (task.isSuccessful()) {
+                HttpsCallableResult result = task.getResult();
+                if (result != null) {
+                    Map response = (Map) result.getData();
+                    if ((Boolean) response.get("success")) {
+                        Log.d("Email", "Receipt sent successfully");
+                        lottieAnimationView2.setVisibility(View.VISIBLE);
+                        lottieAnimationView2.playAnimation();
 
-                            } else {
-                                Log.e("Email", "Error: " + response.get("message"));
-                            }
-                        }
                     } else {
-                        Log.e("Email", "Function call failed", task.getException());
+                        Log.e("Email", "Error: " + response.get("message"));
                     }
-                });
+                }
+            } else {
+                Log.e("Email", "Function call failed", task.getException());
+            }
+        });
     }
 
-    private void stopAnimation() {
-        lottieAnimationView.cancelAnimation();
-        lottieAnimationView.setVisibility(View.GONE);
+    private void stopAnimation1() {
+        lottieAnimationView1.cancelAnimation();
+        lottieAnimationView1.setVisibility(View.GONE);
     }
 }
