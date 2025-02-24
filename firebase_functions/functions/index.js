@@ -45,7 +45,7 @@ const createPdf = ({ paymentHolder, id, cardNumber, cvv, email, totalCost, items
     });
     doc.on("error", reject);
 
-    doc.fontSize(16).text("Purchase Receipt", { align: "center" }).moveDown();
+    doc.fontSize(18).text("Purchase Receipt", { align: "center" }).moveDown();
     doc.fontSize(12).text(`Payment Holder: ${paymentHolder}`);
     doc.text(`ID: ${id}`);
     doc.text(`Card Number: ${cardNumber}`);
