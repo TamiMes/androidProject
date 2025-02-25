@@ -54,7 +54,7 @@ public class UserPage extends Fragment {
     private LinearLayoutManager layoutManager;
     private ItemAdapter adapter;
     private Cart cart;
-    private ImageButton btnMyCart, btnCustumerSupport, btnPersonal;
+    private ImageButton btnMyCart, btnCustumerSupport, btnPersonal, ibFavoritePage;
     private ArrayList<Item> dataSet;
     EditText editText;
     // TODO: Rename parameter arguments, choose names that match
@@ -95,6 +95,7 @@ public class UserPage extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_page, container, false);
         editText = view.findViewById(R.id.editText);
         btnMyCart = view.findViewById(R.id.ibMyCart);
+        ibFavoritePage = view.findViewById(R.id.ibFavorites);
         btnMyCart.setOnClickListener(new View.OnClickListener() {
                                          @Override
                                          public void onClick(View v) {
@@ -106,7 +107,8 @@ public class UserPage extends Fragment {
         btnCustumerSupport.setOnClickListener(new View.OnClickListener() {
                                                   @Override
                                                   public void onClick(View v) {
-                                                      Navigation.findNavController(v).navigate(R.id.action_userPage_to_customerSupport);
+                                                      Navigation.findNavController(v).navigate(R.id.action_global_customerSupport);
+//                                                      Navigation.findNavController(v).navigate(R.id.action_userPage_to_customerSupport);
                                                   }
                                               }
         );
@@ -119,6 +121,12 @@ public class UserPage extends Fragment {
                                        }
         );
 
+        ibFavoritePage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_userPage_to_wishlist);
+            }
+        });
 
         dataSet = new ArrayList<>();
         recyclerView = view.findViewById(R.id.resView);

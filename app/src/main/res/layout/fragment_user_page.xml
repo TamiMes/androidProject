@@ -6,17 +6,47 @@
     tools:context=".Fragments.UserPage"
     android:orientation="vertical"
     android:background="@color/white"
-    android:padding="12dp">
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="User's Name"
+        android:layout_margin="4dp"/>
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp"
+        android:layout_weight="1"
+        android:hint="Enter part of a name to search for"/>
+
+    <!-- RecyclerView for Shopping Items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/resView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="0.3"/>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="0.9"
+        >
         <ImageView
             android:layout_width="46dp"
             android:layout_height="44dp"
-            android:src="@drawable/merchverselogo"/>
+            android:src="@drawable/merchverselogo"
+            android:layout_margin="4dp"/>
 
         <ImageButton
             android:id="@+id/homeButton"
@@ -25,7 +55,8 @@
             android:src="@drawable/baseline_home_24"
             android:background="@null"
             android:contentDescription="Home"
-            android:padding="8dp"/>
+            android:padding="8dp"
+            android:layout_margin="4dp"/>
 
         <ImageButton
             android:id="@+id/customerSupportButton"
@@ -34,18 +65,8 @@
             android:src="@drawable/baseline_contact_support_24"
             android:background="@null"
             android:contentDescription="Customer Support"
-            android:padding="8dp"/>
-
-
-
-        <TextView
-            android:id="@+id/tvUserName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:padding="8dp"
+            android:layout_margin="4dp"/>
 
         <ImageButton
             android:id="@+id/ibToPersonalInfo"
@@ -54,28 +75,27 @@
             android:background="@null"
             android:contentDescription="Customer Support"
             android:padding="8dp"
-            android:src="@drawable/baseline_person_outline_24" />
+            android:src="@drawable/baseline_person_outline_24"
+            android:layout_margin="4dp"/>
 
         <ImageButton
             android:id="@+id/ibMyCart"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:background="@null"
             android:src="@drawable/baseline_add_to_shopping_cart_24"
-            android:contentDescription="Shopping Cart"/>
+            android:contentDescription="Shopping Cart"
+            android:layout_margin="4dp"/>
+        <ImageButton
+            android:id="@+id/ibFavorites"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@null"
+            android:src="@drawable/baseline_favorite_24"
+            android:contentDescription="Shopping Cart"
+            android:layout_margin="4dp"/>
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:hint="Enter part of a name to search for"/>
 
-    <!-- RecyclerView for Shopping Items -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/resView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"/>
 
 </LinearLayout>

@@ -24,7 +24,7 @@ public class HomePage extends Fragment {
     private Button buttonRegister, buttonLogin;
     private ImageButton supportBtn;
     private FirebaseFunctions mFunctions;
-    private LottieAnimationView lottieAnimationView1,lottieAnimationView2; // Lottie animation reference
+    private LottieAnimationView lottieAnimationView1, lottieAnimationView2; // Lottie animation reference
 
     public HomePage() {
         // Required empty public constructor
@@ -35,10 +35,10 @@ public class HomePage extends Fragment {
         // Inflate the layout
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
         Log.d("DEBUG", "View Hierarchy: " + view);
-       // mFunctions = FirebaseFunctions.getInstance();
+        // mFunctions = FirebaseFunctions.getInstance();
 
-       // Log.d("EMAIL", "ABOUT TO SEND RECIEPT");
-       // sendReceiptEmail("tami", "12465", "12311","789","tmesengiser444@gmail.com");
+        // Log.d("EMAIL", "ABOUT TO SEND RECIEPT");
+        // sendReceiptEmail("tami", "12465", "12311","789","tmesengiser444@gmail.com");
 
         // Initialize UI elements
         buttonRegister = view.findViewById(R.id.btnRegisterHomePage);
@@ -64,12 +64,12 @@ public class HomePage extends Fragment {
         }
 
         supportBtn.setOnClickListener(v ->
-                Navigation.findNavController(v).navigate(R.id.action_homePage_to_customerSupport)
+                        Navigation.findNavController(v).navigate(R.id.action_global_customerSupport)
+                //Navigation.findNavController(v).navigate(R.id.action_homePage_to_customerSupport)
         );
 
         return view;
     }
-
 
 
 }
