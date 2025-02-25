@@ -2,16 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="This is some text"
-        android:textStyle="bold"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,8 +22,8 @@
             android:id="@+id/ibItem"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:contentDescription="@string/app_name"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="12dp"
+            android:contentDescription="@string/app_name" />
 
 
         <LinearLayout
@@ -59,42 +59,42 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="Price: $" />
+                        android:text="Price: $"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvItemPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="0" />
+                        android:text="0"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="Number of items:" />
+                        android:text="Number of items:"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvItemCounter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="0" />
+                        android:text="0"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
 
@@ -102,27 +102,27 @@
                     android:id="@+id/tvItemDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
                     android:minHeight="100dp"
                     android:minLines="3"
                     android:scrollbars="vertical"
-                    android:textStyle="bold"
                     android:text="Description"
-                    android:layout_marginBottom="12dp"/>
+                    android:textStyle="bold" />
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:minHeight="50dp">
+                    android:minHeight="50dp"
+                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/btnAdd"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:minHeight="50dp"
                         android:backgroundTint="@color/material_dynamic_primary70"
+                        android:minHeight="50dp"
                         android:text="ADD+" />
 
                     <Button
@@ -130,8 +130,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:minHeight="50dp"
                         android:backgroundTint="@color/material_dynamic_primary70"
+                        android:minHeight="50dp"
                         android:text="REMOVE-" />
                 </LinearLayout>
             </LinearLayout>
