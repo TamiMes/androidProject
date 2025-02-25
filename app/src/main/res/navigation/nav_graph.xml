@@ -8,30 +8,30 @@
     <fragment
         android:id="@+id/homePage"
         android:name="com.example.androidproject_tamara_hen.Fragments.HomePage"
-        android:label="HomePage" >
+        android:label="HomePage">
         <action
             android:id="@+id/action_homePage_to_loginPage"
             app:destination="@id/loginPage" />
         <action
             android:id="@+id/action_homePage_to_registrationPage"
             app:destination="@id/registrationPage" />
-        <action
-            android:id="@+id/action_homePage_to_customerSupport"
-            app:destination="@id/customerSupport" />
+        <!--        <action-->
+        <!--            android:id="@+id/action_homePage_to_customerSupport"-->
+        <!--            app:destination="@id/customerSupport" />-->
     </fragment>
     <fragment
         android:id="@+id/registrationPage"
         android:name="com.example.androidproject_tamara_hen.Fragments.RegistrationPage"
-        android:label="RegistrationPage" >
+        android:label="RegistrationPage">
         <action
             android:id="@+id/action_registrationPage_to_userPage"
             app:destination="@id/userPage" />
         <action
             android:id="@+id/action_registrationPage_to_homePage"
             app:destination="@id/homePage" />
-        <action
-            android:id="@+id/action_registrationPage_to_customerSupport"
-            app:destination="@id/customerSupport" />
+        <!--        <action-->
+        <!--            android:id="@+id/action_registrationPage_to_customerSupport"-->
+        <!--            app:destination="@id/customerSupport" />-->
     </fragment>
     <fragment
         android:id="@+id/wishlist"
@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/userPersonalInfo"
         android:name="com.example.androidproject_tamara_hen.Fragments.UserPersonalInfo"
-        android:label="UserPersonalInfo" >
+        android:label="UserPersonalInfo">
         <action
             android:id="@+id/action_userPersonalInfo_to_homePage"
             app:destination="@id/homePage" />
@@ -49,18 +49,19 @@
     <fragment
         android:id="@+id/purchase"
         android:name="com.example.androidproject_tamara_hen.Fragments.Purchase"
-        android:label="Purchase" >
+        android:label="Purchase">
         <action
             android:id="@+id/action_purchase_to_homePage"
             app:destination="@id/homePage" />
-        <action
-            android:id="@+id/action_purchase_to_customerSupport"
-            app:destination="@id/customerSupport" />
+        <!--        <action-->
+        <!--            android:id="@+id/action_purchase_to_customerSupport"-->
+        <!--            app:destination="@id/customerSupport" />-->
     </fragment>
     <fragment
         android:id="@+id/customerSupport"
         android:name="com.example.androidproject_tamara_hen.Fragments.CustomerSupport"
-        android:label="CustomerSupport" >
+        android:label="CustomerSupport">
+
         <action
             android:id="@+id/action_customerSupport_to_homePage"
             app:destination="@id/homePage" />
@@ -68,30 +69,33 @@
     <fragment
         android:id="@+id/loginPage"
         android:name="com.example.androidproject_tamara_hen.Fragments.loginPage"
-        android:label="loginPage" >
+        android:label="loginPage">
         <action
             android:id="@+id/action_loginPage_to_userPage"
             app:destination="@id/userPage" />
         <action
             android:id="@+id/action_loginPage_to_homePage"
             app:destination="@id/homePage" />
-        <action
-            android:id="@+id/action_loginPage_to_customerSupport"
-            app:destination="@id/customerSupport" />
+        <!--        <action-->
+        <!--            android:id="@+id/action_loginPage_to_customerSupport"-->
+        <!--            app:destination="@id/customerSupport" />-->
     </fragment>
     <fragment
         android:id="@+id/userPage"
         android:name="com.example.androidproject_tamara_hen.Fragments.UserPage"
-        android:label="UserPage" >
+        android:label="UserPage">
         <action
             android:id="@+id/action_userPage_to_userPersonalInfo"
             app:destination="@id/userPersonalInfo" />
-        <action
-            android:id="@+id/action_userPage_to_customerSupport"
-            app:destination="@id/customerSupport" />
+        <!--        <action-->
+        <!--            android:id="@+id/action_userPage_to_customerSupport"-->
+        <!--            app:destination="@id/customerSupport" />-->
         <action
             android:id="@+id/action_userPage_to_myCart"
             app:destination="@id/myCart" />
+        <action
+            android:id="@+id/action_userPage_to_wishlist"
+            app:destination="@id/wishlist" />
     </fragment>
     <fragment
         android:id="@+id/myCart"
@@ -102,4 +106,11 @@
             android:id="@+id/action_myCart_to_purchase"
             app:destination="@id/purchase" />
     </fragment>
+
+    <action
+        android:id="@+id/action_global_customerSupport"
+        app:destination="@id/customerSupport" />
+    <action
+        android:id="@+id/action_global_homePage"
+        app:destination="@id/homePage" />
 </navigation>

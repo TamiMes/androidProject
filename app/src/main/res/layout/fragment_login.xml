@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/pastel2"
-    tools:context=".Fragments.loginPage">
+    tools:context=".Fragments.loginPage"
+    android:padding="16dp">
 
 
     <LinearLayout

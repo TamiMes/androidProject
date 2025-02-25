@@ -108,6 +108,10 @@ public class myCart extends Fragment {
                     tvItemCounter.setText(String.valueOf(counter - 1));
                     dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() - 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite()));
                     updateTotalAmount();
+                    if (dataSet.get(position).getAmount() == 0){
+                        dataSet.remove(position);
+                        adapter.notifyItemChanged(position);
+                    }
                 }
             }
 

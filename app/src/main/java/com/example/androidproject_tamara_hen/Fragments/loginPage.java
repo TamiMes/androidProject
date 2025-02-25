@@ -79,7 +79,9 @@ public class loginPage extends Fragment {
         supportBtn = view.findViewById(R.id.customerSupportButton);
         supportBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {Navigation.findNavController(v).navigate(R.id.action_loginPage_to_customerSupport);
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_global_customerSupport);
+//                Navigation.findNavController(v).navigate(R.id.action_loginPage_to_customerSupport);
             }
         }
         );
