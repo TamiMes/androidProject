@@ -33,7 +33,7 @@ exports.sendEmail = functions.https.onCall(async (data, context) => {
 });
 
 // Function to generate PDF as a Buffer
-const createPdf = ({ paymentHolder, id, cardNumber, cvv, email }) => {
+const createPdf = ({ paymentHolder, id, cardNumber, cvv, email, totalCost, items }) => {
   return new Promise((resolve, reject) => {
     const doc = new PDFDocument();
     let buffers = [];
@@ -45,31 +45,40 @@ const createPdf = ({ paymentHolder, id, cardNumber, cvv, email }) => {
     });
     doc.on("error", reject);
 
-    // Generate PDF content
-    doc.fontSize(16).text("Purchase Receipt", { align: "center" }).moveDown();
+    doc.fontSize(18).text("Purchase Receipt", { align: "center" }).moveDown();
     doc.fontSize(12).text(`Payment Holder: ${paymentHolder}`);
     doc.text(`ID: ${id}`);
     doc.text(`Card Number: ${cardNumber}`);
     doc.text(`CVV: ${cvv}`);
-    doc.text(`Email: ${email}`);
-    
+    doc.text(`Email: ${email}`).moveDown();
+    doc.fontSize(12).text("Purchased Items:").moveDown();
+
+    // Add each item to the receipt
+    Object.entries(items).forEach(([item, quantity]) => {
+      doc.text(`${item}: ${quantity}`);
+    });
+
+    doc.moveDown();
+    doc.fontSize(14).text(`Total Cost: $${totalCost.toFixed(2)}`);
+
     doc.end();
   });
 };
 
+
 // Cloud Function to send email with attached PDF receipt
 exports.sendReceipt = functions.https.onCall(async (data, context) => {
-  const { userEmail, paymentHolder, id, cardNumber, cvv } = data.data;
-  console.log(`Received data to send receipt. Data: ${userEmail}, ${paymentHolder}, ${id}, ${cardNumber}, ${cvv}`);
+  const { userEmail, paymentHolder, id, cardNumber, cvv, totalCost, items } = data.data;
+  console.log(`Received data to send receipt. Data: ${JSON.stringify(data.data)}`);
 
   try {
-    const pdfBuffer = await createPdf({ paymentHolder, id, cardNumber, cvv, email: userEmail });
+    const pdfBuffer = await createPdf({ paymentHolder, id, cardNumber, cvv, email: userEmail, totalCost, items });
 
     const mailOptions = {
       to: userEmail,
       from: gmailUsername,
       subject: "Your Purchase Receipt",
-      text: "Thank you for your purchase! Please find attached the receipt with your details.",
+      text: `Thank you for your purchase! Your total cost was $${totalCost.toFixed(2)}. Please find your receipt attached.`,
       attachments: [
         {
           filename: "receipt.pdf",

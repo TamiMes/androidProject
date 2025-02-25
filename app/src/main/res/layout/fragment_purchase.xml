@@ -74,14 +74,31 @@
         android:backgroundTint="@color/PINK1"
         android:text="Purchase"
         android:textColor="@android:color/white" />
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimation1"
+    <FrameLayout
         android:layout_width="300dp"
         android:layout_height="175dp"
-        android:layout_gravity="center"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/loadingharry" />
+        android:layout_gravity="center">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimation1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loadingharry"
+            android:visibility="visible"/> <!-- Initially visible -->
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationemail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/mailsucsess"
+            android:visibility="gone"/> <!-- Initially hidden -->
+
+    </FrameLayout>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
