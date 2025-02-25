@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public class myCart extends Fragment {
     private RecyclerView recyclerView;
     private ItemAdapter adapter;
     private ArrayList<Item> dataSet;
-    private Button btnClearCart,btnPurchase;
+    private Button btnClearCart, btnPurchase;
     private TextView totalAmount;
     private LinearLayoutManager layoutManager;
     private DatabaseReference databaseReference;
@@ -55,8 +56,8 @@ public class myCart extends Fragment {
             String safeEmailKey = userEmail.replace('.', '_');
             databaseReference = FirebaseDatabase.getInstance()
                     .getReference("carts")
-                    .child(safeEmailKey)
-                    .child("items");
+                    .child(safeEmailKey);
+//                    .child("items");
         }
     }
 
@@ -88,8 +89,9 @@ public class myCart extends Fragment {
                 TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
-                databaseReference.child(tvItemName.getText().toString()).setValue(counter + 1);
+                databaseReference.child("items").child(tvItemName.getText().toString()).setValue(counter + 1);
                 tvItemCounter.setText(String.valueOf(counter + 1));
+                dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() + 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite()));
                 updateTotalAmount();
             }
 
@@ -100,20 +102,30 @@ public class myCart extends Fragment {
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
                 if (counter > 0) {
-                    databaseReference.child(tvItemName.getText().toString()).setValue(counter - 1);
+                    databaseReference.child("items").child(tvItemName.getText().toString()).setValue(counter - 1);
                     tvItemCounter.setText(String.valueOf(counter - 1));
+                    dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() - 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite()));
                     updateTotalAmount();
                 }
             }
+
+            @Override
+            public void onFavoriteButtonClick(View view, int position) {
+                dataSet.get(position).setFavorite(!dataSet.get(position).getFavorite());
+                databaseReference.child("favorites").child(dataSet.get(position).getName()).setValue(dataSet.get(position).getFavorite());
+                adapter.notifyItemChanged(position);
+            }
+
+
         });
         recyclerView.setAdapter(adapter);
         btnPurchase = view.findViewById(R.id.checkout);
         btnPurchase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_myCart_to_purchase);
-            }
-        }
+                                           @Override
+                                           public void onClick(View v) {
+                                               Navigation.findNavController(v).navigate(R.id.action_myCart_to_purchase);
+                                           }
+                                       }
         );
 
         fetchCartData();
@@ -130,10 +142,13 @@ public class myCart extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataSet.clear();
-                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                DataSnapshot itemsSnapshot = snapshot.child("items");
+                DataSnapshot favoritesSnapshot = snapshot.child("favorites");
+
+                for (DataSnapshot itemSnapshot : itemsSnapshot.getChildren()) {
                     String itemName = itemSnapshot.getKey();
                     Integer quantity = itemSnapshot.getValue(Integer.class);
-
+                    Boolean favorite = favoritesSnapshot.child(itemName).getValue(Boolean.class);
                     if (quantity != null && quantity > 0) {
                         int index = getItemIndexByName(itemName);
                         if (index != -1) {
@@ -143,8 +158,10 @@ public class myCart extends Fragment {
                                     myData.drawableArray[index],
                                     myData.id_[index],
                                     myData.versionArray[index],
-                                    myData.price[index]
+                                    myData.price[index],
+                                    favorite
                             ));
+                            Log.d("Error",myData.nameArray[index]);
                         }
                     }
                 }

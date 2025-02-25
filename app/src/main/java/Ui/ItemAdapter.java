@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         boolean onLongClick(View view, int position);
         void onAddButtonClick(View view, int position);
         void onRemoveButtonClick(View view, int position);
+        void onFavoriteButtonClick(View view, int position);
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -45,6 +47,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         Button btnRemove;
         TextView tvDesc;
         TextView tvPrice;
+        ImageButton ibFavorite;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +58,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             btnRemove = itemView.findViewById(R.id.btnRemove);
             tvDesc = itemView.findViewById(R.id.tvItemDesc);
             tvPrice = itemView.findViewById(R.id.tvItemPrice);
+            ibFavorite = itemView.findViewById(R.id.ibFavorite);
         }
     }
 
@@ -75,7 +79,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         holder.textCounter.setText(String.valueOf(dataSet.get(position).getAmount()));
         holder.tvDesc.setText(dataSet.get(position).getDesc());
         holder.tvPrice.setText(String.valueOf(dataSet.get(position).getPrice()));
-//        holder.textCounter.setText(0);
+
+        if(dataSet.get(position).getFavorite())
+            holder.ibFavorite.setImageResource(R.drawable.baseline_favorite_24);
+        else
+            holder.ibFavorite.setImageResource(R.drawable.baseline_favorite_border_24);
+        //Buttons part no need to touch those
         holder.itemView.setOnClickListener(v -> listener.onClick(v, position));
         holder.itemView.setOnLongClickListener(v -> {
             listener.onLongClick(v, position);
@@ -83,7 +92,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         });
         holder.btnAdd.setOnClickListener(v -> listener.onAddButtonClick(holder.itemView, position));
         holder.btnRemove.setOnClickListener(v -> listener.onRemoveButtonClick(holder.itemView, position));
-
+        holder.ibFavorite.setOnClickListener(v ->listener.onFavoriteButtonClick(holder.itemView,position) );
     }
 
 

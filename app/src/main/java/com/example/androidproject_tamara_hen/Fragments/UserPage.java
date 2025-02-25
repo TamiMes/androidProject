@@ -35,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 
 import Ui.Cart;
@@ -53,7 +54,7 @@ public class UserPage extends Fragment {
     private LinearLayoutManager layoutManager;
     private ItemAdapter adapter;
     private Cart cart;
-    private ImageButton btnMyCart,btnCustumerSupport,btnPersonal;
+    private ImageButton btnMyCart, btnCustumerSupport, btnPersonal;
     private ArrayList<Item> dataSet;
     EditText editText;
     // TODO: Rename parameter arguments, choose names that match
@@ -95,27 +96,27 @@ public class UserPage extends Fragment {
         editText = view.findViewById(R.id.editText);
         btnMyCart = view.findViewById(R.id.ibMyCart);
         btnMyCart.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-         Navigation.findNavController(v).navigate(R.id.action_userPage_to_myCart);
-           }
-          }
+                                         @Override
+                                         public void onClick(View v) {
+                                             Navigation.findNavController(v).navigate(R.id.action_userPage_to_myCart);
+                                         }
+                                     }
         );
-        btnCustumerSupport=view.findViewById(R.id.customerSupportButton);
+        btnCustumerSupport = view.findViewById(R.id.customerSupportButton);
         btnCustumerSupport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_userPage_to_customerSupport);
-            }
-        }
+                                                  @Override
+                                                  public void onClick(View v) {
+                                                      Navigation.findNavController(v).navigate(R.id.action_userPage_to_customerSupport);
+                                                  }
+                                              }
         );
-        btnPersonal=view.findViewById(R.id.ibToPersonalInfo);
+        btnPersonal = view.findViewById(R.id.ibToPersonalInfo);
         btnPersonal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_userPage_to_userPersonalInfo);
-            }
-        }
+                                           @Override
+                                           public void onClick(View v) {
+                                               Navigation.findNavController(v).navigate(R.id.action_userPage_to_userPersonalInfo);
+                                           }
+                                       }
         );
 
 
@@ -155,18 +156,20 @@ public class UserPage extends Fragment {
                         } else {
                             cart = task.getResult().getValue(Cart.class);
 
+
                             //        // Populate the dataSet
 //                            for (int i = 0; i < Objects.requireNonNull(cart).getItems().size(); i++) {
-                           // System.out.println(myData.nameArray.length);
+                            // System.out.println(myData.nameArray.length);
                             for (int i = 0; i < myData.nameArray.length; i++) {
-                               // assert cart != null;
+                                // assert cart != null;
                                 dataSet.add(new Item(
                                         myData.nameArray[i],
                                         cart.getQuantity((myData.nameArray[i])),
                                         myData.drawableArray[i],
                                         myData.id_[i],
                                         myData.versionArray[i],
-                                        myData.price[i]
+                                        myData.price[i],
+                                        cart.getFavorite(myData.nameArray[i])
                                 ));
                             }
                         }
@@ -233,6 +236,13 @@ public class UserPage extends Fragment {
                     tvItemCounter.setText(String.valueOf(counter - 1));
                 }
             }
+
+            @Override
+            public void onFavoriteButtonClick(View view, int position) {
+                dataSet.get(position).setFavorite(!dataSet.get(position).getFavorite());
+                mDatabase.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("favorites").child(dataSet.get(position).getName()).setValue(dataSet.get(position).getFavorite());
+                adapter.notifyItemChanged(position);
+            }
         });
         recyclerView.setAdapter(adapter);
 
@@ -282,7 +292,7 @@ public class UserPage extends Fragment {
         myRef.addValueEventListener(userListener);
     }
 
-//Filtering by key words
+    //Filtering by key words
     private void filter(String text) {
         // creating a new array list to filter data, so the original dataSet is kept intact
         ArrayList<Item> filteredList = new ArrayList<>();
