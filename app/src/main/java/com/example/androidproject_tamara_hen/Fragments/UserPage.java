@@ -175,11 +175,10 @@ public class UserPage extends Fragment {
                             Log.e("firebase", "Error getting data", task.getException());
                         } else {
                             cart = task.getResult().child("carts").child(email.replace('.', '_')).getValue(Cart.class);
-//                            rating = task.getResult().child("Ratings").getValue(Rating.class);
+
                             DataSnapshot ratingsSnapshot = task.getResult().child("Ratings");
                             Map<String, Map<String, Float>> ratingsMap = (Map<String, Map<String, Float>>) ratingsSnapshot.getValue();
-//                            Map<String, Float> ratingsMap = (Map<String, Float>) task.getResult().getValue();
-//                            Log.d("Ratings",String.valueOf(rating.getRatings()));
+
                             for (int i = 0; i < myData.nameArray.length; i++) {
                                 dataSet.add(new Item(
                                         myData.nameArray[i],

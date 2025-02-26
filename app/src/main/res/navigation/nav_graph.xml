@@ -106,5 +106,9 @@
     <fragment
         android:id="@+id/ratingLayout"
         android:name="com.example.androidproject_tamara_hen.Fragments.ratingLayout"
-        android:label="ratingLayout" />
+        android:label="ratingLayout" >
+        <action
+            android:id="@+id/action_ratingLayout_to_userPage"
+            app:destination="@id/userPage" />
+    </fragment>
 </navigation>

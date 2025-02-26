@@ -45,6 +45,7 @@ public class ratingLayout extends Fragment {
     private DatabaseReference mDatabase;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     UserViewModel viewModel;
+    Button btnUserPage;
 
     Rating rating;
 
@@ -67,6 +68,7 @@ public class ratingLayout extends Fragment {
         tvItemCounter = view.findViewById(R.id.tvItemCounter);
         tvItemDesc = view.findViewById(R.id.tvItemDesc);
         tvName = view.findViewById(R.id.tvName);
+        btnUserPage = view.findViewById(R.id.btnUserPage);
         Bundle bundle = getArguments();
 
         if (bundle != null && bundle.containsKey("selectedItem")) {
@@ -136,6 +138,13 @@ public class ratingLayout extends Fragment {
                                 }
                             });
                 }
+            }
+        });
+
+        btnUserPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_ratingLayout_to_userPage);
             }
         });
         return view;

@@ -170,12 +170,14 @@ public class myCart extends Fragment {
                 dataSet.clear();
                 DataSnapshot itemsSnapshot = snapshot.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("items");
                 DataSnapshot favoritesSnapshot = snapshot.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("favorites");
-                DataSnapshot ratingSnapshot = snapshot.child("ratings");
+                //DataSnapshot ratingSnapshot = snapshot.child("ratings");
+                DataSnapshot ratingsSnapshot = snapshot.child("Ratings");
                 for (DataSnapshot itemSnapshot : itemsSnapshot.getChildren()) {
                     String itemName = itemSnapshot.getKey();
                     Integer quantity = itemSnapshot.getValue(Integer.class);
                     Boolean favorite = favoritesSnapshot.child(itemName).getValue(Boolean.class);
-                    float rating = ratingSnapshot.child(itemName).getValue(Float.class);
+                    Map<String, Map<String, Float>> ratingsMap = (Map<String, Map<String, Float>>) ratingsSnapshot.getValue();
+//                    float rating = ratingSnapshot.child(itemName).getValue(Float.class);
                     if (quantity != null && quantity > 0) {
                         int index = getItemIndexByName(itemName);
                         if (index != -1) {
@@ -187,7 +189,7 @@ public class myCart extends Fragment {
                                     myData.versionArray[index],
                                     myData.price[index],
                                     favorite,
-                                    rating
+                                    avrageRating(ratingsMap, myData.nameArray[index])
                             ));
                             Log.d("Error",myData.nameArray[index]);
                         }
@@ -218,7 +220,8 @@ public class myCart extends Fragment {
         for (Item item : dataSet) {
             total += item.getAmount() * item.getPrice();
         }
-        totalAmount.setText("Total: $" + total);
+        String formattedTotal = String.format("%.2f", total);
+        totalAmount.setText("Total: $" + formattedTotal);
     }
 
     private void clearCart() {
@@ -228,10 +231,37 @@ public class myCart extends Fragment {
             if (task.isSuccessful()) {
                 dataSet.clear();
                 adapter.notifyDataSetChanged();
+
+
                 totalAmount.setText("Total: $0");
 
 
             }
         });
+    }
+
+    private float avrageRating(Map<String, Map<String, Float>> rating, String itemName) {
+        float totalRating = 0f;
+        int userCount = 0;
+        if (rating == null || rating.get(itemName) == null) {
+            Log.e("Ratings", "Rating object or ratings map is null");
+            return 0f; // No ratings available
+        }
+        Map<String, Float> itemRating = rating.get(itemName);
+        for (Map.Entry<String, Float> entry : itemRating.entrySet()) {
+            Log.d("Rating", String.valueOf(entry.getValue()));
+            float ratingValue = ((Number) entry.getValue()).floatValue();
+            totalRating += ratingValue;
+            ;
+            userCount++;
+        }
+
+        if (userCount > 0) {
+            float averageRating = totalRating / userCount;
+            return averageRating;
+        } else {
+            return 0f; // Default if no ratings exist
+        }
+
     }
 }

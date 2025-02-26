@@ -62,8 +62,7 @@ public class Wishlist extends Fragment {
         if (userEmail != null) {
             String safeEmailKey = userEmail.replace('.', '_');
             databaseReference = FirebaseDatabase.getInstance()
-                    .getReference("carts")
-                    .child(safeEmailKey);
+                    .getReference();
         }
     }
 
@@ -156,8 +155,10 @@ public class Wishlist extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataSet.clear();
-                DataSnapshot itemsSnapshot = snapshot.child("items");
-                DataSnapshot favoritesSnapshot = snapshot.child("favorites");
+                DataSnapshot itemsSnapshot = snapshot.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("items");
+                DataSnapshot favoritesSnapshot = snapshot.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("favorites");
+                DataSnapshot ratingsSnapshot = snapshot.child("Ratings");
+                Map<String, Map<String, Float>> ratingsMap = (Map<String, Map<String, Float>>) ratingsSnapshot.getValue();
 
                 for (DataSnapshot itemSnapshot : itemsSnapshot.getChildren()) {
                     String itemName = itemSnapshot.getKey();
@@ -174,7 +175,7 @@ public class Wishlist extends Fragment {
                                     myData.versionArray[index],
                                     myData.price[index],
                                     favorite,
-0f
+                                    avrageRating(ratingsMap, myData.nameArray[index])
                             ));
                             Log.d("Error",myData.nameArray[index]);
                         }
@@ -197,5 +198,30 @@ public class Wishlist extends Fragment {
             }
         }
         return -1;
+    }
+
+    private float avrageRating(Map<String, Map<String, Float>> rating, String itemName) {
+        float totalRating = 0f;
+        int userCount = 0;
+        if (rating == null || rating.get(itemName) == null) {
+            Log.e("Ratings", "Rating object or ratings map is null");
+            return 0f; // No ratings available
+        }
+        Map<String, Float> itemRating = rating.get(itemName);
+        for (Map.Entry<String, Float> entry : itemRating.entrySet()) {
+            Log.d("Rating", String.valueOf(entry.getValue()));
+            float ratingValue = ((Number) entry.getValue()).floatValue();
+            totalRating += ratingValue;
+            ;
+            userCount++;
+        }
+
+        if (userCount > 0) {
+            float averageRating = totalRating / userCount;
+            return averageRating;
+        } else {
+            return 0f; // Default if no ratings exist
+        }
+
     }
 }
