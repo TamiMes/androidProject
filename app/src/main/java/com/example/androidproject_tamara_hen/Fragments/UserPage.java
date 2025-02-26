@@ -307,8 +307,8 @@ public class UserPage extends Fragment {
         float totalRating = 0f;
         int userCount = 0;
         if (rating == null || rating.get(itemName) == null) {
-            Log.e("Ratings", "Rating object or ratings map is null");
-            return 0f; // No ratings available
+//            Log.e("Ratings", "Rating object or ratings map is null");
+            return 0f;
         }
         Map<String, Float> itemRating = rating.get(itemName);
         for (Map.Entry<String, Float> entry : itemRating.entrySet()) {

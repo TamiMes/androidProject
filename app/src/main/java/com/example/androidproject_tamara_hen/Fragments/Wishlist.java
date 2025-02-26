@@ -111,7 +111,7 @@ public class Wishlist extends Fragment {
                 TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
-                databaseReference.child("items").child(tvItemName.getText().toString()).setValue(counter + 1);
+                databaseReference.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("items").child(tvItemName.getText().toString()).setValue(counter + 1);
                 tvItemCounter.setText(String.valueOf(counter + 1));
                 dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() + 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite(),dataSet.get(position).getRating()));
             }
@@ -123,7 +123,7 @@ public class Wishlist extends Fragment {
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
                 if (counter > 0) {
-                    databaseReference.child("items").child(tvItemName.getText().toString()).setValue(counter - 1);
+                    databaseReference.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("items").child(tvItemName.getText().toString()).setValue(counter - 1);
                     tvItemCounter.setText(String.valueOf(counter - 1));
                     dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() - 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite(),dataSet.get(position).getRating()));
                 }
@@ -132,9 +132,9 @@ public class Wishlist extends Fragment {
             @Override
             public void onFavoriteButtonClick(View view, int position) {
                 dataSet.get(position).setFavorite(!dataSet.get(position).getFavorite());
-                databaseReference.child("favorites").child(dataSet.get(position).getName()).setValue(dataSet.get(position).getFavorite());
+                databaseReference.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("favorites").child(dataSet.get(position).getName()).setValue(dataSet.get(position).getFavorite());
                 dataSet.remove(position);
-                adapter.notifyItemChanged(position);
+                adapter.notifyItemRemoved(position);
             }
 
             @Override
@@ -192,7 +192,7 @@ public class Wishlist extends Fragment {
     }
 
     private int getItemIndexByName(String itemName) {
-        for (int i = 0; i < myData.nameArray.length; i++) {
+        for (int i = 0; i < myData.nameArray.length ; i++) {
             if (myData.nameArray[i].equals(itemName)) {
                 return i;
             }
