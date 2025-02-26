@@ -32,6 +32,11 @@
             android:text="Name: "
             android:textColor="@android:color/black"
             android:textSize="18sp" />
+        <EditText
+            android:id="@+id/etUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your name:"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -40,6 +45,21 @@
             android:text="Payment Method: "
             android:textColor="@android:color/black"
             android:textSize="18sp" />
+        <EditText
+            android:id="@+id/etCardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your credit card number:"/>
+        <EditText
+            android:id="@+id/etCardCVV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your card cvv:"/>
+        <EditText
+            android:id="@+id/etID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your ID:"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -48,6 +68,34 @@
             android:text="Address: "
             android:textColor="@android:color/black"
             android:textSize="18sp" />
+        <EditText
+            android:id="@+id/etAdress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your adress:"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="Phone: "
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your adress:"/>
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:text="UPDATE"/>
+
     </LinearLayout>
 
     <LinearLayout

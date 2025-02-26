@@ -163,11 +163,6 @@ public class UserPage extends Fragment {
                             Log.e("firebase", "Error getting data", task.getException());
                         } else {
                             cart = task.getResult().getValue(Cart.class);
-
-
-                            //        // Populate the dataSet
-//                            for (int i = 0; i < Objects.requireNonNull(cart).getItems().size(); i++) {
-                            // System.out.println(myData.nameArray.length);
                             for (int i = 0; i < myData.nameArray.length; i++) {
                                 // assert cart != null;
                                 dataSet.add(new Item(
@@ -184,32 +179,8 @@ public class UserPage extends Fragment {
                         recyclerView.setAdapter(adapter);
                     }
                 });
-
-
             }
         });
-
-//        if (null != getArguments())
-//            mDatabase.child("carts").child(viewModel.getUser().getValue().getName().replace('.', '_')).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//                @Override
-//                public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                    if (!task.isSuccessful()) {
-//                        Log.e("firebase", "Error getting data", task.getException());
-//                    } else {
-//                        cart = task.getResult().getValue(Cart.class);
-//                        //        // Populate the dataSet
-//                        for (int i = 0; i < cart.getItems().size(); i++) {
-//                            dataSet.add(new Item(
-//                                    myData.nameArray[i],
-//                                    cart.getQuantity((myData.nameArray[i])),
-//                                    myData.drawableArray[i],
-//                                    myData.id_[i]
-//                            ));
-//                        }
-//                    }
-//                    recyclerView.setAdapter(adapter);
-//                }
-//            });
 
         // Set up the adapter
         adapter = new ItemAdapter(dataSet, new ItemAdapter.RecyclerViewListener() {
@@ -281,24 +252,24 @@ public class UserPage extends Fragment {
         return view;
     }
 
-    private void dbListener() {
-        ValueEventListener userListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                User user = dataSnapshot.getValue(User.class);
-                // ..
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.d("loadPost:onCancelled", databaseError.toException().toString());
-            }
-        };
-        DatabaseReference myRef = database.getReference("users").child(getArguments().getString("email").replace('.', '_'));
-        myRef.addValueEventListener(userListener);
-    }
+//    private void dbListener() {
+//        ValueEventListener userListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // Get Post object and use the values to update the UI
+//                User user = dataSnapshot.getValue(User.class);
+//                // ..
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                // Getting Post failed, log a message
+//                Log.d("loadPost:onCancelled", databaseError.toException().toString());
+//            }
+//        };
+//        DatabaseReference myRef = database.getReference("users").child(getArguments().getString("email").replace('.', '_'));
+//        myRef.addValueEventListener(userListener);
+//    }
 
     //Filtering by key words
     private void filter(String text) {

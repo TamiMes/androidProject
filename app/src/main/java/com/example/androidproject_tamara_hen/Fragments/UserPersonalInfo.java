@@ -2,102 +2,124 @@ package com.example.androidproject_tamara_hen.Fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavAction;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.androidproject_tamara_hen.R;
 import com.example.androidproject_tamara_hen.UserViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
 import Ui.User;
 
-///**
-// * A simple {@link Fragment} subclass.
-// * Use the {@link UserPersonalInfo#newInstance} factory method to
-// * create an instance of this fragment.
-// */
+
 public class UserPersonalInfo extends Fragment {
     UserViewModel viewModel;
     ImageButton btnHome;
-    TextView tvName;
-
-
-//    // TODO: Rename parameter arguments, choose names that match
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    EditText etName, etId, etCardNum, etCardCVV, etPhone, etAdress;
+    private DatabaseReference mDatabase;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    Button btnUpdate;
 
     public UserPersonalInfo() {
         // Required empty public constructor
     }
 
-//    /**
-//     * Use this factory method to create a new instance of
-//     * this fragment using the provided parameters.
-//     *
-//     * @param param1 Parameter 1.
-//     * @param param2 Parameter 2.
-//     * @return A new instance of fragment UserPersonalInfo.
-//     */
-//    // TODO: Rename and change types and number of parameters
-//    public static UserPersonalInfo newInstance(String param1, String param2) {
-//        UserPersonalInfo fragment = new UserPersonalInfo();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Setting the pointers to all elements and inflating the fragment
-         View view = inflater.inflate(R.layout.fragment_user_personal_info, container, false);
-         btnHome = view.findViewById(R.id.ibnHome);
-         tvName = view.findViewById(R.id.tvUserNamePersonalInfoPage);
+        View view = inflater.inflate(R.layout.fragment_user_personal_info, container, false);
+        btnHome = view.findViewById(R.id.ibnHome);
+        etName = view.findViewById(R.id.etUserName);
+        etAdress = view.findViewById(R.id.etAdress);
+        etPhone = view.findViewById(R.id.etPhone);
+        etCardNum = view.findViewById(R.id.etCardNumber);
+        etCardCVV = view.findViewById(R.id.etCardCVV);
+        etId = view.findViewById(R.id.etID);
+        btnUpdate = view.findViewById(R.id.btnUpdate);
 
-         viewModel.getUser().observe(getViewLifecycleOwner(),new Observer<User>(){
+        //Log.d("Error",viewModel.getUserEmailLiveData().getValue().replace('.','_'));
+        mDatabase.child("users").child(viewModel.getUserEmailLiveData().getValue().replace('.','_')).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                viewModel.setUser(task.getResult().getValue(User.class));
+            }
+        });
+//        viewModel.getUserEmailLiveData().observe(getViewLifecycleOwner(), email -> {
+//            if (email != null) {
+//                mDatabase.child("users").child(email.replace('.', '_'))
+//                        .get().addOnCompleteListener(task -> {
+//                            if (task.isSuccessful() && task.getResult().exists()) {
+//                                viewModel.setUser(task.getResult().getValue(User.class));
+//                            } else {
+//                                Log.e("FirebaseError", "User data not found");
+//                            }
+//                        });
+//            } else {
+//                Log.e("FirebaseError", "Email is null");
+//            }
+//        });
 
-             @Override
-             public void onChanged(User user) {
-                 tvName.setText(Objects.requireNonNull(viewModel.getUser().getValue()).getName());
-             }
-         });
-         btnHome.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 Navigation.findNavController(view).navigate(R.id.action_userPersonalInfo_to_homePage);
-             }
-         });
+        viewModel.getUser().observe(getViewLifecycleOwner(), new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                etName.setText(Objects.requireNonNull(viewModel.getUser().getValue()).getName());
+                etCardNum.setText(Objects.requireNonNull(viewModel.getUser().getValue()).getCardNumber());
+                etCardCVV.setText(Objects.requireNonNull(viewModel.getUser().getValue()).getCvv());
+                etId.setText(Objects.requireNonNull(viewModel.getUser().getValue()).getId());
+                etPhone.setText(Objects.requireNonNull(viewModel.getUser().getValue()).getPhone());
+                etAdress.setText(Objects.requireNonNull(viewModel.getUser().getValue()).getAdress());
+            }
+        });
 
-
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_global_homePage);
+            }
+        });
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO ADD HERE A setUser to the user with the viewModel.getUserEmailLiveData().getValue().replace('.','_') email
+                mDatabase.child("users").child(viewModel.getUserEmailLiveData().getValue().replace('.','_')).setValue(new User(
+                        etName.getText().toString(),
+                        etPhone.getText().toString(),
+                        etCardNum.getText().toString(),
+                        etCardCVV.getText().toString(),
+                        etId.getText().toString(),
+                        etAdress.getText().toString()
+                ));
+            }
+        });
         return view;
     }
 }
