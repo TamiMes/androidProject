@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -28,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import Ui.Cart;
@@ -44,20 +42,16 @@ public class Wishlist extends Fragment {
     private DatabaseReference databaseReference;
     private UserViewModel viewModel;
     private myData myData = new myData();
-    private Cart cart;
-    private ImageButton  ibCostumerSupport,ibHome;
+    private ImageButton ibCostumerSupport, ibHome;
 
     public Wishlist() {
-        // Required empty public constructor
     }
-
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-        cart = new Cart();
         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         if (userEmail != null) {
             String safeEmailKey = userEmail.replace('.', '_');
@@ -69,29 +63,25 @@ public class Wishlist extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_wishlist, container, false);
         recyclerView = view.findViewById(R.id.resViewWish);
-        //clearCartButton = view.findViewById(R.id.clearCartButton);
-
         layoutManager = new LinearLayoutManager(requireContext());
         recyclerView.setLayoutManager(layoutManager);
         ibHome = view.findViewById(R.id.ibnHome);
         ibHome.setOnClickListener(new View.OnClickListener() {
-                                       @Override
-                                       public void onClick(View v) {
-                                           Navigation.findNavController(v).navigate(R.id.action_global_homePage);
-                                       }
-                                   }
+                                      @Override
+                                      public void onClick(View v) {
+                                          Navigation.findNavController(v).navigate(R.id.action_global_homePage);
+                                      }
+                                  }
         );
         ibCostumerSupport = view.findViewById(R.id.customerSupportButton);
         ibCostumerSupport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_global_customerSupport);
-//
-            }
-        }
+                                                 @Override
+                                                 public void onClick(View v) {
+                                                     Navigation.findNavController(v).navigate(R.id.action_global_customerSupport);
+                                                 }
+                                             }
         );
         dataSet = new ArrayList<>();
         adapter = new ItemAdapter(dataSet, new ItemAdapter.RecyclerViewListener() {
@@ -107,25 +97,23 @@ public class Wishlist extends Fragment {
 
             @Override
             public void onAddButtonClick(View view, int position) {
-                //Toast.makeText(requireContext(), "Add to number of items", Toast.LENGTH_SHORT).show();
                 TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
                 databaseReference.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("items").child(tvItemName.getText().toString()).setValue(counter + 1);
                 tvItemCounter.setText(String.valueOf(counter + 1));
-                dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() + 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite(),dataSet.get(position).getRating()));
+                dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() + 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(), dataSet.get(position).getFavorite(), dataSet.get(position).getRating()));
             }
 
             @Override
             public void onRemoveButtonClick(View view, int position) {
-                //Toast.makeText(requireContext(), "Decrease to number of items", Toast.LENGTH_SHORT).show();
                 TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
                 if (counter > 0) {
                     databaseReference.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("items").child(tvItemName.getText().toString()).setValue(counter - 1);
                     tvItemCounter.setText(String.valueOf(counter - 1));
-                    dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() - 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite(),dataSet.get(position).getRating()));
+                    dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() - 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(), dataSet.get(position).getFavorite(), dataSet.get(position).getRating()));
                 }
             }
 
@@ -177,7 +165,7 @@ public class Wishlist extends Fragment {
                                     favorite,
                                     avrageRating(ratingsMap, myData.nameArray[index])
                             ));
-                            Log.d("Error",myData.nameArray[index]);
+                            Log.d("Error", myData.nameArray[index]);
                         }
                     }
                 }
@@ -192,7 +180,7 @@ public class Wishlist extends Fragment {
     }
 
     private int getItemIndexByName(String itemName) {
-        for (int i = 0; i < myData.nameArray.length ; i++) {
+        for (int i = 0; i < myData.nameArray.length; i++) {
             if (myData.nameArray[i].equals(itemName)) {
                 return i;
             }
@@ -205,7 +193,7 @@ public class Wishlist extends Fragment {
         int userCount = 0;
         if (rating == null || rating.get(itemName) == null) {
             Log.e("Ratings", "Rating object or ratings map is null");
-            return 0f; // No ratings available
+            return 0f;
         }
         Map<String, Float> itemRating = rating.get(itemName);
         for (Map.Entry<String, Float> entry : itemRating.entrySet()) {
@@ -220,7 +208,7 @@ public class Wishlist extends Fragment {
             float averageRating = totalRating / userCount;
             return averageRating;
         } else {
-            return 0f; // Default if no ratings exist
+            return 0f;
         }
 
     }

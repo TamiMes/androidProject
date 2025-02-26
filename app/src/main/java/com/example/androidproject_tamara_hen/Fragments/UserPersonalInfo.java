@@ -6,27 +6,25 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavAction;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
+
 
 import com.example.androidproject_tamara_hen.R;
 import com.example.androidproject_tamara_hen.UserViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 
 import java.util.Objects;
 
@@ -55,7 +53,6 @@ public class UserPersonalInfo extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Setting the pointers to all elements and inflating the fragment
         View view = inflater.inflate(R.layout.fragment_user_personal_info, container, false);
         btnHome = view.findViewById(R.id.ibnHome);
         etName = view.findViewById(R.id.etUserName);
@@ -66,7 +63,7 @@ public class UserPersonalInfo extends Fragment {
         etId = view.findViewById(R.id.etID);
         btnUpdate = view.findViewById(R.id.btnUpdate);
 
-        mDatabase.child("users").child(viewModel.getUserEmailLiveData().getValue().replace('.','_')).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        mDatabase.child("users").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 viewModel.setUser(task.getResult().getValue(User.class));
@@ -94,7 +91,7 @@ public class UserPersonalInfo extends Fragment {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabase.child("users").child(viewModel.getUserEmailLiveData().getValue().replace('.','_')).setValue(new User(
+                mDatabase.child("users").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).setValue(new User(
                         etName.getText().toString(),
                         etPhone.getText().toString(),
                         etCardNum.getText().toString(),

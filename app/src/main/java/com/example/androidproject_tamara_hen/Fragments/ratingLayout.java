@@ -81,36 +81,35 @@ public class ratingLayout extends Fragment {
                 ivItem.setImageResource(selectedItem.getImage());
                 ratingBar.setRating(selectedItem.getRating());
                 mDatabase.child("Ratings").child(selectedItem.getName()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (!task.isSuccessful()) {
+                            Log.e("firebase", "Error getting data", task.getException());
+                        } else {
+                            DataSnapshot snapshot = task.getResult();
+                            if (snapshot.exists()) {
+                                float totalRating = 0;
+                                int userCount = 0;
 
-                            @Override
-                            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                if (!task.isSuccessful()) {
-                                    Log.e("firebase", "Error getting data", task.getException());
-                                } else {
-                                    DataSnapshot snapshot = task.getResult();
-                                    if (snapshot.exists()) {
-                                        float totalRating = 0;
-                                        int userCount = 0;
+                                for (DataSnapshot userRatingSnapshot : snapshot.getChildren()) {
+                                    Float ratingValue = userRatingSnapshot.getValue(Float.class); // Rating
 
-                                        for (DataSnapshot userRatingSnapshot : snapshot.getChildren()) {
-                                            Float ratingValue = userRatingSnapshot.getValue(Float.class); // Rating
-
-                                            if (ratingValue != null) {
-                                                totalRating += ratingValue;
-                                                userCount++;
-                                            }
-                                        }
-
-                                        if (userCount > 0) {
-                                            float averageRating = totalRating / userCount;
-                                            ratingBar.setRating(averageRating);
-                                        } else {
-                                            ratingBar.setRating(0); // Default if no ratings exist
-                                        }
+                                    if (ratingValue != null) {
+                                        totalRating += ratingValue;
+                                        userCount++;
                                     }
                                 }
+
+                                if (userCount > 0) {
+                                    float averageRating = totalRating / userCount;
+                                    ratingBar.setRating(averageRating);
+                                } else {
+                                    ratingBar.setRating(0);
+                                }
                             }
-                        });
+                        }
+                    }
+                });
 
             }
         }
@@ -121,11 +120,10 @@ public class ratingLayout extends Fragment {
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 Item selectedItem = (Item) bundle.getSerializable("selectedItem");
 
-                if (selectedItem != null&& fromUser) {
+                if (selectedItem != null && fromUser) {
                     String itemName = selectedItem.getName(); // Item name
                     String userEmail = viewModel.getUserEmailLiveData().getValue(); // Get logged-in user's email
 
-                    // Save the rating in Firebase
                     mDatabase.child("Ratings").child(itemName).child(userEmail.replace(".", "_")).setValue(rating)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

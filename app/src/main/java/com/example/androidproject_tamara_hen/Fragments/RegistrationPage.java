@@ -65,16 +65,9 @@ public class RegistrationPage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view =  inflater.inflate(R.layout.fragment_registration_page, container, false);
 
-        /*Button button1 = view.findViewById(R.id.RegisterButton);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_registrationFragment_to_mainScreenFragment);
-            }
-        });*/
         homeBtn = view.findViewById(R.id.homeButton);
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +81,7 @@ public class RegistrationPage extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.action_global_customerSupport);
-//
+
             }
         }
         );
@@ -121,9 +114,6 @@ public class RegistrationPage extends Fragment {
                 }
             }
         });
-
-
-
 
         return view;
 

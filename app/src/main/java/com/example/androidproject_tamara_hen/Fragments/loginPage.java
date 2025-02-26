@@ -79,8 +79,6 @@ public class loginPage extends Fragment {
         }
         );
 
-
-
         EditText emailLoginText = view.findViewById(R.id.EmailLogin);
         String loginEmailStr = emailLoginText.getText().toString();
 
@@ -93,7 +91,6 @@ public class loginPage extends Fragment {
             public void onClick(View v) {
                 MainActivity mainAct = (MainActivity) getActivity();
                 mainAct.login(v);
-//                Navigation.findNavController(v).navigate(R.id.action_loginPage_to_userPage);
             }
         });
 

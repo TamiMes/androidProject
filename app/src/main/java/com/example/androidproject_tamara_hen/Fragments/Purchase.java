@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -17,22 +18,18 @@ import com.example.androidproject_tamara_hen.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.functions.FirebaseFunctions;
 import com.google.firebase.functions.HttpsCallableResult;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import Ui.PolicyDialog;
-
 public class Purchase extends Fragment {
 
-    // UI Components
     private EditText paymentHolderInput, idInput, cardNumberInput, cvvInput, emailInput;
     private Button purchaseButton;
-    private ImageButton homeBtn,supportBtn;
+    private ImageButton homeBtn, supportBtn;
     private double totalCost;
     private HashMap<String, Integer> items;
-    private LottieAnimationView lottieAnimationView1,lottieAnimationView2;
-
-    // Firebase Instances
+    private LottieAnimationView lottieAnimationView1, lottieAnimationView2;
     private FirebaseFirestore db;
     private FirebaseFunctions mFunctions;
 
@@ -56,7 +53,7 @@ public class Purchase extends Fragment {
         lottieAnimationView1 = view.findViewById(R.id.lottieAnimation1);
         lottieAnimationView2 = view.findViewById(R.id.lottieAnimationemail);
         supportBtn = view.findViewById(R.id.customerSupportButton);
-        homeBtn=view.findViewById(R.id.ibhome);
+        homeBtn = view.findViewById(R.id.ibhome);
         stopAnimation1();
         stopAnimation2();
 
@@ -153,10 +150,11 @@ public class Purchase extends Fragment {
     }
 
 
-private void stopAnimation1() {
+    private void stopAnimation1() {
         lottieAnimationView1.cancelAnimation();
         lottieAnimationView1.setVisibility(View.GONE);
     }
+
     private void stopAnimation2() {
         lottieAnimationView2.cancelAnimation();
         lottieAnimationView2.setVisibility(View.GONE);

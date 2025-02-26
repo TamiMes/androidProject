@@ -14,10 +14,7 @@ import androidx.navigation.Navigation;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.androidproject_tamara_hen.R;
 import com.google.firebase.functions.FirebaseFunctions;
-import com.google.firebase.functions.HttpsCallableResult;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class HomePage extends Fragment {
 
@@ -32,22 +29,14 @@ public class HomePage extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
         Log.d("DEBUG", "View Hierarchy: " + view);
-        // mFunctions = FirebaseFunctions.getInstance();
-
-        // Log.d("EMAIL", "ABOUT TO SEND RECIEPT");
-        // sendReceiptEmail("tami", "12465", "12311","789","tmesengiser444@gmail.com");
-
-        // Initialize UI elements
         buttonRegister = view.findViewById(R.id.btnRegisterHomePage);
         buttonLogin = view.findViewById(R.id.LoginPage);
         supportBtn = view.findViewById(R.id.customerSupportButton);
         lottieAnimationView1 = view.findViewById(R.id.lottieAnimation);
         lottieAnimationView2 = view.findViewById(R.id.lottieAnimationgold);
 
-        // Play animation on fragment load
         lottieAnimationView1.playAnimation();
         lottieAnimationView2.playAnimation();
 
@@ -65,7 +54,6 @@ public class HomePage extends Fragment {
 
         supportBtn.setOnClickListener(v ->
                         Navigation.findNavController(v).navigate(R.id.action_global_customerSupport)
-                //Navigation.findNavController(v).navigate(R.id.action_homePage_to_customerSupport)
         );
 
         return view;

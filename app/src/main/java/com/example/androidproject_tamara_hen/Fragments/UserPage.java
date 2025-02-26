@@ -2,7 +2,6 @@ package com.example.androidproject_tamara_hen.Fragments;
 
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -30,14 +29,11 @@ import com.example.androidproject_tamara_hen.data.myData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Objects;
 
 import Ui.Cart;
 import Ui.Item;
@@ -151,7 +147,6 @@ public class UserPage extends Fragment {
             @Override
             public void onChanged(String email) {
                 if (email != null) {
-                    // Fetch user name from Firebase when email is available
                     mDatabase.child("users").child(email.replace('.', '_')).get()
                             .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                 @Override
@@ -205,7 +200,7 @@ public class UserPage extends Fragment {
                 Item clickedItem = dataSet.get(position);
 
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("selectedItem", clickedItem);  // Pass the item
+                bundle.putSerializable("selectedItem", clickedItem);
 
                 Navigation.findNavController(view).navigate(R.id.action_userPage_to_ratingLayout, bundle);
 
@@ -218,7 +213,6 @@ public class UserPage extends Fragment {
 
             @Override
             public void onAddButtonClick(View view, int position) {
-                //Toast.makeText(requireContext(), "Add to number of items", Toast.LENGTH_SHORT).show();
                 TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
@@ -228,7 +222,6 @@ public class UserPage extends Fragment {
 
             @Override
             public void onRemoveButtonClick(View view, int position) {
-                //Toast.makeText(requireContext(), "Decrease to number of items", Toast.LENGTH_SHORT).show();
                 TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
@@ -252,9 +245,8 @@ public class UserPage extends Fragment {
         });
         recyclerView.setAdapter(adapter);
 
-        //Here we will handle the filtering EditText
         editText.addTextChangedListener(new TextWatcher() {
-            //Not used in the project
+
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -269,36 +261,33 @@ public class UserPage extends Fragment {
                 adapter.notifyDataSetChanged();
             }
 
-            //Not used in the project
             @Override
             public void afterTextChanged(Editable editable) {
             }
         });
 
-        // Return the modified view
         return view;
     }
 
     private void filter(String text) {
-        // creating a new array list to filter data, so the original dataSet is kept intact
+
         ArrayList<Item> filteredList = new ArrayList<>();
 
-        // itirating all elements of dataSet
+
         for (Item item : dataSet) {
-            // checking if the entered string matches any item of our recycler view
+
             if (item.getName().toLowerCase().contains(text.toLowerCase())) {
-                // adding matched item to the filtered list
+
                 filteredList.add(item);
             }
         }
 
-        //Checking if the filteredList has some elements in it
+
         if (filteredList.isEmpty()) {
-            // displaying a toast message if no data found
+
             Toast.makeText(requireContext(), "No character with the entered letters found..", Toast.LENGTH_SHORT).show();
             adapter.filterList(filteredList);
         } else {
-            // passing the filtered list to the CustomeAdapter
             adapter.filterList(filteredList);
         }
     }
@@ -307,7 +296,6 @@ public class UserPage extends Fragment {
         float totalRating = 0f;
         int userCount = 0;
         if (rating == null || rating.get(itemName) == null) {
-//            Log.e("Ratings", "Rating object or ratings map is null");
             return 0f;
         }
         Map<String, Float> itemRating = rating.get(itemName);
@@ -323,7 +311,7 @@ public class UserPage extends Fragment {
             float averageRating = totalRating / userCount;
             return averageRating;
         } else {
-            return 0f; // Default if no ratings exist
+            return 0f;
         }
 
     }

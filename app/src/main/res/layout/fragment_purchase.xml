@@ -91,7 +91,7 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/loadingharry"
-            android:visibility="visible"/> <!-- Initially visible -->
+            android:visibility="visible"/>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieAnimationemail"
@@ -100,7 +100,7 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/mailsucsess"
-            android:visibility="gone"/> <!-- Initially hidden -->
+            android:visibility="gone"/>
 
     </FrameLayout>
 

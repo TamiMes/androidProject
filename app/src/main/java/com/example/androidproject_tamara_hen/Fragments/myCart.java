@@ -2,7 +2,6 @@ package com.example.androidproject_tamara_hen.Fragments;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,11 +38,10 @@ public class myCart extends Fragment {
     private RecyclerView recyclerView;
     private ItemAdapter adapter;
     private ArrayList<Item> dataSet;
-    private Button btnClearCart,btnPurchase;
+    private Button btnPurchase;
     private TextView totalAmount;
     private LinearLayoutManager layoutManager;
     private DatabaseReference databaseReference;
-    private Cart cart;
     private UserViewModel viewModel;
 
     private myData myData = new myData();
@@ -52,15 +50,9 @@ public class myCart extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-        cart = new Cart();
-        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        if (userEmail != null) {
-            String safeEmailKey = userEmail.replace('.', '_');
-            databaseReference = FirebaseDatabase.getInstance()
-                    .getReference();
-//                    .child(safeEmailKey);
-//                    .child("items");
-        }
+        databaseReference = FirebaseDatabase.getInstance()
+                .getReference();
+
     }
 
     @Override
@@ -87,28 +79,26 @@ public class myCart extends Fragment {
 
             @Override
             public void onAddButtonClick(View view, int position) {
-                //Toast.makeText(requireContext(), "Add to number of items", Toast.LENGTH_SHORT).show();
                 TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
                 databaseReference.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("items").child(tvItemName.getText().toString()).setValue(counter + 1);
                 tvItemCounter.setText(String.valueOf(counter + 1));
-                dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() + 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite(),dataSet.get(position).getRating()));
+                dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() + 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(), dataSet.get(position).getFavorite(), dataSet.get(position).getRating()));
                 updateTotalAmount();
             }
 
             @Override
             public void onRemoveButtonClick(View view, int position) {
-                //Toast.makeText(requireContext(), "Decrease to number of items", Toast.LENGTH_SHORT).show();
                 TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
                 if (counter > 0) {
                     databaseReference.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("items").child(tvItemName.getText().toString()).setValue(counter - 1);
                     tvItemCounter.setText(String.valueOf(counter - 1));
-                    dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() - 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite(),dataSet.get(position).getRating()));
+                    dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() - 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(), dataSet.get(position).getFavorite(), dataSet.get(position).getRating()));
                     updateTotalAmount();
-                    if (dataSet.get(position).getAmount() == 0){
+                    if (dataSet.get(position).getAmount() == 0) {
                         dataSet.remove(position);
                         adapter.notifyItemRemoved(position);
                     }
@@ -152,12 +142,7 @@ public class myCart extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_myCart_to_purchase, bundle);
             }
         });
-
-
         fetchCartData();
-
-        //clearCartButton.setOnClickListener(v -> clearCart());
-
         return view;
     }
 
@@ -191,7 +176,7 @@ public class myCart extends Fragment {
                                     favorite,
                                     avrageRating(ratingsMap, myData.nameArray[index])
                             ));
-                            Log.d("Error",myData.nameArray[index]);
+                            Log.d("Error", myData.nameArray[index]);
                         }
                     }
                 }
@@ -260,7 +245,7 @@ public class myCart extends Fragment {
             float averageRating = totalRating / userCount;
             return averageRating;
         } else {
-            return 0f; // Default if no ratings exist
+            return 0f;
         }
 
     }
