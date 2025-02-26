@@ -114,7 +114,7 @@ public class Wishlist extends Fragment {
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
                 databaseReference.child("items").child(tvItemName.getText().toString()).setValue(counter + 1);
                 tvItemCounter.setText(String.valueOf(counter + 1));
-                dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() + 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite()));
+                dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() + 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite(),dataSet.get(position).getRating()));
             }
 
             @Override
@@ -126,7 +126,7 @@ public class Wishlist extends Fragment {
                 if (counter > 0) {
                     databaseReference.child("items").child(tvItemName.getText().toString()).setValue(counter - 1);
                     tvItemCounter.setText(String.valueOf(counter - 1));
-                    dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() - 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite()));
+                    dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() - 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite(),dataSet.get(position).getRating()));
                 }
             }
 
@@ -173,7 +173,8 @@ public class Wishlist extends Fragment {
                                     myData.id_[index],
                                     myData.versionArray[index],
                                     myData.price[index],
-                                    favorite
+                                    favorite,
+0f
                             ));
                             Log.d("Error",myData.nameArray[index]);
                         }

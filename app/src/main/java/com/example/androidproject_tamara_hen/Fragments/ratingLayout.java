@@ -90,7 +90,6 @@ public class ratingLayout extends Fragment {
                                         float totalRating = 0;
                                         int userCount = 0;
 
-                                        // Iterate over each entry in the ratings map (email -> rating)
                                         for (DataSnapshot userRatingSnapshot : snapshot.getChildren()) {
                                             Float ratingValue = userRatingSnapshot.getValue(Float.class); // Rating
 

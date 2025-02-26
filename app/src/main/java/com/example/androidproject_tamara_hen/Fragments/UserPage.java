@@ -42,6 +42,7 @@ import java.util.Objects;
 import Ui.Cart;
 import Ui.Item;
 import Ui.ItemAdapter;
+import Ui.Rating;
 import Ui.User;
 
 
@@ -55,6 +56,7 @@ public class UserPage extends Fragment {
     private LinearLayoutManager layoutManager;
     private ItemAdapter adapter;
     private Cart cart;
+    private Rating rating;
     private ImageButton btnMyCart, btnCustumerSupport, btnPersonal, ibFavoritePage, homeBtn;
     private ArrayList<Item> dataSet;
     EditText editText;
@@ -98,37 +100,37 @@ public class UserPage extends Fragment {
         btnMyCart = view.findViewById(R.id.ibMyCart);
         ibFavoritePage = view.findViewById(R.id.ibFavorites);
         btnMyCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                                         @Override
+                                         public void onClick(View v) {
 
-                Navigation.findNavController(v).navigate(R.id.action_userPage_to_myCart);
-            }
-        }
+                                             Navigation.findNavController(v).navigate(R.id.action_userPage_to_myCart);
+                                         }
+                                     }
         );
         btnCustumerSupport = view.findViewById(R.id.customerSupportButton);
         btnCustumerSupport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_global_customerSupport);
+                                                  @Override
+                                                  public void onClick(View v) {
+                                                      Navigation.findNavController(v).navigate(R.id.action_global_customerSupport);
 //
-            }
-        }
+                                                  }
+                                              }
         );
         homeBtn = view.findViewById(R.id.homeButton);
         homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_global_homePage);
-            }
-        }
+                                       @Override
+                                       public void onClick(View v) {
+                                           Navigation.findNavController(v).navigate(R.id.action_global_homePage);
+                                       }
+                                   }
         );
         btnPersonal = view.findViewById(R.id.ibToPersonalInfo);
         btnPersonal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_userPage_to_userPersonalInfo);
-            }
-        }
+                                           @Override
+                                           public void onClick(View v) {
+                                               Navigation.findNavController(v).navigate(R.id.action_userPage_to_userPersonalInfo);
+                                           }
+                                       }
         );
 
         ibFavoritePage.setOnClickListener(new View.OnClickListener() {
@@ -166,15 +168,19 @@ public class UserPage extends Fragment {
                     tvName.setText("No email found");
                 }
 
-                mDatabase.child("carts").child(email.replace('.', '_')).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                mDatabase.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if (!task.isSuccessful()) {
                             Log.e("firebase", "Error getting data", task.getException());
                         } else {
-                            cart = task.getResult().getValue(Cart.class);
+                            cart = task.getResult().child("carts").child(email.replace('.', '_')).getValue(Cart.class);
+//                            rating = task.getResult().child("Ratings").getValue(Rating.class);
+                            DataSnapshot ratingsSnapshot = task.getResult().child("Ratings");
+                            Map<String, Map<String, Float>> ratingsMap = (Map<String, Map<String, Float>>) ratingsSnapshot.getValue();
+//                            Map<String, Float> ratingsMap = (Map<String, Float>) task.getResult().getValue();
+//                            Log.d("Ratings",String.valueOf(rating.getRatings()));
                             for (int i = 0; i < myData.nameArray.length; i++) {
-                                // assert cart != null;
                                 dataSet.add(new Item(
                                         myData.nameArray[i],
                                         cart.getQuantity((myData.nameArray[i])),
@@ -182,7 +188,8 @@ public class UserPage extends Fragment {
                                         myData.id_[i],
                                         myData.versionArray[i],
                                         myData.price[i],
-                                        cart.getFavorite(myData.nameArray[i])
+                                        cart.getFavorite(myData.nameArray[i]),
+                                        avrageRating(ratingsMap, myData.nameArray[i])
                                 ));
                             }
                         }
@@ -196,7 +203,7 @@ public class UserPage extends Fragment {
         adapter = new ItemAdapter(dataSet, new ItemAdapter.RecyclerViewListener() {
             @Override
             public void onClick(View view, int position) {
-                 Item clickedItem = dataSet.get(position);
+                Item clickedItem = dataSet.get(position);
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("selectedItem", clickedItem);  // Pass the item
@@ -273,26 +280,6 @@ public class UserPage extends Fragment {
         return view;
     }
 
-//    private void dbListener() {
-//        ValueEventListener userListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                // Get Post object and use the values to update the UI
-//                User user = dataSnapshot.getValue(User.class);
-//                // ..
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                // Getting Post failed, log a message
-//                Log.d("loadPost:onCancelled", databaseError.toException().toString());
-//            }
-//        };
-//        DatabaseReference myRef = database.getReference("users").child(getArguments().getString("email").replace('.', '_'));
-//        myRef.addValueEventListener(userListener);
-//    }
-
-    //Filtering by key words
     private void filter(String text) {
         // creating a new array list to filter data, so the original dataSet is kept intact
         ArrayList<Item> filteredList = new ArrayList<>();
@@ -315,6 +302,31 @@ public class UserPage extends Fragment {
             // passing the filtered list to the CustomeAdapter
             adapter.filterList(filteredList);
         }
+    }
+
+    private float avrageRating(Map<String, Map<String, Float>> rating, String itemName) {
+        float totalRating = 0f;
+        int userCount = 0;
+        if (rating == null || rating.get(itemName) == null) {
+            Log.e("Ratings", "Rating object or ratings map is null");
+            return 0f; // No ratings available
+        }
+        Map<String, Float> itemRating = rating.get(itemName);
+        for (Map.Entry<String, Float> entry : itemRating.entrySet()) {
+            Log.d("Rating", String.valueOf(entry.getValue()));
+            float ratingValue = ((Number) entry.getValue()).floatValue();
+            totalRating += ratingValue;
+            ;
+            userCount++;
+        }
+
+        if (userCount > 0) {
+            float averageRating = totalRating / userCount;
+            return averageRating;
+        } else {
+            return 0f; // Default if no ratings exist
+        }
+
     }
 
 }

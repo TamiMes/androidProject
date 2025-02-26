@@ -12,14 +12,14 @@ public class Item  implements Serializable {
     private Boolean favorite;
     private float rating;
 
-    public Item   (String name, int amount, int image, int id_, String desc, double price, Boolean favorite) {
+    public Item   (String name, int amount, int image, int id_, String desc, double price, Boolean favorite,float rating) {
         this.name = name;
         this.image = image;
         this.amount = amount;
         this.desc   = desc;
         this.price = price;
         this.favorite = favorite;
-        this.rating = 0.0f;
+        this.rating = rating;
     }
 
     public int getImage() {

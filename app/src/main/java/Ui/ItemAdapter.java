@@ -45,7 +45,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewName, textCounter, tvDesc, tvPrice;
+        TextView textViewName, textCounter, tvDesc, tvPrice,tvrating;
         ImageView imageView;
         Button btnAdd, btnRemove;
         ImageButton ibFavorite;
@@ -62,6 +62,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             tvPrice = itemView.findViewById(R.id.tvItemPrice);
             ibFavorite = itemView.findViewById(R.id.ibFavorite);
             rbRate = itemView.findViewById(R.id.ratingBar);
+            tvrating = itemView.findViewById(R.id.tvRating);
         }
     }
 
@@ -82,6 +83,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         holder.tvPrice.setText(String.valueOf(item.getPrice()));
         holder.ibFavorite.setImageResource(item.getFavorite() ? R.drawable.baseline_favorite_24 : R.drawable.baseline_favorite_border_24);
         holder.rbRate.setRating((float) item.getRating());
+holder.tvrating.setText(String.valueOf(item.getRating()));
 
         holder.itemView.setOnClickListener(v -> listener.onClick(v, position));
         holder.itemView.setOnLongClickListener(v -> {

@@ -57,8 +57,8 @@ public class myCart extends Fragment {
         if (userEmail != null) {
             String safeEmailKey = userEmail.replace('.', '_');
             databaseReference = FirebaseDatabase.getInstance()
-                    .getReference("carts")
-                    .child(safeEmailKey);
+                    .getReference();
+//                    .child(safeEmailKey);
 //                    .child("items");
         }
     }
@@ -93,7 +93,7 @@ public class myCart extends Fragment {
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
                 databaseReference.child("items").child(tvItemName.getText().toString()).setValue(counter + 1);
                 tvItemCounter.setText(String.valueOf(counter + 1));
-                dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() + 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite()));
+                dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() + 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite(),dataSet.get(position).getRating()));
                 updateTotalAmount();
             }
 
@@ -106,7 +106,7 @@ public class myCart extends Fragment {
                 if (counter > 0) {
                     databaseReference.child("items").child(tvItemName.getText().toString()).setValue(counter - 1);
                     tvItemCounter.setText(String.valueOf(counter - 1));
-                    dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() - 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite()));
+                    dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() - 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite(),dataSet.get(position).getRating()));
                     updateTotalAmount();
                     if (dataSet.get(position).getAmount() == 0){
                         dataSet.remove(position);
@@ -168,13 +168,14 @@ public class myCart extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataSet.clear();
-                DataSnapshot itemsSnapshot = snapshot.child("items");
-                DataSnapshot favoritesSnapshot = snapshot.child("favorites");
-
+                DataSnapshot itemsSnapshot = snapshot.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("items");
+                DataSnapshot favoritesSnapshot = snapshot.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("favorites");
+                DataSnapshot ratingSnapshot = snapshot.child("ratings");
                 for (DataSnapshot itemSnapshot : itemsSnapshot.getChildren()) {
                     String itemName = itemSnapshot.getKey();
                     Integer quantity = itemSnapshot.getValue(Integer.class);
                     Boolean favorite = favoritesSnapshot.child(itemName).getValue(Boolean.class);
+                    float rating = ratingSnapshot.child(itemName).getValue(Float.class);
                     if (quantity != null && quantity > 0) {
                         int index = getItemIndexByName(itemName);
                         if (index != -1) {
@@ -185,7 +186,8 @@ public class myCart extends Fragment {
                                     myData.id_[index],
                                     myData.versionArray[index],
                                     myData.price[index],
-                                    favorite
+                                    favorite,
+                                    rating
                             ));
                             Log.d("Error",myData.nameArray[index]);
                         }
