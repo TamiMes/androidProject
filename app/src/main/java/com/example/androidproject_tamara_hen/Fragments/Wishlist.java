@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.androidproject_tamara_hen.R;
@@ -43,17 +45,13 @@ public class Wishlist extends Fragment {
     private UserViewModel viewModel;
     private myData myData = new myData();
     private Cart cart;
+    private ImageButton  ibCostumerSupport,ibHome;
 
     public Wishlist() {
         // Required empty public constructor
     }
 
-//    public static Wishlist newInstance(String param1, String param2) {
-//        Wishlist fragment = new Wishlist();
-//        Bundle args = new Bundle();
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,6 +77,23 @@ public class Wishlist extends Fragment {
 
         layoutManager = new LinearLayoutManager(requireContext());
         recyclerView.setLayoutManager(layoutManager);
+        ibHome = view.findViewById(R.id.ibnHome);
+        ibHome.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           Navigation.findNavController(v).navigate(R.id.action_global_homePage);
+                                       }
+                                   }
+        );
+        ibCostumerSupport = view.findViewById(R.id.customerSupportButton);
+        ibCostumerSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_global_customerSupport);
+//
+            }
+        }
+        );
         dataSet = new ArrayList<>();
         adapter = new ItemAdapter(dataSet, new ItemAdapter.RecyclerViewListener() {
             @Override
@@ -121,6 +136,11 @@ public class Wishlist extends Fragment {
                 databaseReference.child("favorites").child(dataSet.get(position).getName()).setValue(dataSet.get(position).getFavorite());
                 dataSet.remove(position);
                 adapter.notifyItemChanged(position);
+            }
+
+            @Override
+            public void onRatingClick(View view, int position) {
+
             }
         });
         recyclerView.setAdapter(adapter);

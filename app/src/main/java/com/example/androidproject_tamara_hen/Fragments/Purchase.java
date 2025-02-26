@@ -56,6 +56,7 @@ public class Purchase extends Fragment {
         lottieAnimationView1 = view.findViewById(R.id.lottieAnimation1);
         lottieAnimationView2 = view.findViewById(R.id.lottieAnimationemail);
         supportBtn = view.findViewById(R.id.customerSupportButton);
+        homeBtn=view.findViewById(R.id.ibhome);
         stopAnimation1();
         stopAnimation2();
 
@@ -72,6 +73,12 @@ public class Purchase extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.action_global_customerSupport);
+            }
+        });
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_global_homePage);
             }
         });
         return view;

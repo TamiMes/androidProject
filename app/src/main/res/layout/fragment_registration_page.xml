@@ -98,10 +98,10 @@
             android:id="@+id/RegisterButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/holo_blue_dark"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/PINK1"
             android:text="Register"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="20dp"/>
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <LinearLayout

@@ -58,21 +58,14 @@ public class loginPage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view =  inflater.inflate(R.layout.fragment_login, container, false);
 
-        /*Button button1 = view.findViewById(R.id.LoginButton);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_mainScreenFragment_to_calenderFragment);
-            }
-        });*/
         homeBtn = view.findViewById(R.id.homeButton);
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_loginPage_to_homePage);
+                Navigation.findNavController(v).navigate(R.id.action_global_homePage);
             }
         }
         );
@@ -81,10 +74,11 @@ public class loginPage extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.action_global_customerSupport);
-//                Navigation.findNavController(v).navigate(R.id.action_loginPage_to_customerSupport);
+
             }
         }
         );
+
 
 
         EditText emailLoginText = view.findViewById(R.id.EmailLogin);

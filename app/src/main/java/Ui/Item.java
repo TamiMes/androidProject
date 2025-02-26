@@ -1,6 +1,8 @@
 package Ui;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item  implements Serializable {
 
     private String name;
     private int amount;
@@ -8,14 +10,16 @@ public class Item {
     private String desc;
     private double price;
     private Boolean favorite;
+    private float rating;
 
-    public Item(String name, int amount, int image, int id_, String desc, double price, Boolean favorite) {
-        this.name = name;;
+    public Item   (String name, int amount, int image, int id_, String desc, double price, Boolean favorite) {
+        this.name = name;
         this.image = image;
         this.amount = amount;
         this.desc   = desc;
         this.price = price;
         this.favorite = favorite;
+        this.rating = 0.0f;
     }
 
     public int getImage() {
@@ -64,5 +68,13 @@ public class Item {
 
     public void setFavorite(Boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }

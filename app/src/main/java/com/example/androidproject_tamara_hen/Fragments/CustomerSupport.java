@@ -61,7 +61,7 @@ public class CustomerSupport extends Fragment {
         homeBtn.setOnClickListener(new View.OnClickListener() {
                                        @Override
                                        public void onClick(View v) {
-                                           Navigation.findNavController(v).navigate(R.id.action_customerSupport_to_homePage);
+                                           Navigation.findNavController(v).navigate(R.id.action_global_homePage);
                                        }
                                    }
         );

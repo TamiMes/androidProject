@@ -15,9 +15,7 @@
         <action
             android:id="@+id/action_homePage_to_registrationPage"
             app:destination="@id/registrationPage" />
-        <!--        <action-->
-        <!--            android:id="@+id/action_homePage_to_customerSupport"-->
-        <!--            app:destination="@id/customerSupport" />-->
+
     </fragment>
     <fragment
         android:id="@+id/registrationPage"
@@ -26,12 +24,7 @@
         <action
             android:id="@+id/action_registrationPage_to_userPage"
             app:destination="@id/userPage" />
-        <action
-            android:id="@+id/action_registrationPage_to_homePage"
-            app:destination="@id/homePage" />
-        <!--        <action-->
-        <!--            android:id="@+id/action_registrationPage_to_customerSupport"-->
-        <!--            app:destination="@id/customerSupport" />-->
+
     </fragment>
     <fragment
         android:id="@+id/wishlist"
@@ -42,29 +35,20 @@
         android:id="@+id/userPersonalInfo"
         android:name="com.example.androidproject_tamara_hen.Fragments.UserPersonalInfo"
         android:label="UserPersonalInfo">
-        <action
-            android:id="@+id/action_userPersonalInfo_to_homePage"
-            app:destination="@id/homePage" />
+
     </fragment>
     <fragment
         android:id="@+id/purchase"
         android:name="com.example.androidproject_tamara_hen.Fragments.Purchase"
         android:label="Purchase">
-        <action
-            android:id="@+id/action_purchase_to_homePage"
-            app:destination="@id/homePage" />
-        <!--        <action-->
-        <!--            android:id="@+id/action_purchase_to_customerSupport"-->
-        <!--            app:destination="@id/customerSupport" />-->
+
     </fragment>
     <fragment
         android:id="@+id/customerSupport"
         android:name="com.example.androidproject_tamara_hen.Fragments.CustomerSupport"
         android:label="CustomerSupport">
 
-        <action
-            android:id="@+id/action_customerSupport_to_homePage"
-            app:destination="@id/homePage" />
+
     </fragment>
     <fragment
         android:id="@+id/loginPage"
@@ -74,11 +58,14 @@
             android:id="@+id/action_loginPage_to_userPage"
             app:destination="@id/userPage" />
         <action
-            android:id="@+id/action_loginPage_to_homePage"
-            app:destination="@id/homePage" />
-        <!--        <action-->
-        <!--            android:id="@+id/action_loginPage_to_customerSupport"-->
-        <!--            app:destination="@id/customerSupport" />-->
+            android:id="@+id/action_loginPage_self"
+            app:destination="@id/loginPage"
+            app:popUpTo="@id/homePage"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginPage_to_ratingLayout"
+            app:destination="@id/ratingLayout" />
+
     </fragment>
     <fragment
         android:id="@+id/userPage"
@@ -87,15 +74,16 @@
         <action
             android:id="@+id/action_userPage_to_userPersonalInfo"
             app:destination="@id/userPersonalInfo" />
-        <!--        <action-->
-        <!--            android:id="@+id/action_userPage_to_customerSupport"-->
-        <!--            app:destination="@id/customerSupport" />-->
+
         <action
             android:id="@+id/action_userPage_to_myCart"
             app:destination="@id/myCart" />
         <action
             android:id="@+id/action_userPage_to_wishlist"
             app:destination="@id/wishlist" />
+        <action
+            android:id="@+id/action_userPage_to_ratingLayout"
+            app:destination="@id/ratingLayout" />
     </fragment>
     <fragment
         android:id="@+id/myCart"
@@ -112,5 +100,11 @@
         app:destination="@id/customerSupport" />
     <action
         android:id="@+id/action_global_homePage"
-        app:destination="@id/homePage" />
+        app:destination="@id/homePage"
+        app:popUpTo="@id/homePage"
+        app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/ratingLayout"
+        android:name="com.example.androidproject_tamara_hen.Fragments.ratingLayout"
+        android:label="ratingLayout" />
 </navigation>

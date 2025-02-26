@@ -79,7 +79,7 @@ public class RegistrationPage extends Fragment {
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_registrationPage_to_homePage);
+                Navigation.findNavController(v).navigate(R.id.action_global_homePage);
             }
         }
         );
@@ -88,7 +88,7 @@ public class RegistrationPage extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.action_global_customerSupport);
-//                Navigation.findNavController(v).navigate(R.id.action_registrationPage_to_customerSupport);
+//
             }
         }
         );

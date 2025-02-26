@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:background="@drawable/pastel2">
 
     <TextView
         android:id="@+id/tvName"
@@ -20,12 +21,12 @@
         android:gravity="center_vertical">
 
 
-        <ImageButton
-            android:id="@+id/ibItem"
+        <ImageView
+            android:id="@+id/ivItem"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginEnd="12dp"
-            android:background="@null"/>
+            android:contentDescription="@string/app_name" />
 
 
         <LinearLayout
@@ -37,6 +38,7 @@
 
             <RatingBar
                 android:id="@+id/ratingBar"
+                android:isIndicator="false"
                 style="@style/Widget.AppCompat.RatingBar.Indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,14 +58,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Price:"
+                    android:text="Price: $"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvItemPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" $ 0"
+                    android:text="0"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -93,7 +95,7 @@
             android:id="@+id/ibFavorite"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@null"
+            android:backgroundTint="@color/white"
             android:contentDescription="Add to wishlist"
             android:src="@drawable/baseline_favorite_border_24" />
     </LinearLayout>
@@ -110,30 +112,19 @@
         android:text="Description"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/btnUserPage"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/PINK1"
+        android:minHeight="20dp"
+        android:minLines="3"
+        android:scrollbars="vertical"
+        android:text="Go back to shopping"
+        android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="50dp"
-        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnAdd"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@color/material_dynamic_primary70"
-            android:minHeight="50dp"
-            android:text="ADD+" />
-
-        <Button
-            android:id="@+id/btnRemove"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@color/material_dynamic_primary70"
-            android:minHeight="50dp"
-            android:text="REMOVE-" />
-    </LinearLayout>
 </LinearLayout>
 

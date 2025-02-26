@@ -24,7 +24,7 @@ public class HomePage extends Fragment {
     private Button buttonRegister, buttonLogin;
     private ImageButton supportBtn;
     private FirebaseFunctions mFunctions;
-    private LottieAnimationView lottieAnimationView1, lottieAnimationView2; // Lottie animation reference
+    private LottieAnimationView lottieAnimationView1, lottieAnimationView2;
 
     public HomePage() {
         // Required empty public constructor

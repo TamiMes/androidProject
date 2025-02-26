@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                             addData();
                             userViewModel.setEmail(email);
                             Toast.makeText(MainActivity.this, "Register succeeded", Toast.LENGTH_LONG).show();
-                            //navController.navigate(R.id.action_registrationPage_to_homePage);
+
                             Navigation.findNavController(v).navigate(R.id.action_registrationPage_to_userPage);
                         } else {
                             String errorMessage = task.getException() != null ? task.getException().getMessage() : "Unknown error";

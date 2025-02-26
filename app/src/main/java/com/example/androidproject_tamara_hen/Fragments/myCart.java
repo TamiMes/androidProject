@@ -122,6 +122,11 @@ public class myCart extends Fragment {
                 adapter.notifyItemChanged(position);
             }
 
+            @Override
+            public void onRatingClick(View view, int position) {
+
+            }
+
 
         });
         recyclerView.setAdapter(adapter);

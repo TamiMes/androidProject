@@ -2,6 +2,7 @@ package com.example.androidproject_tamara_hen.Fragments;
 
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -54,7 +55,7 @@ public class UserPage extends Fragment {
     private LinearLayoutManager layoutManager;
     private ItemAdapter adapter;
     private Cart cart;
-    private ImageButton btnMyCart, btnCustumerSupport, btnPersonal, ibFavoritePage;
+    private ImageButton btnMyCart, btnCustumerSupport, btnPersonal, ibFavoritePage, homeBtn;
     private ArrayList<Item> dataSet;
     EditText editText;
     // TODO: Rename parameter arguments, choose names that match
@@ -97,28 +98,37 @@ public class UserPage extends Fragment {
         btnMyCart = view.findViewById(R.id.ibMyCart);
         ibFavoritePage = view.findViewById(R.id.ibFavorites);
         btnMyCart.setOnClickListener(new View.OnClickListener() {
-                                         @Override
-                                         public void onClick(View v) {
-                                             Navigation.findNavController(v).navigate(R.id.action_userPage_to_myCart);
-                                         }
-                                     }
+            @Override
+            public void onClick(View v) {
+
+                Navigation.findNavController(v).navigate(R.id.action_userPage_to_myCart);
+            }
+        }
         );
         btnCustumerSupport = view.findViewById(R.id.customerSupportButton);
         btnCustumerSupport.setOnClickListener(new View.OnClickListener() {
-                                                  @Override
-                                                  public void onClick(View v) {
-                                                      Navigation.findNavController(v).navigate(R.id.action_global_customerSupport);
-//                                                      Navigation.findNavController(v).navigate(R.id.action_userPage_to_customerSupport);
-                                                  }
-                                              }
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_global_customerSupport);
+//
+            }
+        }
+        );
+        homeBtn = view.findViewById(R.id.homeButton);
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_global_homePage);
+            }
+        }
         );
         btnPersonal = view.findViewById(R.id.ibToPersonalInfo);
         btnPersonal.setOnClickListener(new View.OnClickListener() {
-                                           @Override
-                                           public void onClick(View v) {
-                                               Navigation.findNavController(v).navigate(R.id.action_userPage_to_userPersonalInfo);
-                                           }
-                                       }
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_userPage_to_userPersonalInfo);
+            }
+        }
         );
 
         ibFavoritePage.setOnClickListener(new View.OnClickListener() {
@@ -186,6 +196,12 @@ public class UserPage extends Fragment {
         adapter = new ItemAdapter(dataSet, new ItemAdapter.RecyclerViewListener() {
             @Override
             public void onClick(View view, int position) {
+                 Item clickedItem = dataSet.get(position);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("selectedItem", clickedItem);  // Pass the item
+
+                Navigation.findNavController(view).navigate(R.id.action_userPage_to_ratingLayout, bundle);
 
             }
 
@@ -221,6 +237,11 @@ public class UserPage extends Fragment {
                 dataSet.get(position).setFavorite(!dataSet.get(position).getFavorite());
                 mDatabase.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("favorites").child(dataSet.get(position).getName()).setValue(dataSet.get(position).getFavorite());
                 adapter.notifyItemChanged(position);
+            }
+
+            @Override
+            public void onRatingClick(View view, int position) {
+
             }
         });
         recyclerView.setAdapter(adapter);
