@@ -91,7 +91,7 @@ public class myCart extends Fragment {
                 TextView tvItemCounter = view.findViewById(R.id.tvItemCounter);
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
-                databaseReference.child("items").child(tvItemName.getText().toString()).setValue(counter + 1);
+                databaseReference.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("items").child(tvItemName.getText().toString()).setValue(counter + 1);
                 tvItemCounter.setText(String.valueOf(counter + 1));
                 dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() + 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite(),dataSet.get(position).getRating()));
                 updateTotalAmount();
@@ -104,13 +104,13 @@ public class myCart extends Fragment {
                 TextView tvItemName = view.findViewById(R.id.tvName);
                 int counter = Integer.parseInt(tvItemCounter.getText().toString());
                 if (counter > 0) {
-                    databaseReference.child("items").child(tvItemName.getText().toString()).setValue(counter - 1);
+                    databaseReference.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("items").child(tvItemName.getText().toString()).setValue(counter - 1);
                     tvItemCounter.setText(String.valueOf(counter - 1));
                     dataSet.set(position, new Item(dataSet.get(position).getName(), dataSet.get(position).getAmount() - 1, dataSet.get(position).getImage(), 0, dataSet.get(position).getDesc(), dataSet.get(position).getPrice(),dataSet.get(position).getFavorite(),dataSet.get(position).getRating()));
                     updateTotalAmount();
                     if (dataSet.get(position).getAmount() == 0){
                         dataSet.remove(position);
-                        adapter.notifyItemChanged(position);
+                        adapter.notifyItemRemoved(position);
                     }
                 }
             }
