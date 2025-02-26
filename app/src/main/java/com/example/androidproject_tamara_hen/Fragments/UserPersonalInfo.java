@@ -66,27 +66,12 @@ public class UserPersonalInfo extends Fragment {
         etId = view.findViewById(R.id.etID);
         btnUpdate = view.findViewById(R.id.btnUpdate);
 
-        //Log.d("Error",viewModel.getUserEmailLiveData().getValue().replace('.','_'));
         mDatabase.child("users").child(viewModel.getUserEmailLiveData().getValue().replace('.','_')).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 viewModel.setUser(task.getResult().getValue(User.class));
             }
         });
-//        viewModel.getUserEmailLiveData().observe(getViewLifecycleOwner(), email -> {
-//            if (email != null) {
-//                mDatabase.child("users").child(email.replace('.', '_'))
-//                        .get().addOnCompleteListener(task -> {
-//                            if (task.isSuccessful() && task.getResult().exists()) {
-//                                viewModel.setUser(task.getResult().getValue(User.class));
-//                            } else {
-//                                Log.e("FirebaseError", "User data not found");
-//                            }
-//                        });
-//            } else {
-//                Log.e("FirebaseError", "Email is null");
-//            }
-//        });
 
         viewModel.getUser().observe(getViewLifecycleOwner(), new Observer<User>() {
             @Override
@@ -109,7 +94,6 @@ public class UserPersonalInfo extends Fragment {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO ADD HERE A setUser to the user with the viewModel.getUserEmailLiveData().getValue().replace('.','_') email
                 mDatabase.child("users").child(viewModel.getUserEmailLiveData().getValue().replace('.','_')).setValue(new User(
                         etName.getText().toString(),
                         etPhone.getText().toString(),
@@ -117,7 +101,12 @@ public class UserPersonalInfo extends Fragment {
                         etCardCVV.getText().toString(),
                         etId.getText().toString(),
                         etAdress.getText().toString()
-                ));
+                )).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Navigation.findNavController(view).navigate(R.id.action_global_homePage);
+                    }
+                });
             }
         });
         return view;
