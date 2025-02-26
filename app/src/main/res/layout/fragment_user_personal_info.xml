@@ -36,7 +36,8 @@
             android:id="@+id/etUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your name:"/>
+            android:hint="Enter your name:"
+            android:textColor="@color/black"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -49,17 +50,20 @@
             android:id="@+id/etCardNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your credit card number:"/>
+            android:hint="Enter your credit card number:"
+            android:textColor="@color/black"/>
         <EditText
             android:id="@+id/etCardCVV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your card cvv:"/>
+            android:hint="Enter your card cvv:"
+            android:textColor="@color/black"/>
         <EditText
             android:id="@+id/etID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your ID:"/>
+            android:hint="Enter your ID:"
+            android:textColor="@color/black"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -72,7 +76,8 @@
             android:id="@+id/etAdress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your adress:"/>
+            android:hint="Enter your adress:"
+            android:textColor="@color/black"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -86,7 +91,8 @@
             android:id="@+id/etPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your adress:"/>
+            android:hint="Enter your adress:"
+            android:textColor="@color/black"/>
 
         <Button
             android:id="@+id/btnUpdate"

@@ -25,6 +25,7 @@
         android:background="@android:drawable/editbox_background"
         android:hint="Name of Payment Holder"
         android:inputType="text"
+        android:textColor="@color/black"
         android:padding="10dp" />
 
     <EditText
@@ -35,6 +36,7 @@
         android:background="@android:drawable/editbox_background"
         android:hint="ID"
         android:inputType="text"
+        android:textColor="@color/black"
         android:padding="10dp" />
 
     <EditText
@@ -45,6 +47,7 @@
         android:background="@android:drawable/editbox_background"
         android:hint="Card Number"
         android:inputType="text"
+        android:textColor="@color/black"
         android:padding="10dp" />
 
     <EditText
@@ -55,6 +58,7 @@
         android:background="@android:drawable/editbox_background"
         android:hint="CVV"
         android:inputType="numberPassword"
+        android:textColor="@color/black"
         android:padding="10dp" />
     <EditText
         android:id="@+id/emailInput1"
@@ -64,6 +68,7 @@
         android:background="@android:drawable/editbox_background"
         android:hint="Email for recipt "
         android:inputType="text"
+        android:textColor="@color/black"
         android:padding="10dp" />
 
     <Button
