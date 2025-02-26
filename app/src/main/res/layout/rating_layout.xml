@@ -91,13 +91,6 @@
         </LinearLayout>
 
 
-        <ImageButton
-            android:id="@+id/ibFavorite"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:backgroundTint="@color/white"
-            android:contentDescription="Add to wishlist"
-            android:src="@drawable/baseline_favorite_border_24" />
     </LinearLayout>
 
 
