@@ -124,15 +124,6 @@
             android:src="@drawable/baseline_home_24"
             android:visibility="visible" />
 
-        <ImageButton
-            android:id="@+id/customerSupportButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@null"
-            android:contentDescription="Customer Support"
-            android:padding="8dp"
-            android:src="@drawable/baseline_contact_support_24"
-            android:visibility="visible" />
     </LinearLayout>
 
 </LinearLayout>
