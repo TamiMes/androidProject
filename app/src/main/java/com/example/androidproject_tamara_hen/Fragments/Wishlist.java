@@ -122,7 +122,7 @@ public class Wishlist extends Fragment {
                 dataSet.get(position).setFavorite(!dataSet.get(position).getFavorite());
                 databaseReference.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("favorites").child(dataSet.get(position).getName()).setValue(dataSet.get(position).getFavorite());
                 dataSet.remove(position);
-                adapter.notifyItemRemoved(position);
+                adapter.notifyDataSetChanged();
             }
 
             @Override

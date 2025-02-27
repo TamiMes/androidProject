@@ -100,7 +100,7 @@ public class myCart extends Fragment {
                     updateTotalAmount();
                     if (dataSet.get(position).getAmount() == 0) {
                         dataSet.remove(position);
-                        adapter.notifyItemRemoved(position);
+                        adapter.notifyDataSetChanged();
                     }
                 }
             }
@@ -108,7 +108,7 @@ public class myCart extends Fragment {
             @Override
             public void onFavoriteButtonClick(View view, int position) {
                 dataSet.get(position).setFavorite(!dataSet.get(position).getFavorite());
-                databaseReference.child("favorites").child(dataSet.get(position).getName()).setValue(dataSet.get(position).getFavorite());
+                databaseReference.child("carts").child(viewModel.getUserEmailLiveData().getValue().replace('.', '_')).child("favorites").child(dataSet.get(position).getName()).setValue(dataSet.get(position).getFavorite());
                 adapter.notifyItemChanged(position);
             }
 
